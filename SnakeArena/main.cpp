@@ -3,8 +3,9 @@
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(1200, 700), "SnakeArena");
-	Game game;
+	sf::Vector2u windowSize(1200, 700);
+	sf::RenderWindow window(sf::VideoMode(windowSize.x, windowSize.y), "SnakeArena");
+	Game game(windowSize);
 	while (window.isOpen())
 	{
 		sf::Event event;

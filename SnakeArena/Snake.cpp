@@ -2,6 +2,7 @@
 
 Snake::Snake(Color color, sf::Vector2u startPosition, size_t bodyLen):
 	mColor (color),
+	mHeadColor (Color(color.r * 0.75f, color.g * 0.75f, color.b * 0.75f)),
 	mDirection (Direction::Up),
 	mBodyLen (bodyLen)
 {

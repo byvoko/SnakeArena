@@ -24,6 +24,7 @@ private:
 
 	Positions mPositions; // Head is the first one
 	Color mColor;
+	Color mHeadColor;
 	Direction mDirection;
 	Direction mTempDirection;
 	size_t mBodyLen;
@@ -34,10 +35,12 @@ private:
 	void ProcessDirectionChange();
 
 public:
-	Snake(Color color, sf::Vector2u startPosition, size_t bodyLen = 3);
+	Snake(Color color, sf::Vector2u startPosition, size_t bodyLen = 10);
 	virtual ~Snake();
 
-	std::pair<Positions, Color> GetBody() { return { mPositions, mColor }; }
+	Positions& GetBody() { return mPositions; }
+	Color& GetColor() { return mColor; }
+	Color& GetHeadColor() { return mHeadColor; }
 
 	void Update();
 

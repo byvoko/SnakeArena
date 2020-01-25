@@ -4,11 +4,17 @@
 
 #include "Arena.hpp"
 #include "Snake.hpp"
+#include "Background.hpp"
+#include "GameInterface.hpp"
+
 #include "IControls.hpp"
 
 class Game
 {
 private:
+	Background mBackground;
+	GameInterface mGameInterface;
+
 	std::vector<Arena> mArenas;
 	std::vector<Snake> mSnakes;
 	std::vector<IGameControls *> mControls;
@@ -19,11 +25,13 @@ private:
 	sf::Clock mClockUpdate;
 	sf::Clock mClockDraw;
 
-	void InitArenas();
+	void InitBackground();
+	void InitArenas(sf::Vector2u windowSize);
 	void InitSnakes();
+	void InitGameInterface();
 
 public:
-	Game();
+	Game(sf::Vector2u windowSize);
 	virtual ~Game();
 
 	void Draw(sf::RenderWindow & window);

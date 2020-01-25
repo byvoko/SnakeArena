@@ -132,16 +132,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Arena.cpp" />
+    <ClCompile Include="Background.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GamepadControls.cpp" />
+    <ClCompile Include="GameInterface.cpp" />
     <ClCompile Include="KeyControls.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Snake.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arena.hpp" />
+    <ClInclude Include="Background.hpp" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="GamepadControls.hpp" />
+    <ClInclude Include="GameInterface.hpp" />
     <ClInclude Include="IControls.hpp" />
     <ClInclude Include="KeyControls.hpp" />
     <ClInclude Include="Snake.hpp" />
