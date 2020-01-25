@@ -1,14 +1,15 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
+#include <vector>
+#include <SFML\Graphics.hpp>
 
 class Snake
 {
+public:
+	typedef std::vector<sf::Vector2u> Position;
+	typedef int	Color;
+
 private:
-	struct Position
-	{
-		int x, y;
-	};
 
 	enum Direction
 	{
@@ -18,14 +19,17 @@ private:
 		Left,
 	};
 
-	std::vector<Position> mPositions;
-	int mColor;
+	Position mPositions;
+	Color mColor;
 	Direction mDirection;
-
-	sf::Sprite mBody;
+	size_t mBodyLen;	
 
 public:
-	Snake();
+	Snake(Color color, sf::Vector2u startPosition, size_t bodyLen = 3);
 	virtual ~Snake();
+
+	std::pair<Position, Color> GetBody() { return { mPositions, mColor }; }
+
+	void Update();
 };
 
