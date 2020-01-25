@@ -135,6 +135,7 @@
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameInterface.cpp" />
+    <ClCompile Include="KeyControls.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Snake.cpp" />
   </ItemGroup>
@@ -143,6 +144,8 @@
     <ClInclude Include="Background.hpp" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="GameInterface.hpp" />
+    <ClInclude Include="IControls.hpp" />
+    <ClInclude Include="KeyControls.hpp" />
     <ClInclude Include="Snake.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
