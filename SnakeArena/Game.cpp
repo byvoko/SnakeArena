@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include "KeyControls.hpp"
 
 void Game::InitArenas()
 {
@@ -18,6 +19,10 @@ void Game::InitSnakes()
 	Snake snake(sf::Color(150, 50, 250), { gridTileSize.x / 2, gridTileSize.y / 2 });
 	mSnakes.push_back(snake);
 	mArenas[0].AddSnake(mSnakes[0]);
+
+	KeyControls * key = new KeyControls(sf::Keyboard::Key::Up, sf::Keyboard::Key::Right, sf::Keyboard::Key::Down, sf::Keyboard::Key::Left);
+	mSnakes[0].AddControl(*key);
+	mControls.push_back(key);
 }
 
 Game::Game()
@@ -63,5 +68,16 @@ void Game::Update()
 	for (Arena & arena : mArenas)
 	{
 		arena.Update();
+	}
+}
+
+void Game::ProcessEvent(sf::Event e)
+{
+	for (auto control : mControls)
+	{
+		if (control == nullptr)
+			continue;
+
+		control->ProcessEvent(e);
 	}
 }

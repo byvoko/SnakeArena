@@ -133,12 +133,15 @@
   <ItemGroup>
     <ClCompile Include="Arena.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="KeyControls.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Snake.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arena.hpp" />
     <ClInclude Include="Game.hpp" />
+    <ClInclude Include="IControls.hpp" />
+    <ClInclude Include="KeyControls.hpp" />
     <ClInclude Include="Snake.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -17,6 +17,8 @@ Snake::~Snake()
 
 void Snake::Update()
 {
+	ProcessDirectionChange();
+
 	switch (mDirection)
 	{
 	case Snake::Up:
@@ -36,6 +38,15 @@ void Snake::Update()
 	}
 }
 
+void Snake::AddControl(ISnakeControls & c)
+{
+	mControl = &c;
+	c.UpEvent = [&]{ this->ChangeDirection(Direction::Up); };
+	c.RightEvent = [&]{ this->ChangeDirection(Direction::Right); };
+	c.DownEvent = [&]{ this->ChangeDirection(Direction::Down); };
+	c.LeftEvent = [&]{ this->ChangeDirection(Direction::Left); };
+}
+
 // Private methods
 
 void Snake::Move(Position newHeadPosition)
@@ -47,4 +58,26 @@ void Snake::Move(Position newHeadPosition)
 	}
 
 	mPositions[0] = newHeadPosition;
+}
+
+void Snake::ChangeDirection(Direction d)
+{
+	mTempDirection = d;
+}
+
+void Snake::ProcessDirectionChange()
+{
+	if (mTempDirection == Direction::Up && mDirection == Direction::Down)
+		return;
+
+	if (mTempDirection == Direction::Down && mDirection == Direction::Up)
+		return;
+
+	if (mTempDirection == Direction::Right && mDirection == Direction::Left)
+		return;
+
+	if (mTempDirection == Direction::Left && mDirection == Direction::Right)
+		return;
+
+	mDirection = mTempDirection;
 }
