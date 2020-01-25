@@ -7,7 +7,7 @@ class Snake
 {
 public:
 	typedef std::vector<sf::Vector2u> Position;
-	typedef int	Color;
+	typedef sf::Color Color;
 
 private:
 

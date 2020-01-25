@@ -1,11 +1,10 @@
 #include <SFML/Graphics.hpp>
+#include "Game.hpp"
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
-
+	sf::RenderWindow window(sf::VideoMode(1200, 700), "SnakeArena");
+	Game game;
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -15,8 +14,9 @@ int main()
 				window.close();
 		}
 
+		game.Update();
 		window.clear();
-		window.draw(shape);
+		game.Draw(window);
 		window.display();
 	}
 
