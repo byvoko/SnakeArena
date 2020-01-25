@@ -133,6 +133,7 @@
   <ItemGroup>
     <ClCompile Include="Arena.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GamepadControls.cpp" />
     <ClCompile Include="KeyControls.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Snake.cpp" />
@@ -140,6 +141,7 @@
   <ItemGroup>
     <ClInclude Include="Arena.hpp" />
     <ClInclude Include="Game.hpp" />
+    <ClInclude Include="GamepadControls.hpp" />
     <ClInclude Include="IControls.hpp" />
     <ClInclude Include="KeyControls.hpp" />
     <ClInclude Include="Snake.hpp" />
