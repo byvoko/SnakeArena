@@ -15,7 +15,7 @@ void Arena::Draw(sf::RenderWindow & window)
 
 	for (auto snake : mSnakes)
 	{
-		std::pair<Snake::Position, Snake::Color> snakeBody = snake.GetBody();
+		std::pair<Snake::Positions, Snake::Color> snakeBody = snake.GetBody();
 		bodyShape.setFillColor(snakeBody.second);
 		for (auto position : snakeBody.first)
 		{

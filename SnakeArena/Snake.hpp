@@ -6,7 +6,8 @@
 class Snake
 {
 public:
-	typedef std::vector<sf::Vector2u> Position;
+	typedef sf::Vector2u Position;
+	typedef std::vector<Position> Positions;
 	typedef sf::Color Color;
 
 private:
@@ -19,16 +20,18 @@ private:
 		Left,
 	};
 
-	Position mPositions;
+	Positions mPositions; // Head is the first one
 	Color mColor;
 	Direction mDirection;
-	size_t mBodyLen;	
+	size_t mBodyLen;
+
+	void Move(Position newHeadPosition);
 
 public:
 	Snake(Color color, sf::Vector2u startPosition, size_t bodyLen = 3);
 	virtual ~Snake();
 
-	std::pair<Position, Color> GetBody() { return { mPositions, mColor }; }
+	std::pair<Positions, Color> GetBody() { return { mPositions, mColor }; }
 
 	void Update();
 };
