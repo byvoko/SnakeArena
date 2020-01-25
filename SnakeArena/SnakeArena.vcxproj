@@ -135,6 +135,7 @@
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="FoodItem.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GamepadControls.cpp" />
     <ClCompile Include="GameInterface.cpp" />
     <ClCompile Include="KeyControls.cpp" />
     <ClCompile Include="main.cpp" />
@@ -146,6 +147,7 @@
     <ClInclude Include="BaseItem.hpp" />
     <ClInclude Include="FoodItem.hpp" />
     <ClInclude Include="Game.hpp" />
+    <ClInclude Include="GamepadControls.hpp" />
     <ClInclude Include="GameInterface.hpp" />
     <ClInclude Include="IControls.hpp" />
     <ClInclude Include="KeyControls.hpp" />

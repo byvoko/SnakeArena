@@ -11,7 +11,7 @@ private:
 
 	sf::Vector2u mSizePx;
 	sf::Vector2u mGridTileSize;
-	sf::RectangleShape mBondries;
+	sf::Vector2u mPosition;
 
 public:
 	Arena(sf::Vector2u sizePx, sf::Vector2u gridTileSize, sf::Vector2u position);

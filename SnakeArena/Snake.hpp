@@ -32,7 +32,7 @@ private:
 	void ProcessDirectionChange();
 
 public:
-	Snake(Color color, sf::Vector2u startPosition, size_t bodyLen = 3);
+	Snake(Color color, sf::Vector2u startPosition, size_t bodyLen = 10);
 	virtual ~Snake();
 
 	Positions& GetBody() { return mPositions; }

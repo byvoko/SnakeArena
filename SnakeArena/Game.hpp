@@ -31,12 +31,12 @@ private:
 	sf::Clock mClockDraw;
 
 	void InitBackground();
-	void InitArenas();
+	void InitArenas(sf::Vector2u windowSize);
 	void InitSnakes();
 	void InitGameInterface();
 
 public:
-	Game();
+	Game(sf::Vector2u windowSize);
 	virtual ~Game();
 
 	void Draw(sf::RenderWindow & window);
