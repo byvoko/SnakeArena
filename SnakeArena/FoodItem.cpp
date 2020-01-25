@@ -17,8 +17,20 @@ void FoodItem::Eat(Snake & snake)
 	snake.IncrementLength();
 }
 
-void FoodItem::Draw(sf::RenderWindow & window)
+void FoodItem::Draw(sf::RenderWindow & window, sf::Vector2u offsetPosition)
 {
+	auto positionH = mHorizontalPlusLine.getPosition();
+	auto positionV = mVerticalPlusLine.getPosition();
+
+	positionH.x += offsetPosition.x;
+	positionH.y += offsetPosition.y;
+
+	positionV.x += offsetPosition.x;
+	positionV.y += offsetPosition.y;
+
+	mHorizontalPlusLine.setPosition(positionH);
+	mVerticalPlusLine.setPosition(positionV);
+
 	window.draw(mHorizontalPlusLine);
 	window.draw(mVerticalPlusLine);
 }

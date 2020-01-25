@@ -36,11 +36,11 @@ void Game::InitSnakes()
 	mArenas[0].AddSnake(mSnakes[0]);
 	mArenas[1].AddSnake(mSnakes[1]);
 
-	KeyControls * key1 = new KeyControls(sf::Keyboard::Key::Up, sf::Keyboard::Key::Right, sf::Keyboard::Key::Down, sf::Keyboard::Key::Left);
+	KeyControls * key1 = new KeyControls(sf::Keyboard::Key::W, sf::Keyboard::Key::D, sf::Keyboard::Key::S, sf::Keyboard::Key::A);
 	mSnakes[0].AddControl(*key1);
 	mControls.push_back(key1);
-
-	KeyControls * key2 = new KeyControls(sf::Keyboard::Key::W, sf::Keyboard::Key::D, sf::Keyboard::Key::S, sf::Keyboard::Key::A);
+	
+	KeyControls * key2 = new KeyControls(sf::Keyboard::Key::Up, sf::Keyboard::Key::Right, sf::Keyboard::Key::Down, sf::Keyboard::Key::Left);
 	mSnakes[1].AddControl(*key2);
 	mControls.push_back(key2);
 
