@@ -11,9 +11,10 @@ private:
 
 	sf::Vector2u mSizePx;
 	sf::Vector2u mGridTileSize;
+	sf::RectangleShape mBondries;
 
 public:
-	Arena(sf::Vector2u sizePx, sf::Vector2u gridTileSize);
+	Arena(sf::Vector2u sizePx, sf::Vector2u gridTileSize, sf::Vector2u position);
 	virtual ~Arena();
 
 	void Draw(sf::RenderWindow & window);

@@ -132,13 +132,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Arena.cpp" />
+    <ClCompile Include="Background.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameInterface.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Snake.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arena.hpp" />
+    <ClInclude Include="Background.hpp" />
     <ClInclude Include="Game.hpp" />
+    <ClInclude Include="GameInterface.hpp" />
     <ClInclude Include="Snake.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
