@@ -11,7 +11,7 @@ void Game::InitArenas()
 
 void Game::InitSnakes()
 {
-	if (mArenas.size == 0)
+	if (mArenas.size() == 0)
 		return;
 
 	auto gridTileSize = mArenas[0].GetGridTileSize();
@@ -29,7 +29,7 @@ Game::Game()
 void Game::Draw(sf::RenderWindow & window)
 {
 	sf::Time elapsed = mClockDraw.getElapsedTime();
-	if (elapsed.asMilliseconds < (1000 / FPS))
+	if (elapsed.asMilliseconds() < (1000 / FPS))
 		return;
 
 	mClockDraw.restart();
@@ -42,7 +42,7 @@ void Game::Draw(sf::RenderWindow & window)
 void Game::Update()
 {
 	sf::Time elapsed = mClockUpdate.getElapsedTime();
-	if (elapsed.asMilliseconds < mSpeed)
+	if (elapsed.asMilliseconds() < mSpeed)
 		return;
 
 	mClockUpdate.restart();
