@@ -38,6 +38,10 @@ void Game::InitSnakes()
 	KeyControls * key = new KeyControls(sf::Keyboard::Key::Up, sf::Keyboard::Key::Right, sf::Keyboard::Key::Down, sf::Keyboard::Key::Left);
 	mSnakes[0].AddControl(*key);
 	mControls.push_back(key);
+
+
+	// Test
+	mItems.push_back(new FoodItem(Position(80, 80), mArenas[0].CalcTileSize()));
 }
 
 void Game::InitGameInterface()
@@ -55,6 +59,10 @@ Game::Game()
 
 Game::~Game()
 {
+	for (BaseItem* baseItem : mItems)
+	{
+		delete baseItem;
+	}
 }
 
 void Game::Draw(sf::RenderWindow & window)
@@ -74,6 +82,10 @@ void Game::Draw(sf::RenderWindow & window)
 	for (Arena & arena : mArenas)
 	{
 		arena.Draw(window);
+	}
+	for (BaseItem* baseItem : mItems)
+	{
+		baseItem->Draw(window);
 	}
 	mGameInterface.Draw(window);
 
@@ -95,6 +107,10 @@ void Game::Update()
 	for (Arena & arena : mArenas)
 	{
 		arena.Update();
+	}
+	for (BaseItem* baseItem : mItems)
+	{
+		baseItem->Update();
 	}
 	mGameInterface.Update();
 }

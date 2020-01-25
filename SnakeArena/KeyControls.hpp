@@ -1,9 +1,10 @@
 #pragma once
 
-#include "IControls.hpp"
 #include <SFML/Graphics.hpp>
 
-class KeyControls:
+#include "IControls.hpp"
+
+class KeyControls :
 	public ISnakeControls,
 	public IGameControls
 {

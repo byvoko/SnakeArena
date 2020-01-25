@@ -30,7 +30,7 @@ void Arena::Draw(sf::RenderWindow & window)
 			continue;
 
 		Snake & snake = *pSnake;
-		Snake::Positions snakeBody = snake.GetBody();
+		Positions snakeBody = snake.GetBody();
 
 		// Draw head
 		bodyShape.setFillColor(snake.GetHeadColor());

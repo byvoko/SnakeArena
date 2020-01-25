@@ -8,6 +8,8 @@
 #include "GameInterface.hpp"
 
 #include "IControls.hpp"
+#include "BaseItem.hpp"
+#include "FoodItem.hpp"
 
 class Game
 {
@@ -18,6 +20,9 @@ private:
 	std::vector<Arena> mArenas;
 	std::vector<Snake> mSnakes;
 	std::vector<IGameControls *> mControls;
+
+	// Test
+	std::vector<BaseItem*> mItems;
 
 	static constexpr int FPS = 60;
 	int mSpeed = 200;	//[ms]

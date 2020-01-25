@@ -42,10 +42,18 @@ void Snake::Update()
 void Snake::AddControl(ISnakeControls & c)
 {
 	mControl = &c;
+
 	c.UpEvent = [&]{ this->ChangeDirection(Direction::Up); };
 	c.RightEvent = [&]{ this->ChangeDirection(Direction::Right); };
 	c.DownEvent = [&]{ this->ChangeDirection(Direction::Down); };
 	c.LeftEvent = [&]{ this->ChangeDirection(Direction::Left); };
+}
+
+void Snake::IncrementLength()
+{
+	mBodyLen++;
+
+	mPositions.push_back(Position(mPositions.back()));
 }
 
 // Private methods

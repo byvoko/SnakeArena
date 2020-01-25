@@ -4,14 +4,11 @@
 #include <SFML\Graphics.hpp>
 
 #include "IControls.hpp"
+#include "Types.hpp"
 
 class Snake
 {
 public:
-	typedef sf::Vector2u Position;
-	typedef std::vector<Position> Positions;
-	typedef sf::Color Color;
-
 	enum Direction
 	{
 		Up,
@@ -21,12 +18,12 @@ public:
 	};
 
 private:
-
 	Positions mPositions; // Head is the first one
 	Color mColor;
 	Color mHeadColor;
 	Direction mDirection;
 	Direction mTempDirection;
+
 	size_t mBodyLen;
 
 	ISnakeControls * mControl;
@@ -45,6 +42,8 @@ public:
 	void Update();
 
 	void AddControl(ISnakeControls & c);
+
+	void IncrementLength();
 
 	void ChangeDirection(Direction d);
 };
