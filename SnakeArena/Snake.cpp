@@ -12,6 +12,10 @@ Snake::Snake(Color color, sf::Vector2u startPosition, size_t bodyLen):
 	}
 }
 
+Snake::~Snake()
+{
+}
+
 void Snake::Update()
 {
 	switch (mDirection)

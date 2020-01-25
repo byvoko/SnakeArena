@@ -26,6 +26,10 @@ Game::Game()
 	InitSnakes();
 }
 
+Game::~Game()
+{
+}
+
 void Game::Draw(sf::RenderWindow & window)
 {
 	sf::Time elapsed = mClockDraw.getElapsedTime();
@@ -33,10 +37,16 @@ void Game::Draw(sf::RenderWindow & window)
 		return;
 
 	mClockDraw.restart();
+
+	if (mArenas.size() == 0)
+		return;
+
+	window.clear();
 	for (Arena & arena : mArenas)
 	{
 		arena.Draw(window);
 	}
+	window.display();
 }
 
 void Game::Update()
@@ -46,6 +56,10 @@ void Game::Update()
 		return;
 
 	mClockUpdate.restart();
+
+	if (mArenas.size() == 0)
+		return;
+
 	for (Arena & arena : mArenas)
 	{
 		arena.Update();

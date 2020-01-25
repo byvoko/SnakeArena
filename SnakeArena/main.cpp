@@ -15,9 +15,7 @@ int main()
 		}
 
 		game.Update();
-		window.clear();
 		game.Draw(window);
-		window.display();
 	}
 
 	return 0;

@@ -7,7 +7,7 @@
 class Arena
 {
 private:
-	std::vector<Snake&> mSnakes;
+	std::vector<Snake*> mSnakes;
 
 	sf::Vector2u mSizePx;
 	sf::Vector2u mGridTileSize;
@@ -22,5 +22,5 @@ public:
 	sf::Vector2f CalcTileSize();
 	sf::Vector2u GetGridTileSize() { return mGridTileSize; }
 
-	void AddSnake(Snake & snake) { mSnakes.push_back(snake); }
+	void AddSnake(Snake & snake) { mSnakes.push_back(&snake); }
 };
