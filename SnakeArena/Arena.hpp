@@ -3,18 +3,20 @@
 #include <SFML\Graphics.hpp>
 
 #include "Snake.hpp"
+#include "BaseItem.hpp"
 
 class Arena
 {
 private:
 	std::vector<Snake*> mSnakes;
+	std::vector<BaseItem*>* pItems;
 
 	sf::Vector2u mSizePx;
 	sf::Vector2u mGridTileSize;
 	sf::Vector2u mPosition;
 
 public:
-	Arena(sf::Vector2u sizePx, sf::Vector2u gridTileSize, sf::Vector2u position);
+	Arena(sf::Vector2u sizePx, sf::Vector2u gridTileSize, sf::Vector2u position, std::vector<BaseItem*>* items);
 	virtual ~Arena();
 
 	void Draw(sf::RenderWindow & window);

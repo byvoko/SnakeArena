@@ -1,12 +1,12 @@
 #include "Arena.hpp"
 #include "Snake.hpp"
 
-Arena::Arena(sf::Vector2u sizePx, sf::Vector2u gridTileSize, sf::Vector2u position) :
+Arena::Arena(sf::Vector2u sizePx, sf::Vector2u gridTileSize, sf::Vector2u position, std::vector<BaseItem*>* items) :
 	mSizePx(sizePx),
 	mGridTileSize(gridTileSize),
-	mPosition (position)
+	mPosition (position),
+	pItems(items)
 {
-
 }
 
 Arena::~Arena()
@@ -41,6 +41,11 @@ void Arena::Draw(sf::RenderWindow & window)
 			bodyShape.setPosition(mPosition.x + (snakeBody[i].x * tileSize.x), mPosition.y + (snakeBody[i].y * tileSize.y));
 			window.draw(bodyShape);
 		}
+	}
+
+	for (BaseItem* baseItem : *pItems)
+	{
+		baseItem->Draw(window, sf::Vector2f(mPosition.x, mPosition.y));
 	}
 
 	sf::RectangleShape bondries(sf::Vector2f(mSizePx.x, mSizePx.y));

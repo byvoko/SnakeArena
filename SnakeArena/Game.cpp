@@ -13,8 +13,8 @@ void Game::InitArenas(sf::Vector2u windowSize)
 	sf::Vector2u arenaTileSize = { 20, 20 };
 	sf::Vector2u arenaGritTileSize = { arenaSizePx.x / arenaTileSize.x, arenaSizePx.y / arenaTileSize.y };
 	
-	Arena arena1(arenaSizePx, arenaGritTileSize, sf::Vector2u(0, 0));
-	Arena arena2(arenaSizePx, arenaGritTileSize, sf::Vector2u((windowSize.x / 2), 0));
+	Arena arena1(arenaSizePx, arenaGritTileSize, sf::Vector2u(0, 0), &mItems);
+	Arena arena2(arenaSizePx, arenaGritTileSize, sf::Vector2u((windowSize.x / 2), 0), &mItems);
 
 	mArenas.push_back(arena1);
 	mArenas.push_back(arena2);
@@ -94,10 +94,6 @@ void Game::Draw(sf::RenderWindow & window)
 	for (Arena & arena : mArenas)
 	{
 		arena.Draw(window);
-	}
-	for (BaseItem* baseItem : mItems)
-	{
-		baseItem->Draw(window);
 	}
 	mGameInterface.Draw(window);
 

@@ -14,7 +14,7 @@ public:
 
 	virtual void Eat(Snake& snake) = 0;
 
-	virtual void Draw(sf::RenderWindow & window, sf::Vector2u offsetPosition) = 0;
+	virtual void Draw(sf::RenderWindow & window, sf::Vector2f offsetPosition) = 0;
 	virtual void Update() = 0;
 };
 
