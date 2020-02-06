@@ -17,15 +17,12 @@ void FoodItem::Eat(Snake & snake)
 	snake.IncrementLength();
 }
 
-void FoodItem::Draw(sf::RenderWindow & window, sf::Vector2f offsetPosition)
-{
-	sf::Transform t;
-	t.translate(offsetPosition);
-
-	window.draw(mHorizontalPlusLine, t);
-	window.draw(mVerticalPlusLine, t);
-}
-
 void FoodItem::Update()
 {
+}
+
+void FoodItem::Draw(sf::RenderWindow& window, sf::Transform t)
+{
+	window.draw(mHorizontalPlusLine, t);
+	window.draw(mVerticalPlusLine, t);
 }
