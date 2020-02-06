@@ -150,6 +150,7 @@
     <ClInclude Include="GamepadControls.hpp" />
     <ClInclude Include="GameInterface.hpp" />
     <ClInclude Include="IControls.hpp" />
+    <ClInclude Include="IGameDrawable.hpp" />
     <ClInclude Include="KeyControls.hpp" />
     <ClInclude Include="Snake.hpp" />
     <ClInclude Include="Types.hpp" />
