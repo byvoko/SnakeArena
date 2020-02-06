@@ -4,12 +4,13 @@
 
 #include "Snake.hpp"
 #include "BaseItem.hpp"
+#include "FoodItem.hpp"
 
 class Arena
 {
 private:
 	std::vector<Snake*> mSnakes;
-	std::vector<BaseItem*>& pItems;
+	FoodItem* pFood;
 
 	sf::Vector2u mSizePx;
 	sf::Vector2u mGridTileSize;
@@ -17,7 +18,7 @@ private:
 	sf::Transform mTransform;
 
 public:
-	Arena(sf::Vector2u sizePx, sf::Vector2u gridTileSize, sf::Vector2u position, std::vector<BaseItem*>& items);
+	Arena(sf::Vector2u sizePx, sf::Vector2u gridTileSize, sf::Vector2u position, FoodItem* foodItem = nullptr);
 	virtual ~Arena();
 
 	void Draw(sf::RenderWindow & window);
@@ -27,4 +28,5 @@ public:
 	sf::Vector2u GetGridTileSize() { return mGridTileSize; }
 
 	void AddSnake(Snake & snake) { mSnakes.push_back(&snake); }
+	void AddFood(FoodItem* food);
 };

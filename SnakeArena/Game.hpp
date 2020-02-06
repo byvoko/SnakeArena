@@ -22,7 +22,7 @@ private:
 	std::vector<IGameControls *> mControls;
 
 	// Test
-	std::vector<BaseItem*> mItems;
+	FoodItem* pFood;
 
 	static constexpr int FPS = 60;
 	int mSpeed = 200;	//[ms]
@@ -34,6 +34,9 @@ private:
 	void InitArenas(sf::Vector2u windowSize);
 	void InitSnakes();
 	void InitGameInterface();
+
+	void GenerateFood();
+	bool IsFoodOnSnake(Position& position);
 
 public:
 	Game(sf::Vector2u windowSize);
