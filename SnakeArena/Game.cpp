@@ -66,7 +66,7 @@ void Game::GenerateFood()
 		sf::Vector2u gridResolution = static_cast<sf::Vector2u>(mArenas[0].CalcTileSize());
 
 		Position foodPosition{ rand() % gridResolution.x, rand() % gridResolution.y };
-		while (IsFoodOnSnake(foodPosition) && i++ > 100)
+		while (IsFoodOnSnake(foodPosition) && i++ < 100)
 		{
 			foodPosition = Position(rand() % gridResolution.x, rand() % gridResolution.y);
 		}
@@ -166,15 +166,30 @@ void Game::Update()
 	// Food
 	if (pFood != nullptr)
 	{
+		Snake* snakeEat = nullptr;
 		for (Snake& snake : mSnakes)
 		{
 			if (snake.GetNext() == pFood->GetPosition())
 			{
-				pFood->Eat(snake);
-				delete pFood;
-				pFood = nullptr;
-				break;
+				if (snakeEat != nullptr)
+				{
+					snakeEat = nullptr;
+					delete pFood;
+					pFood = nullptr;
+					break;
+				}
+				else
+				{
+					snakeEat = &snake;
+				}
 			}
+		}
+
+		if (snakeEat)
+		{
+			pFood->Eat(*snakeEat);
+			delete pFood;
+			pFood = nullptr;
 		}
 	}
 
@@ -182,6 +197,7 @@ void Game::Update()
 		return;
 
 	UpdateMovement();
+	GenerateFood();
 }
 
 void Game::UpdateMovement()
@@ -194,7 +210,6 @@ void Game::UpdateMovement()
 	{
 		arena.Update();
 	}
-	GenerateFood();
 
 	mGameInterface.Update();
 }
