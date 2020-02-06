@@ -101,13 +101,13 @@ void Snake::Draw(sf::RenderWindow & window, sf::Transform t)
 	// Draw head
 	bodyShape.setFillColor(GetHeadColor());
 	bodyShape.setPosition(snakeBody[0].x * mTileSize.x, snakeBody[0].y * mTileSize.y);
-	window.draw(bodyShape);
+	window.draw(bodyShape, t);
 
 	// Draw body
 	bodyShape.setFillColor(GetColor());
 	for (size_t i = 1; i < snakeBody.size(); i++)
 	{
 		bodyShape.setPosition(snakeBody[i].x * mTileSize.x, snakeBody[i].y * mTileSize.y);
-		window.draw(bodyShape);
+		window.draw(bodyShape, t);
 	}
 }
