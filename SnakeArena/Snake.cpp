@@ -9,7 +9,7 @@ Snake::Snake(Color color, sf::Vector2u startPosition, sf::Vector2f tileSize, siz
 {
 	for (int i = 0; i < bodyLen; i++)
 	{
-		mPositions.push_back({ startPosition.x, startPosition.y + i });
+		mPositions.push_back({ startPosition.x, startPosition.y });
 	}
 }
 
