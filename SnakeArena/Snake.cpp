@@ -1,9 +1,10 @@
 #include "Snake.hpp"
 
-Snake::Snake(Color color, sf::Vector2u startPosition, size_t bodyLen):
+Snake::Snake(Color color, sf::Vector2u startPosition, sf::Vector2f tileSize, size_t bodyLen):
 	mColor (color),
 	mHeadColor (Color(color.r * 0.75f, color.g * 0.75f, color.b * 0.75f)),
 	mDirection (Direction::Up),
+	mTileSize (tileSize),
 	mBodyLen (bodyLen)
 {
 	for (int i = 0; i < bodyLen; i++)
@@ -74,6 +75,10 @@ void Snake::ChangeDirection(Direction d)
 	mTempDirection = d;
 }
 
+void Snake::Draw(sf::RenderWindow & window, sf::Transform t)
+{
+}
+
 void Snake::ProcessDirectionChange()
 {
 	if (mTempDirection == Direction::Up && mDirection == Direction::Down)
@@ -89,4 +94,24 @@ void Snake::ProcessDirectionChange()
 		return;
 
 	mDirection = mTempDirection;
+}
+
+void Snake::Draw(sf::RenderWindow & window, sf::Transform t)
+{
+	sf::RectangleShape bodyShape(mTileSize);
+
+	Positions snakeBody = GetBody();
+
+	// Draw head
+	bodyShape.setFillColor(GetHeadColor());
+	bodyShape.setPosition(snakeBody[0].x * mTileSize.x, snakeBody[0].y * mTileSize.y);
+	window.draw(bodyShape);
+
+	// Draw body
+	bodyShape.setFillColor(GetColor());
+	for (size_t i = 1; i < snakeBody.size(); i++)
+	{
+		bodyShape.setPosition(snakeBody[i].x * mTileSize.x, snakeBody[i].y * mTileSize.y);
+		window.draw(bodyShape);
+	}
 }

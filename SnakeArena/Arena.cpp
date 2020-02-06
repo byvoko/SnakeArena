@@ -15,9 +15,6 @@ Arena::~Arena()
 
 void Arena::Draw(sf::RenderWindow & window)
 {
-	auto tileSize = CalcTileSize();
-	sf::RectangleShape bodyShape(tileSize);
-
 	if (mSnakes.size() == 0)
 		return;
 
@@ -27,20 +24,7 @@ void Arena::Draw(sf::RenderWindow & window)
 			continue;
 
 		Snake & snake = *pSnake;
-		Positions snakeBody = snake.GetBody();
-
-		// Draw head
-		bodyShape.setFillColor(snake.GetHeadColor());
-		bodyShape.setPosition(mPosition.x + (snakeBody[0].x * tileSize.x), mPosition.y + (snakeBody[0].y * tileSize.y));
-		window.draw(bodyShape);
-
-		// Draw body
-		bodyShape.setFillColor(snake.GetColor());
-		for (size_t i = 1; i < snakeBody.size(); i++)
-		{
-			bodyShape.setPosition(mPosition.x + (snakeBody[i].x * tileSize.x), mPosition.y + (snakeBody[i].y * tileSize.y));
-			window.draw(bodyShape);
-		}
+		snake.Draw(window, mTransform);
 	}
 
 	for (BaseItem* baseItem : pItems)

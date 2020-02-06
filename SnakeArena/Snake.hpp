@@ -3,10 +3,12 @@
 #include <vector>
 #include <SFML\Graphics.hpp>
 
+#include "IGameDrawable.hpp"
 #include "IControls.hpp"
 #include "Types.hpp"
 
-class Snake
+class Snake :
+	public IGameDrawable
 {
 public:
 	enum Direction
@@ -24,6 +26,8 @@ private:
 	Direction mDirection;
 	Direction mTempDirection;
 
+	sf::Vector2f mTileSize;
+
 	size_t mBodyLen;
 
 	ISnakeControls * mControl;
@@ -32,7 +36,7 @@ private:
 	void ProcessDirectionChange();
 
 public:
-	Snake(Color color, sf::Vector2u startPosition, size_t bodyLen = 10);
+	Snake(Color color, sf::Vector2u startPosition, sf::Vector2f tileSize, size_t bodyLen = 10);
 	virtual ~Snake();
 
 	Positions& GetBody() { return mPositions; }
@@ -46,5 +50,8 @@ public:
 	void IncrementLength();
 
 	void ChangeDirection(Direction d);
+
+	// Dìdí se pøes IGameDrawable.
+	void Draw(sf::RenderWindow & window, sf::Transform t) override;
 };
 
