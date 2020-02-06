@@ -27,8 +27,8 @@ void Game::InitSnakes()
 
 	auto gridTileSize = mArenas[0].GetGridTileSize();
 
-	Snake snake1(sf::Color(150, 50, 250), { gridTileSize.x / 2, gridTileSize.y / 2 });
-	Snake snake2(sf::Color(200, 25, 180), { gridTileSize.x / 2, gridTileSize.y / 2 });
+	Snake snake1(sf::Color(150, 50, 250), { gridTileSize.x / 2, gridTileSize.y / 2 }, mArenas[0].CalcTileSize());
+	Snake snake2(sf::Color(200, 25, 180), { gridTileSize.x / 2, gridTileSize.y / 2 }, mArenas[1].CalcTileSize());
 
 	mSnakes.push_back(snake1);
 	mSnakes.push_back(snake2);

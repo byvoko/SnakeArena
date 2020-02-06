@@ -33,13 +33,13 @@ void Arena::Draw(sf::RenderWindow & window)
 	}
 
 	sf::RectangleShape bondries(sf::Vector2f(mSizePx.x, mSizePx.y));
-	bondries.setPosition(mPosition.x, mPosition.y);
+	bondries.setPosition(0, 0);
 	bondries.setOutlineThickness(3.f);
 	bondries.setOutlineColor(sf::Color(0, 0, 0));
 	bondries.setFillColor(sf::Color(0, 0, 0, 0));
 
 	// Draw arena boundries
-	window.draw(bondries);
+	window.draw(bondries, mTransform);
 }
 
 void Arena::Update()

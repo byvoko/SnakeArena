@@ -52,6 +52,6 @@ public:
 	void ChangeDirection(Direction d);
 
 	// Dìdí se pøes IGameDrawable.
-	void Draw(sf::RenderWindow & window, sf::Transform t) override;
+	virtual void Draw(sf::RenderWindow & window, sf::Transform t) override;
 };
 

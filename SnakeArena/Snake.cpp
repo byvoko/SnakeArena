@@ -75,10 +75,6 @@ void Snake::ChangeDirection(Direction d)
 	mTempDirection = d;
 }
 
-void Snake::Draw(sf::RenderWindow & window, sf::Transform t)
-{
-}
-
 void Snake::ProcessDirectionChange()
 {
 	if (mTempDirection == Direction::Up && mDirection == Direction::Down)
