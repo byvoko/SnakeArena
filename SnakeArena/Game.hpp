@@ -21,6 +21,9 @@ private:
 	std::vector<Snake> mSnakes;
 	std::vector<IGameControls *> mControls;
 
+	bool mRun;
+	int mSnakeWinner;
+
 	// Test
 	FoodItem* pFood;
 
@@ -34,6 +37,12 @@ private:
 	void InitArenas(sf::Vector2u windowSize);
 	void InitSnakes();
 	void InitGameInterface();
+	bool CheckSnakeBodyColision(Positions const & snakeBody, const Position nextPosition);
+	bool CheckSnakeArenaColision(const Position nextPosition, sf::Vector2u gridSize);
+
+	void UpdateMovement();
+	void PrepareEnd();
+	void DrawEnd(sf::RenderWindow & window);
 
 	void GenerateFood();
 	bool IsFoodOnSnake(Position& position);

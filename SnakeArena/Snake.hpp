@@ -39,9 +39,9 @@ public:
 	Snake(Color color, sf::Vector2u startPosition, sf::Vector2f tileSize, size_t bodyLen = 10);
 	virtual ~Snake();
 
-	Positions& GetBody() { return mPositions; }
-	Color& GetColor() { return mColor; }
-	Color& GetHeadColor() { return mHeadColor; }
+	Positions const & GetBody() { return mPositions; }
+	Color const & GetColor() { return mColor; }
+	Color const & GetHeadColor() { return mHeadColor; }
 
 	void Update();
 
@@ -50,6 +50,8 @@ public:
 	void IncrementLength();
 
 	void ChangeDirection(Direction d);
+
+	Position GetNext();
 
 	// Dìdí se pøes IGameDrawable.
 	virtual void Draw(sf::RenderWindow & window, sf::Transform t) override;
