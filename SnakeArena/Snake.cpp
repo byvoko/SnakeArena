@@ -19,6 +19,7 @@ Snake::~Snake()
 
 Position Snake::GetNext()
 {
+	ProcessDirectionChange();
 	switch (mDirection)
 	{
 	case Snake::Up:
@@ -41,8 +42,6 @@ Position Snake::GetNext()
 
 void Snake::Update()
 {
-	ProcessDirectionChange();
-
 	Move(GetNext());
 }
 

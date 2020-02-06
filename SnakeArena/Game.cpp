@@ -200,8 +200,8 @@ bool Game::CheckSnakeArenaColision(const Position nextPosition, sf::Vector2u gri
 	if (head.x < 0 || head.y < 0)
 		return true;
 
-	if (head.x > gridSize.x ||
-		head.y > gridSize.y)
+	if (head.x >= gridSize.x ||
+		head.y >= gridSize.y)
 		return true;
 
 	return false;
