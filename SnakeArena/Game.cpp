@@ -150,6 +150,7 @@ void Game::Update()
 
 	mClockUpdate.restart();
 
+	// Collisions
 	for (int i = 0; i < mSnakes.size(); i++)
 	{
 		Snake & s = mSnakes[i];
@@ -159,6 +160,21 @@ void Game::Update()
 		{
 			mSnakeWinner = i;
 			PrepareEnd();
+		}
+	}
+
+	// Food
+	if (pFood != nullptr)
+	{
+		for (Snake& snake : mSnakes)
+		{
+			if (snake.GetNext() == pFood->GetPosition())
+			{
+				pFood->Eat(snake);
+				delete pFood;
+				pFood = nullptr;
+				break;
+			}
 		}
 	}
 

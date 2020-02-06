@@ -13,6 +13,11 @@ public:
 	{
 	}
 
+	virtual Position GetPosition()
+	{
+		return mPosition;
+	}
+
 	virtual void Eat(Snake& snake) = 0;
 	
 	virtual void Update() = 0;
