@@ -45,7 +45,7 @@ void Arena::Draw(sf::RenderWindow & window)
 
 	for (BaseItem* baseItem : pItems)
 	{
-		baseItem->Draw(window, sf::Vector2f(mPosition.x, mPosition.y));
+		baseItem->Draw(window, mTransform);
 	}
 
 	sf::RectangleShape bondries(sf::Vector2f(mSizePx.x, mSizePx.y));
@@ -74,7 +74,7 @@ void Arena::Update()
 
 sf::Vector2f Arena::CalcTileSize()
 {
-	return sf::Vector2f{ float(mSizePx.x / mGridTileSize.x), float(mSizePx.y / mGridTileSize.y)};
+	return sf::Vector2f { float(mSizePx.x / mGridTileSize.x), float(mSizePx.y / mGridTileSize.y)};
 }
 
 

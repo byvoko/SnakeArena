@@ -14,7 +14,9 @@ public:
 
 	// Dìdí se pøes BaseItem.
 	virtual void Eat(Snake & snake) override;
-	virtual void Draw(sf::RenderWindow & window, sf::Vector2f offsetPosition) override;
-	virtual void Update() override;
-};
 
+	virtual void Update() override;
+
+	// Dìdí se pøes BaseItem.
+	virtual void Draw(sf::RenderWindow& window, sf::Transform t) override;
+};
