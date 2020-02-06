@@ -25,7 +25,7 @@ private:
 	int mSnakeWinner;
 
 	// Test
-	std::vector<BaseItem*> mItems;
+	FoodItem* pFood;
 
 	static constexpr int FPS = 60;
 	int mSpeed = 200;	//[ms]
@@ -43,6 +43,9 @@ private:
 	void UpdateMovement();
 	void PrepareEnd();
 	void DrawEnd(sf::RenderWindow & window);
+
+	void GenerateFood();
+	bool IsFoodOnSnake(Position& position);
 
 public:
 	Game(sf::Vector2u windowSize);

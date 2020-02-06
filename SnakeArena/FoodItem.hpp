@@ -10,7 +10,7 @@ private:
 	sf::RectangleShape mVerticalPlusLine;
 
 public:
-	FoodItem(Position position, sf::Vector2f tileSize);
+	FoodItem(Position position, sf::Vector2u tileSize);
 
 	// Dìdí se pøes BaseItem.
 	virtual void Eat(Snake & snake) override;

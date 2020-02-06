@@ -13,8 +13,8 @@ void Game::InitArenas(sf::Vector2u windowSize)
 	sf::Vector2u arenaTileSize = { 20, 20 };
 	sf::Vector2u arenaGritTileSize = { arenaSizePx.x / arenaTileSize.x, arenaSizePx.y / arenaTileSize.y };
 	
-	Arena arena1(arenaSizePx, arenaGritTileSize, sf::Vector2u(0, 0), mItems);
-	Arena arena2(arenaSizePx, arenaGritTileSize, sf::Vector2u((windowSize.x / 2), 0), mItems);
+	Arena arena1(arenaSizePx, arenaGritTileSize, sf::Vector2u(0, 0));
+	Arena arena2(arenaSizePx, arenaGritTileSize, sf::Vector2u((windowSize.x / 2), 0));
 
 	mArenas.push_back(arena1);
 	mArenas.push_back(arena2);
@@ -50,10 +50,6 @@ void Game::InitSnakes()
 		mSnakes[0].AddControl(*gamepad);
 		mControls.push_back(gamepad);
 	}*/
-
-
-	// Test
-	mItems.push_back(new FoodItem(Position(80, 80), mArenas[0].CalcTileSize()));
 }
 
 void Game::InitGameInterface()
@@ -61,8 +57,51 @@ void Game::InitGameInterface()
 	mGameInterface = GameInterface();
 }
 
-Game::Game(sf::Vector2u windowSize)
+void Game::GenerateFood()
 {
+	if (pFood == nullptr)
+	{
+		int i = 0;
+
+		sf::Vector2u gridResolution = static_cast<sf::Vector2u>(mArenas[0].CalcTileSize());
+
+		Position foodPosition{ rand() % gridResolution.x, rand() % gridResolution.y };
+		while (IsFoodOnSnake(foodPosition) && i++ > 100)
+		{
+			foodPosition = Position(rand() % gridResolution.x, rand() % gridResolution.y);
+		}
+		
+		pFood = new FoodItem(foodPosition, gridResolution);
+
+		for (Arena& arena : mArenas)
+		{
+			arena.AddFood(pFood);
+		}
+	}
+}
+
+bool Game::IsFoodOnSnake(Position& position)
+{
+	for (Snake& snake : mSnakes)
+	{
+		Positions snakeBody = snake.GetBody();
+		for (Position& snakeBodyTile : snakeBody)
+		{
+			if (snakeBodyTile == position)
+			{
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
+Game::Game(sf::Vector2u windowSize)
+	: pFood(nullptr)
+{
+	srand(time(NULL));
+
 	mRun = true;
 	mSnakeWinner = -1;
 	InitBackground();
@@ -73,10 +112,8 @@ Game::Game(sf::Vector2u windowSize)
 
 Game::~Game()
 {
-	for (BaseItem* baseItem : mItems)
-	{
-		delete baseItem;
-	}
+	if (pFood)
+		delete pFood;
 }
 
 void Game::Draw(sf::RenderWindow & window)
@@ -141,10 +178,7 @@ void Game::UpdateMovement()
 	{
 		arena.Update();
 	}
-	for (BaseItem* baseItem : mItems)
-	{
-		baseItem->Update();
-	}
+	GenerateFood();
 
 	mGameInterface.Update();
 }
