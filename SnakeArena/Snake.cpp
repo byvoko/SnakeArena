@@ -17,27 +17,33 @@ Snake::~Snake()
 {
 }
 
-void Snake::Update()
+Position Snake::GetNext()
 {
-	ProcessDirectionChange();
-
 	switch (mDirection)
 	{
 	case Snake::Up:
-		Move({ mPositions[0].x, mPositions[0].y - 1 });
+		return { mPositions[0].x, mPositions[0].y - 1 };
 		break;
 	case Snake::Right:
-		Move({ mPositions[0].x + 1, mPositions[0].y });
+		return { mPositions[0].x + 1, mPositions[0].y };
 		break;
 	case Snake::Down:
-		Move({ mPositions[0].x, mPositions[0].y + 1 });
+		return { mPositions[0].x, mPositions[0].y + 1 };
 		break;
 	case Snake::Left:
-		Move({ mPositions[0].x - 1, mPositions[0].y });
+		return { mPositions[0].x - 1, mPositions[0].y };
 		break;
 	default:
 		break;
 	}
+	return {};
+}
+
+void Snake::Update()
+{
+	ProcessDirectionChange();
+
+	Move(GetNext());
 }
 
 void Snake::AddControl(ISnakeControls & c)

@@ -63,6 +63,8 @@ void Game::InitGameInterface()
 
 Game::Game(sf::Vector2u windowSize)
 {
+	mRun = true;
+	mSnakeWinner = -1;
 	InitBackground();
 	InitArenas(windowSize);
 	InitSnakes();
@@ -97,6 +99,9 @@ void Game::Draw(sf::RenderWindow & window)
 	}
 	mGameInterface.Draw(window);
 
+	if (!mRun)
+		DrawEnd(window);
+
 	window.display();
 }
 
@@ -108,6 +113,26 @@ void Game::Update()
 
 	mClockUpdate.restart();
 
+	for (int i = 0; i < mSnakes.size(); i++)
+	{
+		Snake & s = mSnakes[i];
+		Arena & a = mArenas[i];
+		if (CheckSnakeBodyColision(s.GetBody(), s.GetNext()) ||
+			CheckSnakeArenaColision(s.GetNext(), a.GetGridTileSize()))
+		{
+			mSnakeWinner = i;
+			PrepareEnd();
+		}
+	}
+
+	if (!mRun)
+		return;
+
+	UpdateMovement();
+}
+
+void Game::UpdateMovement()
+{
 	if (mArenas.size() == 0)
 		return;
 
@@ -120,6 +145,7 @@ void Game::Update()
 	{
 		baseItem->Update();
 	}
+
 	mGameInterface.Update();
 }
 
@@ -132,4 +158,63 @@ void Game::ProcessEvent(sf::Event e)
 
 		control->ProcessEvent(e);
 	}
+}
+
+bool Game::CheckSnakeArenaColision(const Position nextPosition, sf::Vector2u gridSize)
+{
+	const Position head = nextPosition;
+	if (head.x < 0 || head.y < 0)
+		return true;
+
+	if (head.x > gridSize.x ||
+		head.y > gridSize.y)
+		return true;
+
+	return false;
+}
+
+bool Game::CheckSnakeBodyColision(Positions const & snakeBody, const Position nextPosition)
+{
+	const Position head = nextPosition;
+	for (int i = 0; i < snakeBody.size() - 1; i++)
+	{
+		if (head == snakeBody[i])
+			return true;
+	}
+	return false;
+}
+
+void Game::PrepareEnd()
+{
+	mRun = false;
+}
+
+void Game::DrawEnd(sf::RenderWindow & window)
+{
+	if (mSnakeWinner < 0)
+		return;
+
+	auto wSize = window.getSize();
+
+	sf::Font font;
+	font.loadFromFile("Anyfreak.ttf");
+	sf::Text text;
+	sf::String s = "The End";
+	text.setString(s);
+	text.setFont(font);
+	text.setCharacterSize(50);
+	text.setFillColor(mSnakes[mSnakeWinner].GetColor());
+	text.setPosition((wSize.x / 2) - 80, (wSize.y / 2) - 35);
+
+	sf::RectangleShape endBack;
+	sf::Color c;
+	c = sf::Color::Black;
+	c.a = 240;
+	endBack.setFillColor(c);
+	endBack.setSize({200, 80});
+	endBack.setPosition((wSize.x / 2) - (endBack.getSize().x / 2), (wSize.y / 2) - (endBack.getSize().y / 2));
+
+	window.draw(endBack);
+	window.draw(text);
+
 }
