@@ -1,12 +1,12 @@
 #include "Arena.hpp"
 #include "Snake.hpp"
 
-Arena::Arena(sf::Vector2u sizePx, sf::Vector2u gridTileSize, sf::Vector2u position, std::vector<BaseItem*>* items) :
+Arena::Arena(sf::Vector2u sizePx, sf::Vector2u gridTileSize, sf::Vector2u position, std::vector<BaseItem*>& items) :
 	mSizePx(sizePx),
 	mGridTileSize(gridTileSize),
-	mPosition (position),
 	pItems(items)
 {
+	mTransform.translate(static_cast<sf::Vector2f>(position));
 }
 
 Arena::~Arena()
@@ -43,7 +43,7 @@ void Arena::Draw(sf::RenderWindow & window)
 		}
 	}
 
-	for (BaseItem* baseItem : *pItems)
+	for (BaseItem* baseItem : pItems)
 	{
 		baseItem->Draw(window, sf::Vector2f(mPosition.x, mPosition.y));
 	}

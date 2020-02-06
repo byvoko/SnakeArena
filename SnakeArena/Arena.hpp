@@ -9,14 +9,15 @@ class Arena
 {
 private:
 	std::vector<Snake*> mSnakes;
-	std::vector<BaseItem*>* pItems;
+	std::vector<BaseItem*>& pItems;
 
 	sf::Vector2u mSizePx;
 	sf::Vector2u mGridTileSize;
-	sf::Vector2u mPosition;
+
+	sf::Transform mTransform;
 
 public:
-	Arena(sf::Vector2u sizePx, sf::Vector2u gridTileSize, sf::Vector2u position, std::vector<BaseItem*>* items);
+	Arena(sf::Vector2u sizePx, sf::Vector2u gridTileSize, sf::Vector2u position, std::vector<BaseItem*>& items);
 	virtual ~Arena();
 
 	void Draw(sf::RenderWindow & window);
