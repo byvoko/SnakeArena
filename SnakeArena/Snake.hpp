@@ -63,6 +63,8 @@ public:
 	void EnableNitro() { mNitroEnable = true; }
 	void DisableNitro() { mNitroEnable = false; }
 
+	size_t GetLength() { return mPositions.size(); }
+
 	Position GetNext();
 
 	uint8_t GetStamina();

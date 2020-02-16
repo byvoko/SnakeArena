@@ -39,6 +39,8 @@ void Game::InitSnakes()
 	// Snakes
 	mArenas[0].AddSnake(mSnakes[0]);
 	mArenas[1].AddSnake(mSnakes[1]);
+	mHud.AddSnake(mSnakes[0]);
+	mHud.AddSnake(mSnakes[1]);
 
 	// Shadows
 	mArenas[0].AddShadow(mSnakes[1]);
