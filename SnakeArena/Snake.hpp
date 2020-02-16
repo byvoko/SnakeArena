@@ -65,6 +65,8 @@ public:
 	void DisableNitro() { mNitroEnable = false; }
 
 	size_t GetLength() { return mPositions.size(); }
+	Snake::Direction GetDirection() { return mTempDirection; }
+	uint64_t GetNextUpdateId() { return mNextUpdateId; }
 
 	Position GetNext();
 
