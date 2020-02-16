@@ -29,5 +29,6 @@ public:
 	sf::Vector2u GetGridTileSize() { return mGridTileSize; }
 
 	void AddSnake(Snake & snake) { mSnakes.push_back(&snake); }
+	void AddShadow(Snake& shadow) { mShadows.push_back(&shadow); }
 	void AddFood(FoodItem* food);
 };

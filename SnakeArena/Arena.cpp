@@ -18,13 +18,20 @@ void Arena::Draw(sf::RenderWindow & window)
 	if (mSnakes.size() == 0)
 		return;
 
+	for (auto pShadow : mShadows)
+	{
+		if (pShadow == nullptr)
+			continue;
+
+		pShadow->Draw(window, mTransform);
+	}
+
 	for (auto pSnake : mSnakes)
 	{
 		if (pSnake == nullptr)
 			continue;
 
-		Snake & snake = *pSnake;
-		snake.Draw(window, mTransform);
+		pSnake->Draw(window, mTransform);
 	}
 	
 	if (pFood)
