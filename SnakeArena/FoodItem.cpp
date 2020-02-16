@@ -12,9 +12,10 @@ FoodItem::FoodItem(Position position, sf::Vector2u tileSize)
 	mVerticalPlusLine.setFillColor(Color(255, 10, 10));
 }
 
-void FoodItem::Eat(Snake & snake)
+void FoodItem::Eat(Snake& snake)
 {
 	snake.IncrementLength();
+	snake.RestoreStamina(3);
 }
 
 void FoodItem::Update()

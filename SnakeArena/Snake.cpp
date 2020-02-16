@@ -62,7 +62,7 @@ void Snake::Update(const uint64_t& updateId)
 	{
 		if (mNitroEnable && mStamina > 0)
 		{
-			mNextUpdateId += mUpdateIdStep / 10;
+			mNextUpdateId += mUpdateIdStep / 2;
 			mStamina--;
 		}
 		else
@@ -90,6 +90,15 @@ void Snake::IncrementLength()
 	mBodyLen++;
 
 	mPositions.push_back(Position(mPositions.back()));
+}
+
+void Snake::RestoreStamina(uint8_t stamina)
+{
+	mStamina += stamina;
+	if (mStamina > MaxStamina)
+	{
+		mStamina = MaxStamina;
+	}
 }
 
 // Private methods
