@@ -21,7 +21,7 @@ void FoodItem::Update()
 {
 }
 
-void FoodItem::Draw(sf::RenderWindow& window, sf::Transform t)
+void FoodItem::Draw(sf::RenderWindow& window, sf::Transform t, uint8_t alpha)
 {
 	window.draw(mHorizontalPlusLine, t);
 	window.draw(mVerticalPlusLine, t);

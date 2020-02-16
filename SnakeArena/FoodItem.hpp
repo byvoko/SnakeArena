@@ -18,5 +18,5 @@ public:
 	virtual void Update() override;
 
 	// Dìdí se pøes BaseItem.
-	virtual void Draw(sf::RenderWindow& window, sf::Transform t) override;
+	virtual void Draw(sf::RenderWindow& window, sf::Transform t, uint8_t alpha = 255) override;
 };

@@ -97,19 +97,23 @@ void Snake::ProcessDirectionChange()
 	mDirection = mTempDirection;
 }
 
-void Snake::Draw(sf::RenderWindow & window, sf::Transform t)
+void Snake::Draw(sf::RenderWindow & window, sf::Transform t, uint8_t alpha)
 {
 	sf::RectangleShape bodyShape(mTileSize);
 
 	Positions snakeBody = GetBody();
 
 	// Draw head
-	bodyShape.setFillColor(GetHeadColor());
+	Color headColor = GetHeadColor();
+	headColor.a = alpha;
+	bodyShape.setFillColor(headColor);
 	bodyShape.setPosition(snakeBody[0].x * mTileSize.x, snakeBody[0].y * mTileSize.y);
 	window.draw(bodyShape, t);
 
 	// Draw body
-	bodyShape.setFillColor(GetColor());
+	Color bodyColor = GetColor();
+	bodyColor.a = alpha;
+	bodyShape.setFillColor(bodyColor);
 	for (size_t i = 1; i < snakeBody.size(); i++)
 	{
 		bodyShape.setPosition(snakeBody[i].x * mTileSize.x, snakeBody[i].y * mTileSize.y);
