@@ -132,16 +132,8 @@ Game::~Game()
 
 void Game::Draw(sf::RenderWindow & window)
 {
-	sf::Time elapsed = mClockDraw.getElapsedTime();
-	if (elapsed.asMilliseconds() < (1000 / FPS))
-		return;
-
-	mClockDraw.restart();
-
 	if (mArenas.size() == 0)
 		return;
-
-	window.clear();
 
 	mBackground.Draw(window);
 	for (Arena & arena : mArenas)
@@ -152,8 +144,6 @@ void Game::Draw(sf::RenderWindow & window)
 
 	if (!mRun)
 		DrawEnd(window);
-
-	window.display();
 }
 
 void Game::Update()

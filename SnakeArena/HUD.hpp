@@ -9,6 +9,7 @@
 class HUD : public IGameDrawable
 {
 private:
+	sf::Color mBackgroundColor;
 	sf::Font mFont;
 	std::vector<Snake*> mSnakes;
 

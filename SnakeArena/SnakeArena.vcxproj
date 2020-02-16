@@ -139,6 +139,7 @@
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="KeyControls.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Snake.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -152,6 +153,7 @@
     <ClInclude Include="IControls.hpp" />
     <ClInclude Include="IGameDrawable.hpp" />
     <ClInclude Include="KeyControls.hpp" />
+    <ClInclude Include="Menu.hpp" />
     <ClInclude Include="Snake.hpp" />
     <ClInclude Include="Types.hpp" />
   </ItemGroup>

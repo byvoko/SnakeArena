@@ -6,8 +6,7 @@ class FoodItem :
 	public BaseItem
 {
 private:
-	sf::RectangleShape mHorizontalPlusLine;
-	sf::RectangleShape mVerticalPlusLine;
+	sf::RectangleShape mShape;
 
 public:
 	FoodItem(Position position, sf::Vector2f tileSize);

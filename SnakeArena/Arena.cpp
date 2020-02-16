@@ -23,7 +23,7 @@ void Arena::Draw(sf::RenderWindow & window)
 		if (pShadow == nullptr)
 			continue;
 
-		pShadow->Draw(window, mTransform, 40);
+		pShadow->Draw(window, mTransform, 65);
 	}
 
 	for (auto pSnake : mSnakes)
