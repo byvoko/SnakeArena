@@ -44,7 +44,7 @@ private:
 public:
 	static const uint8_t MaxStamina;
 
-	Snake(Color color, sf::Vector2u startPosition, sf::Vector2f tileSize, size_t bodyLen = 10);
+	Snake(Color color, sf::Vector2u startPosition, sf::Vector2f tileSize, size_t bodyLen = 3);
 	virtual ~Snake();
 
 	Positions const & GetBody() { return mPositions; }
@@ -57,6 +57,7 @@ public:
 	void AddControl(ISnakeControls & c);
 
 	void IncrementLength();
+	void RestoreStamina(uint8_t stamina);
 
 	void ChangeDirection(Direction d);
 

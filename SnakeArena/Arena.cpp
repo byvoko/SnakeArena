@@ -23,7 +23,7 @@ void Arena::Draw(sf::RenderWindow & window)
 		if (pShadow == nullptr)
 			continue;
 
-		pShadow->Draw(window, mTransform);
+		pShadow->Draw(window, mTransform, 40);
 	}
 
 	for (auto pSnake : mSnakes)
@@ -31,7 +31,7 @@ void Arena::Draw(sf::RenderWindow & window)
 		if (pSnake == nullptr)
 			continue;
 
-		pSnake->Draw(window, mTransform, 40);
+		pSnake->Draw(window, mTransform);
 	}
 	
 	if (pFood)
