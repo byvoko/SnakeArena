@@ -1,6 +1,5 @@
 #include "KeyControls.hpp"
 
-
 KeyControls::KeyControls(sf::Keyboard::Key upKey, sf::Keyboard::Key rightKey, sf::Keyboard::Key downKey, sf::Keyboard::Key leftKey, sf::Keyboard::Key nitroKey):
 	mUpKey (upKey),
 	mRightKey (rightKey),

@@ -35,10 +35,14 @@ private:
 
 	ISnakeControls * mControl;
 
+	uint8_t mStamina;
+
 	void Move(Position newHeadPosition);
 	void ProcessDirectionChange();
 
 public:
+	static const uint8_t MaxStamina;
+
 	Snake(Color color, sf::Vector2u startPosition, sf::Vector2f tileSize, size_t bodyLen = 10);
 	virtual ~Snake();
 
@@ -56,6 +60,8 @@ public:
 	void ChangeDirection(Direction d);
 
 	Position GetNext();
+
+	uint8_t GetStamina();
 
 	// Dìdí se pøes IGameDrawable.
 	virtual void Draw(sf::RenderWindow & window, sf::Transform t, uint8_t alpha = 255) override;
