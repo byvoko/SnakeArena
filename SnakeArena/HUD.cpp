@@ -1,6 +1,5 @@
 #include <string>
 
-#include <iostream>
 #include "HUD.hpp"
 #include "Game.hpp" 
 
@@ -16,7 +15,6 @@ void HUD::Update()
 void HUD::AddSnake(Snake & s) 
 { 
 	mSnakes.push_back(&s); 
-	std::cout << "add snake " << mSnakes.size() << std::endl;
 }
 
 void HUD::Draw(sf::RenderWindow & window, sf::Transform t, uint8_t alpha)
