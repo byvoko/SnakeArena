@@ -39,8 +39,6 @@ void Game::InitSnakes()
 	// Snakes
 	mArenas[0].AddSnake(mSnakes[0]);
 	mArenas[1].AddSnake(mSnakes[1]);
-	mHud.AddSnake(mSnakes[0]);
-	mHud.AddSnake(mSnakes[1]);
 
 	// Shadows
 	mArenas[0].AddShadow(mSnakes[1]);
@@ -51,7 +49,7 @@ void Game::InitSnakes()
 	mSnakes[0].AddControl(*key1);
 	mControls.push_back(key1);
 	
-	KeyControls * key2 = new KeyControls(sf::Keyboard::Key::Up, sf::Keyboard::Key::Right, sf::Keyboard::Key::Down, sf::Keyboard::Key::Left, sf::Keyboard::Key::Space);
+	KeyControls * key2 = new KeyControls(sf::Keyboard::Key::Up, sf::Keyboard::Key::Right, sf::Keyboard::Key::Down, sf::Keyboard::Key::Left, sf::Keyboard::Key::Num0);
 	mSnakes[1].AddControl(*key2);
 	mControls.push_back(key2);
 
@@ -65,7 +63,10 @@ void Game::InitSnakes()
 
 void Game::InitGameInterface()
 {
-	mHud = HUD();
+	for (int i = 0; i < mSnakes.size(); i++)
+	{
+		mHud.AddSnake(mSnakes[i]);
+	}
 }
 
 void Game::GenerateFood()

@@ -28,14 +28,16 @@ void HUD::Draw(sf::RenderWindow & window, sf::Transform t, uint8_t alpha)
 	t.translate(0, (window.getSize().y - Height));
 	window.draw(background, t);
 
-	//std::cout << "Hadu " << mSnakes.size() << std::endl;
 	//Snakes
+	t.translate(10, 10);
 	for (Snake * snake : mSnakes)
 	{
-		std::cout << "snake";
+		if (snake == nullptr)
+			continue;
+
 		Snake & s = *snake;
 		DrawSnakeInfo(window, t, s);
-		t.translate(100, 0);
+		t.translate(610, 0);
 	}
 }
 
@@ -45,11 +47,11 @@ void HUD::DrawSnakeInfo(sf::RenderWindow & window, sf::Transform t, Snake & s)
 	const uint8_t stamina = s.GetStamina();
 	Color c = s.GetColor();
 
-	std::string sLength = "Length: " + snakeLength;
+	std::string sLength = "Length: " + std::to_string(snakeLength) + " Stamina: " + std::to_string(stamina);
 	sf::Text tLength;
 	tLength.setString(sLength);
 	tLength.setFont(mFont);
-	tLength.setCharacterSize(50);
+	tLength.setCharacterSize(30);
 	tLength.setFillColor(c);
 	
 	window.draw(tLength, t);

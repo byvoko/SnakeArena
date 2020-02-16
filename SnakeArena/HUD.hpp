@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 #include <SFML\Graphics.hpp>
 #include "Snake.hpp"
 #include "IGameDrawable.hpp"
@@ -17,5 +19,5 @@ public:
 	void AddSnake(Snake & s);
 	static constexpr size_t Height = 100;	//[px]
 	void Update();
-	void Draw(sf::RenderWindow & window, sf::Transform t, uint8_t alpha = 255);
+	void Draw(sf::RenderWindow & window, sf::Transform t, uint8_t alpha = 255) override;
 };
