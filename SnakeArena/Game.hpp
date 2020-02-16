@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <string>
 
 #include "Arena.hpp"
 #include "Snake.hpp"
@@ -13,9 +14,12 @@
 
 class Game
 {
+public:
+	static const std::string GameFont;
+
 private:
 	Background mBackground;
-	HUD mGameInterface;
+	HUD mHud;
 
 	std::vector<Arena> mArenas;
 	std::vector<Snake> mSnakes;

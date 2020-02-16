@@ -1,6 +1,9 @@
+#include <string>
 #include "Game.hpp"
 #include "KeyControls.hpp"
 #include "GamepadControls.hpp"
+
+const std::string Game::GameFont = "Anyfreak.ttf";
 
 void Game::InitBackground()
 {
@@ -9,7 +12,7 @@ void Game::InitBackground()
 
 void Game::InitArenas(sf::Vector2u windowSize)
 {
-	sf::Vector2u arenaSizePx = { (windowSize.x / 2), windowSize.y };
+	sf::Vector2u arenaSizePx = { (windowSize.x / 2), windowSize.y - HUD::Height };
 	sf::Vector2u arenaTileSize = { 20, 20 };
 	sf::Vector2u arenaGritTileSize = { arenaSizePx.x / arenaTileSize.x, arenaSizePx.y / arenaTileSize.y };
 	
@@ -59,7 +62,7 @@ void Game::InitSnakes()
 
 void Game::InitGameInterface()
 {
-	mGameInterface = HUD();
+	mHud = HUD();
 }
 
 void Game::GenerateFood()
@@ -139,7 +142,7 @@ void Game::Draw(sf::RenderWindow & window)
 	{
 		arena.Draw(window);
 	}
-	mGameInterface.Draw(window);
+	mHud.Draw(window, {});
 
 	if (!mRun)
 		DrawEnd(window);
@@ -216,7 +219,7 @@ void Game::UpdateMovement()
 		arena.Update();
 	}
 
-	mGameInterface.Update();
+	mHud.Update();
 }
 
 void Game::ProcessEvent(sf::Event e)
@@ -267,7 +270,7 @@ void Game::DrawEnd(sf::RenderWindow & window)
 	auto wSize = window.getSize();
 
 	sf::Font font;
-	font.loadFromFile("Anyfreak.ttf");
+	font.loadFromFile(GameFont);
 	sf::Text text;
 	sf::String s = "The End";
 	text.setString(s);
