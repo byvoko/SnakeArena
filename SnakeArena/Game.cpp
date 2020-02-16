@@ -54,7 +54,7 @@ void Game::InitSnakes()
 
 void Game::InitGameInterface()
 {
-	mGameInterface = GameInterface();
+	mGameInterface = HUD();
 }
 
 void Game::GenerateFood()

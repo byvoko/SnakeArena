@@ -5,7 +5,7 @@
 #include "Arena.hpp"
 #include "Snake.hpp"
 #include "Background.hpp"
-#include "GameInterface.hpp"
+#include "HUD.hpp"
 
 #include "IControls.hpp"
 #include "BaseItem.hpp"
@@ -15,7 +15,7 @@ class Game
 {
 private:
 	Background mBackground;
-	GameInterface mGameInterface;
+	HUD mGameInterface;
 
 	std::vector<Arena> mArenas;
 	std::vector<Snake> mSnakes;
