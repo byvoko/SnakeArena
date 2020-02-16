@@ -13,11 +13,11 @@ void Game::InitBackground()
 void Game::InitArenas(sf::Vector2u windowSize)
 {
 	sf::Vector2u arenaSizePx = { (windowSize.x / 2), windowSize.y - HUD::Height };
-	sf::Vector2u arenaTileSize = { 20, 20 };
-	sf::Vector2u arenaGritTileSize = { arenaSizePx.x / arenaTileSize.x, arenaSizePx.y / arenaTileSize.y };
+	sf::Vector2u arenaResolution = { 20, 20 };
+	sf::Vector2f arenaGridTileSize = { (float)arenaSizePx.x / arenaResolution.x, (float)arenaSizePx.y / arenaResolution.y };
 	
-	Arena arena1(arenaSizePx, arenaGritTileSize, sf::Vector2u(0, 0));
-	Arena arena2(arenaSizePx, arenaGritTileSize, sf::Vector2u((windowSize.x / 2), 0));
+	Arena arena1(arenaSizePx, arenaGridTileSize, sf::Vector2u(0, 0));
+	Arena arena2(arenaSizePx, arenaGridTileSize, sf::Vector2u((windowSize.x / 2), 0));
 
 	mArenas.push_back(arena1);
 	mArenas.push_back(arena2);
@@ -28,10 +28,10 @@ void Game::InitSnakes()
 	if (mArenas.size() == 0)
 		return;
 
-	auto gridTileSize = mArenas[0].GetGridTileSize();
-
-	Snake snake1(sf::Color(150, 50, 250), { gridTileSize.x / 2, gridTileSize.y / 2 }, mArenas[0].CalcTileSize());
-	Snake snake2(sf::Color(200, 25, 180), { gridTileSize.x / 2, gridTileSize.y / 2 }, mArenas[1].CalcTileSize());
+	auto gridResolution = mArenas[0].GetGridResolution();
+	
+	Snake snake1(sf::Color(150, 50, 250), { gridResolution.x / 2, gridResolution.y / 2 }, mArenas[0].GetGridTileSize());
+	Snake snake2(sf::Color(200, 25, 180), { gridResolution.x / 2, gridResolution.y / 2 }, mArenas[1].GetGridTileSize());
 
 	mSnakes.push_back(snake1);
 	mSnakes.push_back(snake2);
@@ -75,7 +75,7 @@ void Game::GenerateFood()
 	{
 		int i = 0;
 
-		sf::Vector2u gridResolution = static_cast<sf::Vector2u>(mArenas[0].CalcTileSize());
+		sf::Vector2u gridResolution = mArenas[0].GetGridResolution();
 
 		Position foodPosition{ rand() % gridResolution.x, rand() % gridResolution.y };
 		while (IsFoodOnSnake(foodPosition) && i++ < 100)
@@ -83,7 +83,7 @@ void Game::GenerateFood()
 			foodPosition = Position(rand() % gridResolution.x, rand() % gridResolution.y);
 		}
 		
-		pFood = new FoodItem(foodPosition, gridResolution);
+		pFood = new FoodItem(foodPosition, mArenas[0].GetGridTileSize());
 
 		for (Arena& arena : mArenas)
 		{
@@ -171,7 +171,7 @@ void Game::Update()
 		Arena& a = mArenas[i];
 		if (s.ShouldUpdate(mUpdateId)
 			&& (CheckSnakeBodyColision(s.GetBody(), s.GetNext()) ||
-			CheckSnakeArenaColision(s.GetNext(), a.GetGridTileSize())))
+			CheckSnakeArenaColision(s.GetNext(), a.GetGridResolution())))
 		{
 			mSnakeWinner = i;
 			PrepareEnd();

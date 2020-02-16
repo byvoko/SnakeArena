@@ -1,6 +1,6 @@
 #include "Snake.hpp"
 
-const uint8_t Snake::MaxStamina = 10;
+const uint8_t Snake::MaxStamina = 20;
 
 Snake::Snake(Color color, sf::Vector2u startPosition, sf::Vector2f tileSize, size_t bodyLen):
 	mColor (color),
@@ -62,7 +62,7 @@ void Snake::Update(const uint64_t& updateId)
 	{
 		if (mNitroEnable && mStamina > 0)
 		{
-			mNextUpdateId += mUpdateIdStep / 2;
+			mNextUpdateId += mUpdateIdStep / 3;
 			mStamina--;
 		}
 		else

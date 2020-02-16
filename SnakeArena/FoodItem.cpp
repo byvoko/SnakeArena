@@ -1,6 +1,6 @@
 #include "FoodItem.hpp"
 
-FoodItem::FoodItem(Position position, sf::Vector2u tileSize)
+FoodItem::FoodItem(Position position, sf::Vector2f tileSize)
 	: BaseItem(position)
 	, mHorizontalPlusLine(sf::Vector2f(tileSize.x, tileSize.y / 3.f))
 	, mVerticalPlusLine(sf::Vector2f(tileSize.x / 3.f, tileSize.y))
@@ -15,7 +15,7 @@ FoodItem::FoodItem(Position position, sf::Vector2u tileSize)
 void FoodItem::Eat(Snake& snake)
 {
 	snake.IncrementLength();
-	snake.RestoreStamina(3);
+	snake.RestoreStamina(4);
 }
 
 void FoodItem::Update()

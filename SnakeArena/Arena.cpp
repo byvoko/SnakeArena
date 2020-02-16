@@ -1,7 +1,7 @@
 #include "Arena.hpp"
 #include "Snake.hpp"
 
-Arena::Arena(sf::Vector2u sizePx, sf::Vector2u gridTileSize, sf::Vector2u position, FoodItem* foodItem) :
+Arena::Arena(sf::Vector2u sizePx, sf::Vector2f gridTileSize, sf::Vector2u position, FoodItem* foodItem) :
 	mSizePx(sizePx),
 	mGridTileSize(gridTileSize),
 	pFood(foodItem)
@@ -61,9 +61,9 @@ void Arena::Update(const uint64_t& mUpdateId)
 	}
 }
 
-sf::Vector2f Arena::CalcTileSize()
+sf::Vector2u Arena::GetGridResolution()
 {
-	return sf::Vector2f { float(mSizePx.x / mGridTileSize.x), float(mSizePx.y / mGridTileSize.y)};
+	return sf::Vector2u { unsigned int(mSizePx.x / mGridTileSize.x), unsigned int(mSizePx.y / mGridTileSize.y)};
 }
 
 void Arena::AddFood(FoodItem* food)
