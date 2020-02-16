@@ -47,7 +47,7 @@ void Arena::Draw(sf::RenderWindow & window)
 	window.draw(bondries, mTransform);
 }
 
-void Arena::Update()
+void Arena::Update(const uint64_t& mUpdateId)
 {
 	if (mSnakes.size() == 0)
 		return;
@@ -57,7 +57,7 @@ void Arena::Update()
 		if (pSnake == nullptr)
 			continue;
 
-		pSnake->Update();
+		pSnake->Update(mUpdateId);
 	}
 }
 
@@ -70,5 +70,3 @@ void Arena::AddFood(FoodItem* food)
 {
 	pFood = food;
 }
-
-

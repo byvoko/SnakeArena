@@ -5,7 +5,9 @@ Snake::Snake(Color color, sf::Vector2u startPosition, sf::Vector2f tileSize, siz
 	mHeadColor (Color(color.r * 0.75f, color.g * 0.75f, color.b * 0.75f)),
 	mDirection (Direction::Up),
 	mTileSize (tileSize),
-	mBodyLen (bodyLen)
+	mBodyLen (bodyLen),
+	mNextUpdateId(0),
+	mUpdateIdStep(10)
 {
 	for (int i = 0; i < bodyLen; i++)
 	{
@@ -40,9 +42,18 @@ Position Snake::GetNext()
 	return {};
 }
 
-void Snake::Update()
+bool Snake::ShouldUpdate(const uint64_t& updateId)
 {
-	Move(GetNext());
+	return updateId >= mNextUpdateId;
+}
+
+void Snake::Update(const uint64_t& updateId)
+{
+	if (ShouldUpdate(updateId))
+	{
+		mNextUpdateId += mUpdateIdStep;
+		Move(GetNext());
+	}
 }
 
 void Snake::AddControl(ISnakeControls & c)
@@ -53,6 +64,7 @@ void Snake::AddControl(ISnakeControls & c)
 	c.RightEvent = [&]{ this->ChangeDirection(Direction::Right); };
 	c.DownEvent = [&]{ this->ChangeDirection(Direction::Down); };
 	c.LeftEvent = [&]{ this->ChangeDirection(Direction::Left); };
+	c.NitroEvent = [&] {  };
 }
 
 void Snake::IncrementLength()

@@ -23,7 +23,7 @@ public:
 	virtual ~Arena();
 
 	void Draw(sf::RenderWindow & window);
-	void Update();
+	void Update(const uint64_t& mUpdateId);
 
 	sf::Vector2f CalcTileSize();
 	sf::Vector2u GetGridTileSize() { return mGridTileSize; }
