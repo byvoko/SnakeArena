@@ -32,7 +32,8 @@ private:
 	FoodItem* pFood;
 
 	static constexpr int FPS = 60;
-	int mSpeed = 200;	//[ms]
+	int mSpeed = 20;	//[ms]
+	uint64_t mUpdateId;
 
 	sf::Clock mClockUpdate;
 	sf::Clock mClockDraw;

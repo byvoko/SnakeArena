@@ -44,11 +44,12 @@ void Game::InitSnakes()
 	mArenas[0].AddShadow(mSnakes[1]);
 	mArenas[1].AddShadow(mSnakes[0]);
 
-	KeyControls * key1 = new KeyControls(sf::Keyboard::Key::W, sf::Keyboard::Key::D, sf::Keyboard::Key::S, sf::Keyboard::Key::A);
+	// Controls
+	KeyControls * key1 = new KeyControls(sf::Keyboard::Key::W, sf::Keyboard::Key::D, sf::Keyboard::Key::S, sf::Keyboard::Key::A, sf::Keyboard::Key::E);
 	mSnakes[0].AddControl(*key1);
 	mControls.push_back(key1);
 	
-	KeyControls * key2 = new KeyControls(sf::Keyboard::Key::Up, sf::Keyboard::Key::Right, sf::Keyboard::Key::Down, sf::Keyboard::Key::Left);
+	KeyControls * key2 = new KeyControls(sf::Keyboard::Key::Up, sf::Keyboard::Key::Right, sf::Keyboard::Key::Down, sf::Keyboard::Key::Left, sf::Keyboard::Key::Num0);
 	mSnakes[1].AddControl(*key2);
 	mControls.push_back(key2);
 
@@ -107,11 +108,13 @@ bool Game::IsFoodOnSnake(Position& position)
 
 Game::Game(sf::Vector2u windowSize)
 	: pFood(nullptr)
+	, mUpdateId(0)
 {
 	srand(time(NULL));
 
 	mRun = true;
 	mSnakeWinner = -1;
+
 	InitBackground();
 	InitArenas(windowSize);
 	InitSnakes();
@@ -152,19 +155,20 @@ void Game::Draw(sf::RenderWindow & window)
 
 void Game::Update()
 {
+	// Clock
 	sf::Time elapsed = mClockUpdate.getElapsedTime();
 	if (elapsed.asMilliseconds() < mSpeed)
 		return;
-
 	mClockUpdate.restart();
 
 	// Collisions
 	for (int i = 0; i < mSnakes.size(); i++)
 	{
-		Snake & s = mSnakes[i];
-		Arena & a = mArenas[i];
-		if (CheckSnakeBodyColision(s.GetBody(), s.GetNext()) ||
-			CheckSnakeArenaColision(s.GetNext(), a.GetGridTileSize()))
+		Snake& s = mSnakes[i];
+		Arena& a = mArenas[i];
+		if (s.ShouldUpdate(mUpdateId)
+			&& (CheckSnakeBodyColision(s.GetBody(), s.GetNext()) ||
+			CheckSnakeArenaColision(s.GetNext(), a.GetGridTileSize())))
 		{
 			mSnakeWinner = i;
 			PrepareEnd();
@@ -177,7 +181,7 @@ void Game::Update()
 		Snake* snakeEat = nullptr;
 		for (Snake& snake : mSnakes)
 		{
-			if (snake.GetNext() == pFood->GetPosition())
+			if (snake.ShouldUpdate(mUpdateId) && snake.GetNext() == pFood->GetPosition())
 			{
 				if (snakeEat != nullptr)
 				{
@@ -206,6 +210,8 @@ void Game::Update()
 
 	UpdateMovement();
 	GenerateFood();
+
+	mUpdateId++;
 }
 
 void Game::UpdateMovement()
@@ -216,7 +222,7 @@ void Game::UpdateMovement()
 	mBackground.Update();
 	for (Arena & arena : mArenas)
 	{
-		arena.Update();
+		arena.Update(mUpdateId);
 	}
 
 	mHud.Update();

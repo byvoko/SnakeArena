@@ -30,6 +30,9 @@ private:
 
 	size_t mBodyLen;
 
+	uint64_t mNextUpdateId;
+	uint8_t mUpdateIdStep;
+
 	ISnakeControls * mControl;
 
 	void Move(Position newHeadPosition);
@@ -43,7 +46,8 @@ public:
 	Color const & GetColor() { return mColor; }
 	Color const & GetHeadColor() { return mHeadColor; }
 
-	void Update();
+	bool ShouldUpdate(const uint64_t& updateId);
+	void Update(const uint64_t& updateId);
 
 	void AddControl(ISnakeControls & c);
 
