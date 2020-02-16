@@ -1,5 +1,7 @@
 #include "Snake.hpp"
 
+const uint8_t Snake::MaxStamina = 10;
+
 Snake::Snake(Color color, sf::Vector2u startPosition, sf::Vector2f tileSize, size_t bodyLen):
 	mColor (color),
 	mHeadColor (Color(color.r * 0.75f, color.g * 0.75f, color.b * 0.75f)),
@@ -7,7 +9,8 @@ Snake::Snake(Color color, sf::Vector2u startPosition, sf::Vector2f tileSize, siz
 	mTileSize (tileSize),
 	mBodyLen (bodyLen),
 	mNextUpdateId(0),
-	mUpdateIdStep(10)
+	mUpdateIdStep(10),
+	mStamina(Snake::MaxStamina)
 {
 	for (int i = 0; i < bodyLen; i++)
 	{
@@ -40,6 +43,11 @@ Position Snake::GetNext()
 		break;
 	}
 	return {};
+}
+
+uint8_t Snake::GetStamina()
+{
+	return mStamina;
 }
 
 bool Snake::ShouldUpdate(const uint64_t& updateId)
