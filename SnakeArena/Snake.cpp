@@ -64,7 +64,8 @@ void Snake::AddControl(ISnakeControls & c)
 	c.RightEvent = [&]{ this->ChangeDirection(Direction::Right); };
 	c.DownEvent = [&]{ this->ChangeDirection(Direction::Down); };
 	c.LeftEvent = [&]{ this->ChangeDirection(Direction::Left); };
-	c.NitroEvent = [&] {  };
+	c.NitroEventPull = [&] {  };
+	c.NitroEventPush = [&] {};
 }
 
 void Snake::IncrementLength()

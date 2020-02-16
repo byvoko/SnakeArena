@@ -9,7 +9,8 @@ public:
 	std::function<void()> RightEvent;
 	std::function<void()> DownEvent;
 	std::function<void()> LeftEvent;
-	std::function<void()> NitroEvent;
+	std::function<void()> NitroEventPush;
+	std::function<void()> NitroEventPull;
 };
 
 
