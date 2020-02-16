@@ -16,8 +16,8 @@ void Game::InitArenas(sf::Vector2u windowSize)
 	sf::Vector2u arenaResolution = { 20, 20 };
 	sf::Vector2f arenaGridTileSize = { (float)arenaSizePx.x / arenaResolution.x, (float)arenaSizePx.y / arenaResolution.y };
 	
-	Arena arena1(arenaSizePx, arenaGridTileSize, sf::Vector2u(0, 0));
-	Arena arena2(arenaSizePx, arenaGridTileSize, sf::Vector2u((windowSize.x / 2), 0));
+	Arena arena1(arenaSizePx, arenaGridTileSize, sf::Vector2u(0, 0), &pEatEffect);
+	Arena arena2(arenaSizePx, arenaGridTileSize, sf::Vector2u((windowSize.x / 2), 0), &pEatEffect);
 
 	mArenas.push_back(arena1);
 	mArenas.push_back(arena2);
@@ -111,6 +111,7 @@ bool Game::IsFoodOnSnake(Position& position)
 
 Game::Game(sf::Vector2u windowSize)
 	: pFood(nullptr)
+	, pEatEffect(nullptr)
 	, mUpdateId(0)
 {
 	srand(time(NULL));
@@ -154,6 +155,17 @@ void Game::Update()
 		return;
 	mClockUpdate.restart();
 
+	if (pEatEffect)
+	{
+		pEatEffect->Update();
+
+		if (pEatEffect->HasLifetimeEnded())
+		{
+			delete pEatEffect;
+			pEatEffect = nullptr;
+		}
+	}
+
 	// Collisions
 	for (int i = 0; i < mSnakes.size(); i++)
 	{
@@ -193,6 +205,9 @@ void Game::Update()
 		if (snakeEat)
 		{
 			pFood->Eat(*snakeEat);
+			//pEatEffect = new EatEffect(snakeEat->GetNext(), mArenas[0].GetGridTileSize(), snakeEat->GetColor(), snakeEat->GetDirection(), 10);
+			//mArenas[0].AddEffect(&pEatEffect);
+
 			delete pFood;
 			pFood = nullptr;
 		}

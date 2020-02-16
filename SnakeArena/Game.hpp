@@ -11,6 +11,7 @@
 #include "IControls.hpp"
 #include "BaseItem.hpp"
 #include "FoodItem.hpp"
+#include "EatEffect.hpp"
 
 class Game
 {
@@ -23,13 +24,14 @@ private:
 
 	std::vector<Arena> mArenas;
 	std::vector<Snake> mSnakes;
-	std::vector<IGameControls *> mControls;
+	std::vector<IGameControls*> mControls;
 
 	bool mRun;
 	int mSnakeWinner;
 
 	// Test
 	FoodItem* pFood;
+	EatEffect* pEatEffect;
 
 	int mSpeed = 20;	//[ms]
 	uint64_t mUpdateId;

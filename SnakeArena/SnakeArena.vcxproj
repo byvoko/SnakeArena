@@ -133,6 +133,7 @@
   <ItemGroup>
     <ClCompile Include="Arena.cpp" />
     <ClCompile Include="Background.cpp" />
+    <ClCompile Include="EatEffect.cpp" />
     <ClCompile Include="FoodItem.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GamepadControls.cpp" />
@@ -146,6 +147,7 @@
     <ClInclude Include="Arena.hpp" />
     <ClInclude Include="Background.hpp" />
     <ClInclude Include="BaseItem.hpp" />
+    <ClInclude Include="EatEffect.hpp" />
     <ClInclude Include="FoodItem.hpp" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="GamepadControls.hpp" />
