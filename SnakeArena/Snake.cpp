@@ -10,6 +10,7 @@ Snake::Snake(Color color, sf::Vector2u startPosition, sf::Vector2f tileSize, siz
 	mBodyLen (bodyLen),
 	mNextUpdateId(0),
 	mUpdateIdStep(10),
+	mNitroEnable (false),
 	mStamina(Snake::MaxStamina)
 {
 	for (int i = 0; i < bodyLen; i++)
@@ -59,7 +60,15 @@ void Snake::Update(const uint64_t& updateId)
 {
 	if (ShouldUpdate(updateId))
 	{
-		mNextUpdateId += mUpdateIdStep;
+		if (mNitroEnable && mStamina > 0)
+		{
+			mNextUpdateId += mUpdateIdStep / 10;
+			mStamina--;
+		}
+		else
+		{
+			mNextUpdateId += mUpdateIdStep;
+		}
 		Move(GetNext());
 	}
 }
@@ -72,8 +81,8 @@ void Snake::AddControl(ISnakeControls & c)
 	c.RightEvent = [&]{ this->ChangeDirection(Direction::Right); };
 	c.DownEvent = [&]{ this->ChangeDirection(Direction::Down); };
 	c.LeftEvent = [&]{ this->ChangeDirection(Direction::Left); };
-	c.NitroEventPull = [&] {  };
-	c.NitroEventPush = [&] {};
+	c.NitroEventPull = [&] { this->DisableNitro(); };
+	c.NitroEventPush = [&] { this->EnableNitro(); };
 }
 
 void Snake::IncrementLength()

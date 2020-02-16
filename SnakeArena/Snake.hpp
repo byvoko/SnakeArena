@@ -35,6 +35,7 @@ private:
 
 	ISnakeControls * mControl;
 
+	bool mNitroEnable;
 	uint8_t mStamina;
 
 	void Move(Position newHeadPosition);
@@ -58,6 +59,9 @@ public:
 	void IncrementLength();
 
 	void ChangeDirection(Direction d);
+
+	void EnableNitro() { mNitroEnable = true; }
+	void DisableNitro() { mNitroEnable = false; }
 
 	Position GetNext();
 
