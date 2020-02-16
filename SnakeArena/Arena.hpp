@@ -10,6 +10,7 @@ class Arena
 {
 private:
 	std::vector<Snake*> mSnakes;
+	std::vector<Snake*> mShadows;
 	FoodItem* pFood;
 
 	sf::Vector2u mSizePx;

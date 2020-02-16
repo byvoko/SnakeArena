@@ -2,10 +2,9 @@
 
 #include <SFML\Graphics.hpp>
 
-class GameInterface
+class HUD
 {
 public:
 	void Update();
 	void Draw(sf::RenderWindow & window);
 };
-
