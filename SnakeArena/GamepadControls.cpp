@@ -1,10 +1,15 @@
 #include "GamepadControls.hpp"
 
+#include <iostream>
 
-
-GamepadControls::GamepadControls(int gamepadID):
-	mGamepadID(gamepadID)
+GamepadControls::GamepadControls(int gamepadID, int nitroButton):
+	mGamepadID (gamepadID),
+	mNitroButton (nitroButton)
 {
+	if (!sf::Joystick::isConnected(gamepadID))
+		return;
+
+	mButtonsCount = sf::Joystick::getButtonCount(gamepadID);
 }
 
 
@@ -12,21 +17,84 @@ GamepadControls::~GamepadControls()
 {
 }
 
+void GamepadControls::processButton(const bool isPressedNow, bool & isPressed, std::function<void()> & cb)
+{
+	if (isPressedNow && !isPressed && cb)
+	{
+		isPressed = true;
+		cb();
+	}
+	else if (!isPressedNow && isPressed)
+		isPressed = false;
+}
+
 void GamepadControls::ProcessEvent(sf::Event e)
 {
-	/*float x = sf::Joystick::getAxisPosition(mGamepadID, sf::Joystick::X);
-	float y = sf::Joystick::getAxisPosition(mGamepadID, sf::Joystick::Y);
+	const float x = sf::Joystick::getAxisPosition(mGamepadID, sf::Joystick::PovX);
+	const float y = sf::Joystick::getAxisPosition(mGamepadID, sf::Joystick::PovY);
 
-	if (x > 0 && LeftEvent)
-		LeftEvent();
-	else if (x < 0 && RightEvent)
-		RightEvent();
-	else if (y > 0 && UpEvent)
+	const bool upPressed = y >= PovAxisTresh;
+	const bool downPressed = y <= (-1 * PovAxisTresh);
+	const bool leftPressed = x <= (-1 * PovAxisTresh);
+	const bool rightPressed = x >= PovAxisTresh;
+	const bool nitroIsPressed = sf::Joystick::isButtonPressed(mGamepadID, mNitroButton);
+	
+	processButton(upPressed, mUpIsPressed, UpEvent);
+	processButton(downPressed, mDownIsPressed, DownEvent);
+	processButton(rightPressed, mRightIsPressed, RightEvent);
+	processButton(leftPressed, mLeftIsPressed, LeftEvent);
+	/*
+	if (upPressed && !mUpIsPressed && UpEvent)
+	{
+		mUpIsPressed = true;
 		UpEvent();
-	else if (y < 0 && DownEvent)
-		DownEvent();*/
+	}
+	else if (!upPressed && mUpIsPressed)
+	{
+		mUpIsPressed = false;
+	}
 
-	if (sf::Joystick::isButtonPressed(mGamepadID, 9) && UpEvent)
-		LeftEvent();
+	if (downPressed && !mDownIsPressed && DownEvent)
+	{
+		mDownIsPressed = true;
+		DownEvent();
+		
+	}
+	else if (!downPressed && mDownIsPressed)
+	{
+		mDownIsPressed = false;
+	}
 
+	if (leftPressed && !mLeftIsPressed && LeftEvent)
+	{
+		mLeftIsPressed = true;
+		DownEvent();
+
+	}
+	else if (!leftPressed && mLeftIsPressed)
+	{
+		mLeftIsPressed = false;
+	}
+
+	if (rightPressed && !mRightIsPressed && RightEvent)
+	{
+		mRightIsPressed = true;
+		RightEvent();
+
+	}
+	else if (!rightPressed && mLeftIsPressed)
+	{
+		mRightIsPressed = false;
+	}
+	*/
+	if (nitroIsPressed && !mNitroIsPressed)
+	{
+		mNitroIsPressed = true;
+		NitroEventPush();
+	}
+	else if (!nitroIsPressed && mNitroIsPressed)
+	{
+		mNitroIsPressed = false;
+		NitroEventPull();
+	}
 }

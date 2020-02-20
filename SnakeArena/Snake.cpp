@@ -11,6 +11,7 @@ Snake::Snake(Color color, sf::Vector2u startPosition, sf::Vector2f tileSize, siz
 	mNextUpdateId(0),
 	mUpdateIdStep(10),
 	mNitroEnable (false),
+	mNitronYank (false),
 	mStamina(Snake::MaxStamina)
 {
 	for (int i = 0; i < bodyLen; i++)
@@ -60,7 +61,9 @@ void Snake::Update(const uint64_t& updateId)
 {
 	if (ShouldUpdate(updateId))
 	{
-		if (mNitroEnable && mStamina > 0)
+		mNitronYank |= mNitroEnable;
+
+		if (mNitronYank && mStamina > 0)
 		{
 			mNextUpdateId += mUpdateIdStep / 3;
 			mStamina--;
@@ -69,6 +72,9 @@ void Snake::Update(const uint64_t& updateId)
 		{
 			mNextUpdateId += mUpdateIdStep;
 		}
+
+		mNitronYank = false;
+
 		Move(GetNext());
 	}
 }

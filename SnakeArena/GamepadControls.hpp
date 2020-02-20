@@ -9,9 +9,21 @@ class GamepadControls:
 	public IGameControls
 {
 private:
+	static constexpr float PovAxisTresh = 50.f;
 	int mGamepadID;
+	int mButtonsCount;
+
+	bool mUpIsPressed;
+	bool mLeftIsPressed;
+	bool mDownIsPressed;
+	bool mRightIsPressed;
+	int mNitroButton;
+	bool mNitroIsPressed;
+
+	void processButton(const bool isPressedNow, bool & isPressed, std::function<void()> & cb);
+
 public:
-	GamepadControls(int gamepadID);
+	GamepadControls(int gamepadID, int nitroButton);
 	virtual ~GamepadControls();
 
 	void ProcessEvent(sf::Event e) override;

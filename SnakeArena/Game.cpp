@@ -55,7 +55,7 @@ void Game::InitSnakes()
 
 	/*if (sf::Joystick::isConnected(0))
 	{
-		GamepadControls * gamepad = new GamepadControls(0);
+		GamepadControls * gamepad = new GamepadControls(0, 0);
 		mSnakes[0].AddControl(*gamepad);
 		mControls.push_back(gamepad);
 	}*/
