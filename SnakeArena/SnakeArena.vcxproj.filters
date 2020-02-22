@@ -13,6 +13,8 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Snake.cpp" />
     <ClCompile Include="MenuControls.cpp" />
+    <ClCompile Include="GameContext.cpp" />
+    <ClCompile Include="SnakesFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arena.hpp" />
@@ -31,5 +33,8 @@
     <ClInclude Include="Types.hpp" />
     <ClInclude Include="MenuControls.hpp" />
     <ClInclude Include="MenuControlsLayout.hpp" />
+    <ClInclude Include="IGameContent.hpp" />
+    <ClInclude Include="GameContext.hpp" />
+    <ClInclude Include="SnakesFactory.hpp" />
   </ItemGroup>
 </Project>

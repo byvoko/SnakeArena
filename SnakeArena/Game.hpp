@@ -3,6 +3,8 @@
 #include <vector>
 #include <string>
 
+#include "IGameContent.hpp"
+
 #include "Arena.hpp"
 #include "Snake.hpp"
 #include "Background.hpp"
@@ -13,7 +15,7 @@
 #include "FoodItem.hpp"
 #include "EatEffect.hpp"
 
-class Game
+class Game : public IGameContent
 {
 public:
 	static const std::string GameFont;
@@ -56,7 +58,9 @@ public:
 	Game(sf::Vector2u windowSize);
 	virtual ~Game();
 
-	void Draw(sf::RenderWindow & window);
-	void Update();
+	// Dìdí se pøes IGameContent.
 	void ProcessEvent(sf::Event e);
+
+	void Update();
+	virtual void Draw(sf::RenderWindow& window, sf::Transform t = sf::Transform::Transform::Identity, uint8_t alpha = 255) override;
 };

@@ -45,8 +45,10 @@ private:
 public:
 	static const uint8_t MaxStamina;
 
-	Snake(Color color, sf::Vector2u startPosition, sf::Vector2f tileSize, size_t bodyLen = 3);
+	Snake(Color color, size_t bodyLen = 3); // sf::Vector2u startPosition, sf::Vector2f tileSize, 
 	virtual ~Snake();
+
+	void InitSnake(sf::Vector2f tileSize, sf::Vector2u startPosition);
 
 	Positions const & GetBody() { return mPositions; }
 	Color const & GetColor() { return mColor; }
@@ -74,6 +76,5 @@ public:
 	uint8_t GetStamina();
 
 	// Dìdí se pøes IGameDrawable.
-	virtual void Draw(sf::RenderWindow & window, sf::Transform t, uint8_t alpha = 255) override;
+	virtual void Draw(sf::RenderWindow & window, sf::Transform t = sf::Transform::Transform::Identity, uint8_t alpha = 255) override;
 };
-

@@ -30,8 +30,11 @@ void Game::InitSnakes()
 
 	auto gridResolution = mArenas[0].GetGridResolution();
 	
-	Snake snake1(sf::Color(150, 50, 250), { gridResolution.x / 2, gridResolution.y / 2 }, mArenas[0].GetGridTileSize());
-	Snake snake2(sf::Color(200, 25, 180), { gridResolution.x / 2, gridResolution.y / 2 }, mArenas[1].GetGridTileSize());
+	Snake snake1(sf::Color(150, 50, 250));
+	Snake snake2(sf::Color(200, 25, 180));
+
+	snake1.InitSnake(mArenas[0].GetGridTileSize(), { gridResolution.x / 2, gridResolution.y / 2 });
+	snake2.InitSnake(mArenas[1].GetGridTileSize(), { gridResolution.x / 2, gridResolution.y / 2 });
 
 	mSnakes.push_back(snake1);
 	mSnakes.push_back(snake2);
@@ -129,22 +132,6 @@ Game::~Game()
 {
 	if (pFood)
 		delete pFood;
-}
-
-void Game::Draw(sf::RenderWindow & window)
-{
-	if (mArenas.size() == 0)
-		return;
-
-	mBackground.Draw(window);
-	for (Arena & arena : mArenas)
-	{
-		arena.Draw(window);
-	}
-	mHud.Draw(window, {});
-
-	if (!mRun)
-		DrawEnd(window);
 }
 
 void Game::Update()
@@ -245,6 +232,22 @@ void Game::ProcessEvent(sf::Event e)
 
 		control->ProcessEvent(e);
 	}
+}
+
+void Game::Draw(sf::RenderWindow& window, sf::Transform t, uint8_t alpha)
+{
+	if (mArenas.size() == 0)
+		return;
+
+	mBackground.Draw(window);
+	for (Arena& arena : mArenas)
+	{
+		arena.Draw(window);
+	}
+	mHud.Draw(window, {});
+
+	if (!mRun)
+		DrawEnd(window);
 }
 
 bool Game::CheckSnakeArenaColision(const Position nextPosition, sf::Vector2u gridSize)
