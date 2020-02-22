@@ -43,50 +43,7 @@ void GamepadControls::ProcessEvent(sf::Event e)
 	processButton(downPressed, mDownIsPressed, DownEvent);
 	processButton(rightPressed, mRightIsPressed, RightEvent);
 	processButton(leftPressed, mLeftIsPressed, LeftEvent);
-	/*
-	if (upPressed && !mUpIsPressed && UpEvent)
-	{
-		mUpIsPressed = true;
-		UpEvent();
-	}
-	else if (!upPressed && mUpIsPressed)
-	{
-		mUpIsPressed = false;
-	}
 
-	if (downPressed && !mDownIsPressed && DownEvent)
-	{
-		mDownIsPressed = true;
-		DownEvent();
-		
-	}
-	else if (!downPressed && mDownIsPressed)
-	{
-		mDownIsPressed = false;
-	}
-
-	if (leftPressed && !mLeftIsPressed && LeftEvent)
-	{
-		mLeftIsPressed = true;
-		DownEvent();
-
-	}
-	else if (!leftPressed && mLeftIsPressed)
-	{
-		mLeftIsPressed = false;
-	}
-
-	if (rightPressed && !mRightIsPressed && RightEvent)
-	{
-		mRightIsPressed = true;
-		RightEvent();
-
-	}
-	else if (!rightPressed && mLeftIsPressed)
-	{
-		mRightIsPressed = false;
-	}
-	*/
 	if (nitroIsPressed && !mNitroIsPressed)
 	{
 		mNitroIsPressed = true;

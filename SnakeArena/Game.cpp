@@ -45,20 +45,20 @@ void Game::InitSnakes()
 	mArenas[1].AddShadow(mSnakes[0]);
 
 	// Controls
-	KeyControls * key1 = new KeyControls(sf::Keyboard::Key::W, sf::Keyboard::Key::D, sf::Keyboard::Key::S, sf::Keyboard::Key::A, sf::Keyboard::Key::E);
+	/*KeyControls * key1 = new KeyControls(sf::Keyboard::Key::W, sf::Keyboard::Key::D, sf::Keyboard::Key::S, sf::Keyboard::Key::A, sf::Keyboard::Key::E);
 	mSnakes[0].AddControl(*key1);
-	mControls.push_back(key1);
+	mControls.push_back(key1);*/
 	
 	KeyControls * key2 = new KeyControls(sf::Keyboard::Key::Up, sf::Keyboard::Key::Right, sf::Keyboard::Key::Down, sf::Keyboard::Key::Left, sf::Keyboard::Key::Space);
 	mSnakes[1].AddControl(*key2);
 	mControls.push_back(key2);
 
-	/*if (sf::Joystick::isConnected(0))
+	if (sf::Joystick::isConnected(0))
 	{
 		GamepadControls * gamepad = new GamepadControls(0, 0);
 		mSnakes[0].AddControl(*gamepad);
 		mControls.push_back(gamepad);
-	}*/
+	}
 }
 
 void Game::InitGameInterface()

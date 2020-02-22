@@ -11,7 +11,7 @@ int main()
 
 	sf::Vector2u windowSize(1200, 800);
 	sf::RenderWindow window(sf::VideoMode(windowSize.x, windowSize.y), "SnakeArena");
-	
+
 	Game game(windowSize);
 	Menu menu;
 	while (window.isOpen())
