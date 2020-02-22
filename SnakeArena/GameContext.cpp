@@ -1,12 +1,13 @@
 #include "GameContext.hpp"
 #include "Game.hpp"
+#include "Menu.hpp"
 
 GameContext::GameContext(sf::Vector2u windowSize)
 	: mWindowSize(windowSize)
 	, mpGameContent(nullptr)
 {
 	// Init menu
-
+	//mpGameContent = new Menu();
 
 	// Test - Game
 	mpGameContent = new Game(windowSize);

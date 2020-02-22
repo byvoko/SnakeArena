@@ -12,7 +12,7 @@ void Menu::Update()
 
 }
 
-void Menu::DrawTopLevel(sf::RenderWindow& window, sf::Transform t, uint8_t alpha = 255)
+void Menu::DrawTopLevel(sf::RenderWindow& window, sf::Transform t, uint8_t alpha)
 {
 	const sf::Vector2u wSize = window.getSize();
 	sf::Text text;
@@ -21,12 +21,12 @@ void Menu::DrawTopLevel(sf::RenderWindow& window, sf::Transform t, uint8_t alpha
 	text.setFont(mFont);
 	text.setCharacterSize(50);
 	text.setFillColor(sf::Color::Magenta);
-	text.setPosition({wSize.x * 0.2, wSize.y * 0.5});
+	text.setPosition({wSize.x * 0.2f, wSize.y * 0.5f});
 	window.draw(text);
 
 }
 
-void Menu::DrawNewGame(sf::RenderWindow& window, sf::Transform t, uint8_t alpha = 255)
+void Menu::DrawNewGame(sf::RenderWindow& window, sf::Transform t, uint8_t alpha)
 {
 
 }

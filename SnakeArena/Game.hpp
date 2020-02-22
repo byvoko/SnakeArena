@@ -35,7 +35,9 @@ private:
 	FoodItem* pFood;
 	EatEffect* pEatEffect;
 
+	static constexpr int FoodLevelingScale = 7;	//Po kazdem x jidle nastane dalsi level
 	int mSpeed = 20;	//[ms]
+	int nextSpeedAcumulator;
 	uint64_t mUpdateId;
 
 	sf::Clock mClockUpdate;

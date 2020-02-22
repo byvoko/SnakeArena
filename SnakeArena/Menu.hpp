@@ -1,9 +1,9 @@
 #pragma once
 
-#include "IGameDrawable.hpp"
+#include "IGameContent.hpp"
 #include "MenuControls.hpp"
 
-class Menu : public IGameDrawable, public IGameControls
+class Menu : public IGameContent
 {
 private:
 	const std::string Font = "Anyfreak.ttf";
@@ -26,6 +26,6 @@ public:
 
 	void Draw(sf::RenderWindow & window, sf::Transform t = sf::Transform::Transform::Identity, uint8_t alpha = 255) override;
 
-	void Update();
+	void Update() override;
 	void ProcessEvent(sf::Event e) override;
 };

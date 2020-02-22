@@ -76,6 +76,11 @@ void Game::GenerateFood()
 {
 	if (pFood == nullptr)
 	{
+		if (--nextSpeedAcumulator == 0 && mSpeed > 5)
+		{
+			mSpeed--;
+			nextSpeedAcumulator = FoodLevelingScale;
+		}
 		int i = 0;
 
 		sf::Vector2u gridResolution = mArenas[0].GetGridResolution();
@@ -118,7 +123,7 @@ Game::Game(sf::Vector2u windowSize)
 	, mUpdateId(0)
 {
 	srand(time(NULL));
-
+	nextSpeedAcumulator = FoodLevelingScale;
 	mRun = true;
 	mSnakeWinner = -1;
 
