@@ -15,5 +15,5 @@ private:
 public:
 	Menu();
 
-	void Draw(sf::RenderWindow & window, sf::Transform t, uint8_t alpha = 255) override;
+	void Draw(sf::RenderWindow & window, sf::Transform t = sf::Transform::Transform::Identity, uint8_t alpha = 255) override;
 };

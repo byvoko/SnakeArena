@@ -136,12 +136,14 @@
     <ClCompile Include="EatEffect.cpp" />
     <ClCompile Include="FoodItem.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameContext.cpp" />
     <ClCompile Include="GamepadControls.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="KeyControls.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Snake.cpp" />
+    <ClCompile Include="SnakesFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arena.hpp" />
@@ -150,13 +152,16 @@
     <ClInclude Include="EatEffect.hpp" />
     <ClInclude Include="FoodItem.hpp" />
     <ClInclude Include="Game.hpp" />
+    <ClInclude Include="GameContext.hpp" />
     <ClInclude Include="GamepadControls.hpp" />
     <ClInclude Include="HUD.hpp" />
     <ClInclude Include="IControls.hpp" />
+    <ClInclude Include="IGameContent.hpp" />
     <ClInclude Include="IGameDrawable.hpp" />
     <ClInclude Include="KeyControls.hpp" />
     <ClInclude Include="Menu.hpp" />
     <ClInclude Include="Snake.hpp" />
+    <ClInclude Include="SnakesFactory.hpp" />
     <ClInclude Include="Types.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

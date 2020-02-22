@@ -1,92 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Zdrojové soubory">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Hlavičkové soubory">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Soubory zdrojů">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
+    <ClCompile Include="Arena.cpp" />
+    <ClCompile Include="Background.cpp" />
+    <ClCompile Include="EatEffect.cpp" />
+    <ClCompile Include="FoodItem.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GamepadControls.cpp" />
+    <ClCompile Include="HUD.cpp" />
+    <ClCompile Include="KeyControls.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Snake.cpp" />
+    <ClCompile Include="GameContext.cpp" />
+    <ClCompile Include="SnakesFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Zdrojové soubory</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Zdrojové soubory</Filter>
-    </ClCompile>
-    <ClCompile Include="Arena.cpp">
-      <Filter>Zdrojové soubory</Filter>
-    </ClCompile>
-    <ClCompile Include="Snake.cpp">
-      <Filter>Zdrojové soubory</Filter>
-    </ClCompile>
-    <ClCompile Include="Background.cpp">
-      <Filter>Zdrojové soubory</Filter>
-    </ClCompile>
-    <ClCompile Include="KeyControls.cpp">
-      <Filter>Zdrojové soubory</Filter>
-    </ClCompile>
-    <ClCompile Include="FoodItem.cpp">
-      <Filter>Zdrojové soubory</Filter>
-    </ClCompile>
-    <ClCompile Include="GamepadControls.cpp">
-      <Filter>Zdrojové soubory</Filter>
-    </ClCompile>
-    <ClCompile Include="HUD.cpp">
-      <Filter>Zdrojové soubory</Filter>
-    </ClCompile>
-    <ClCompile Include="Menu.cpp">
-    <ClCompile Include="EatEffect.cpp">
-      <Filter>Zdrojové soubory</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Arena.hpp">
-      <Filter>Hlavičkové soubory</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.hpp">
-      <Filter>Hlavičkové soubory</Filter>
-    </ClInclude>
-    <ClInclude Include="Snake.hpp">
-      <Filter>Hlavičkové soubory</Filter>
-    </ClInclude>
-    <ClInclude Include="Background.hpp">
-      <Filter>Hlavičkové soubory</Filter>
-    </ClInclude>
-    <ClInclude Include="IControls.hpp">
-      <Filter>Hlavičkové soubory</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyControls.hpp">
-      <Filter>Hlavičkové soubory</Filter>
-    </ClInclude>
-    <ClInclude Include="Types.hpp">
-      <Filter>Hlavičkové soubory</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseItem.hpp">
-      <Filter>Hlavičkové soubory</Filter>
-    </ClInclude>
-    <ClInclude Include="FoodItem.hpp">
-      <Filter>Hlavičkové soubory</Filter>
-    </ClInclude>
-    <ClInclude Include="GamepadControls.hpp">
-      <Filter>Hlavičkové soubory</Filter>
-    </ClInclude>
-    <ClInclude Include="IGameDrawable.hpp">
-      <Filter>Hlavičkové soubory</Filter>
-    </ClInclude>
-    <ClInclude Include="HUD.hpp">
-      <Filter>Hlavičkové soubory</Filter>
-    </ClInclude>
-    <ClInclude Include="Menu.hpp">
-    <ClInclude Include="EatEffect.hpp">
-      <Filter>Hlavičkové soubory</Filter>
-    </ClInclude>
+    <ClInclude Include="Arena.hpp" />
+    <ClInclude Include="Background.hpp" />
+    <ClInclude Include="BaseItem.hpp" />
+    <ClInclude Include="EatEffect.hpp" />
+    <ClInclude Include="FoodItem.hpp" />
+    <ClInclude Include="Game.hpp" />
+    <ClInclude Include="GamepadControls.hpp" />
+    <ClInclude Include="HUD.hpp" />
+    <ClInclude Include="IControls.hpp" />
+    <ClInclude Include="IGameDrawable.hpp" />
+    <ClInclude Include="KeyControls.hpp" />
+    <ClInclude Include="Menu.hpp" />
+    <ClInclude Include="Snake.hpp" />
+    <ClInclude Include="Types.hpp" />
+    <ClInclude Include="IGameContent.hpp" />
+    <ClInclude Include="GameContext.hpp" />
+    <ClInclude Include="SnakesFactory.hpp" />
   </ItemGroup>
 </Project>

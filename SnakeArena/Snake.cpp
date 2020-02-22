@@ -2,11 +2,11 @@
 
 const uint8_t Snake::MaxStamina = 20;
 
-Snake::Snake(Color color, sf::Vector2u startPosition, sf::Vector2f tileSize, size_t bodyLen):
+Snake::Snake(Color color, size_t bodyLen):
 	mColor (color),
 	mHeadColor (Color(color.r * 0.75f, color.g * 0.75f, color.b * 0.75f)),
 	mDirection (Direction::Up),
-	mTileSize (tileSize),
+	mTileSize (),
 	mBodyLen (bodyLen),
 	mNextUpdateId(0),
 	mUpdateIdStep(10),
@@ -14,14 +14,20 @@ Snake::Snake(Color color, sf::Vector2u startPosition, sf::Vector2f tileSize, siz
 	mNitronYank (false),
 	mStamina(Snake::MaxStamina)
 {
-	for (int i = 0; i < bodyLen; i++)
-	{
-		mPositions.push_back({ startPosition.x, startPosition.y });
-	}
 }
 
 Snake::~Snake()
 {
+}
+
+void Snake::InitSnake(sf::Vector2f tileSize, sf::Vector2u startPosition)
+{
+	mTileSize = tileSize;
+
+	for (int i = 0; i < mBodyLen; i++)
+	{
+		mPositions.push_back({ startPosition.x, startPosition.y });
+	}
 }
 
 Position Snake::GetNext()
