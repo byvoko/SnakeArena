@@ -9,6 +9,7 @@ class EatEffect : IGameDrawable
 private:
 	uint64_t mLifeTimePassed;
 	uint64_t mLifeTime;
+	uint8_t mAlphaStep;
 
 	sf::RectangleShape mRectangle;
 	Snake::Direction mDirection;

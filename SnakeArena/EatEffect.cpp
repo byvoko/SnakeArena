@@ -5,6 +5,7 @@
 EatEffect::EatEffect(Position position, sf::Vector2f gridTileSize, Color color, Snake::Direction direction, uint64_t lifeTime)
 	: mLifeTimePassed(0)
 	, mLifeTime(lifeTime)
+	, mAlphaStep(255 / lifeTime)
 	, mDirection(direction)
 {
 	sf::Vector2f rectangleSize = sf::Vector2f(gridTileSize.x / 6, gridTileSize.y / 6);
@@ -53,6 +54,10 @@ void EatEffect::Update()
 		mRectangle.setPosition(pos.x, pos.y - 1);
 		break;
 	}
+
+	Color c = mRectangle.getFillColor();
+	c.a -= mAlphaStep;
+	mRectangle.setFillColor(c);
 }
 
 void EatEffect::Draw(sf::RenderWindow& window, sf::Transform t, uint8_t alpha)

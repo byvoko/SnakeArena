@@ -134,8 +134,11 @@ Game::Game(sf::Vector2u windowSize)
 
 Game::~Game()
 {
-	if (pFood)
+	if (pFood != nullptr)
+	{
 		delete pFood;
+		pFood = nullptr;
+	}
 }
 
 void Game::Update()
@@ -206,11 +209,10 @@ void Game::UpdateMovement()
 		return;
 
 	mBackground.Update();
-	//for (Arena & arena : mArenas)
-	//{
-	//	arena.Update(mUpdateId);
-	//}
-	mArenas[1].Update(mUpdateId);
+	for (Arena & arena : mArenas)
+	{
+		arena.Update(mUpdateId);
+	}
 
 	mHud.Update();
 }
