@@ -1,23 +1,31 @@
 #include "Snake.hpp"
+#include "EatEffect.hpp"
 
 const uint8_t Snake::MaxStamina = 20;
 
-Snake::Snake(Color color, size_t bodyLen):
-	mColor (color),
-	mHeadColor (Color(color.r * 0.75f, color.g * 0.75f, color.b * 0.75f)),
-	mDirection (Direction::Up),
-	mTileSize (),
-	mBodyLen (bodyLen),
-	mNextUpdateId(0),
-	mUpdateIdStep(10),
-	mNitroEnable (false),
-	mNitronYank (false),
-	mStamina(Snake::MaxStamina)
+Snake::Snake(Color color, size_t bodyLen)
+	: mColor(color)
+	, mHeadColor(Color(color.r * 0.75f, color.g * 0.75f, color.b * 0.75f))
+	, mDirection(Direction::Up)
+	, mTempDirection(Direction::Up)
+	, mTileSize()
+	, mBodyLen(bodyLen)
+	, mNextUpdateId(0)
+	, mUpdateIdStep(10)
+	, mNitroEnable(false)
+	, mNitronYank(false)
+	, mStamina(Snake::MaxStamina)
+	, pEatEffect(nullptr)
 {
 }
 
 Snake::~Snake()
 {
+	if (pEatEffect != nullptr)
+	{
+		delete pEatEffect;
+		pEatEffect = nullptr;
+	}
 }
 
 void Snake::InitSnake(sf::Vector2f tileSize, sf::Vector2u startPosition)
@@ -33,23 +41,19 @@ void Snake::InitSnake(sf::Vector2f tileSize, sf::Vector2u startPosition)
 Position Snake::GetNext()
 {
 	ProcessDirectionChange();
+
 	switch (mDirection)
 	{
-	case Snake::Up:
+	case Snake::Direction::Up:
 		return { mPositions[0].x, mPositions[0].y - 1 };
-		break;
-	case Snake::Right:
+	case Snake::Direction::Right:
 		return { mPositions[0].x + 1, mPositions[0].y };
-		break;
-	case Snake::Down:
+	case Snake::Direction::Down:
 		return { mPositions[0].x, mPositions[0].y + 1 };
-		break;
-	case Snake::Left:
+	case Snake::Direction::Left:
 		return { mPositions[0].x - 1, mPositions[0].y };
-		break;
-	default:
-		break;
 	}
+
 	return {};
 }
 
@@ -83,6 +87,17 @@ void Snake::Update(const uint64_t& updateId)
 
 		Move(GetNext());
 	}
+
+	if (pEatEffect != nullptr)
+	{
+		pEatEffect->Update();
+
+		if (pEatEffect->HasLifetimeEnded())
+		{
+			delete pEatEffect;
+			pEatEffect = nullptr;
+		}
+	}
 }
 
 void Snake::AddControl(ISnakeControls & c)
@@ -102,6 +117,15 @@ void Snake::IncrementLength()
 	mBodyLen++;
 
 	mPositions.push_back(Position(mPositions.back()));
+
+	// TEST: EatEffect
+	if (pEatEffect != nullptr)
+	{
+		delete pEatEffect;
+		pEatEffect = nullptr;
+	}
+
+	pEatEffect = new EatEffect(GetNext(), mTileSize, mColor, mDirection, (mNitronYank && mStamina) ? mUpdateIdStep / 3 : mUpdateIdStep);
 }
 
 void Snake::RestoreStamina(uint8_t stamina)
@@ -169,5 +193,11 @@ void Snake::Draw(sf::RenderWindow & window, sf::Transform t, uint8_t alpha)
 	{
 		bodyShape.setPosition(snakeBody[i].x * mTileSize.x, snakeBody[i].y * mTileSize.y);
 		window.draw(bodyShape, t);
+	}
+
+	// TEST: EatEffect
+	if (pEatEffect != nullptr)
+	{
+		pEatEffect->Draw(window, t, alpha);
 	}
 }

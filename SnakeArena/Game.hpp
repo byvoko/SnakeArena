@@ -13,7 +13,6 @@
 #include "IControls.hpp"
 #include "BaseItem.hpp"
 #include "FoodItem.hpp"
-#include "EatEffect.hpp"
 
 class Game : public IGameContent
 {
@@ -33,7 +32,6 @@ private:
 
 	// Test
 	FoodItem* pFood;
-	EatEffect* pEatEffect;
 
 	static constexpr int FoodLevelingScale = 7;	//Po kazdem x jidle nastane dalsi level
 	int mSpeed = 20;	//[ms]

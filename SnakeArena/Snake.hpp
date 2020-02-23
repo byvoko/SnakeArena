@@ -7,15 +7,16 @@
 #include "IControls.hpp"
 #include "Types.hpp"
 
-class Snake :
-	public IGameDrawable
+class EatEffect; // Forward declaration
+
+class Snake : public IGameDrawable
 {
 public:
-	enum Direction
+	enum class Direction
 	{
 		Up,
-		Right,
 		Down,
+		Right,
 		Left,
 	};
 
@@ -23,8 +24,8 @@ private:
 	Positions mPositions; // Head is the first one
 	Color mColor;
 	Color mHeadColor;
-	Direction mDirection;
-	Direction mTempDirection;
+	Snake::Direction mDirection;
+	Snake::Direction mTempDirection;
 
 	sf::Vector2f mTileSize;
 
@@ -38,6 +39,9 @@ private:
 	bool mNitroEnable;
 	bool mNitronYank;
 	uint8_t mStamina;
+
+	// TEST: EatEffect
+	EatEffect* pEatEffect;
 
 	void Move(Position newHeadPosition);
 	void ProcessDirectionChange();
@@ -62,7 +66,7 @@ public:
 	void IncrementLength();
 	void RestoreStamina(uint8_t stamina);
 
-	void ChangeDirection(Direction d);
+	void ChangeDirection(Snake::Direction d);
 
 	void EnableNitro() { mNitroEnable = true; mNitronYank = true; }
 	void DisableNitro() { mNitroEnable = false; }

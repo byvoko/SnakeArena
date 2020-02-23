@@ -1,11 +1,10 @@
 #include "Arena.hpp"
 #include "Snake.hpp"
 
-Arena::Arena(sf::Vector2u sizePx, sf::Vector2f gridTileSize, sf::Vector2u position, EatEffect** eatEffect, FoodItem* foodItem) :
-	mSizePx(sizePx),
-	mGridTileSize(gridTileSize),
-	pFood(foodItem),
-	ppEatEffect(eatEffect)
+Arena::Arena(sf::Vector2u sizePx, sf::Vector2f gridTileSize, sf::Vector2u position, FoodItem* foodItem)
+	: mSizePx(sizePx)
+	, mGridTileSize(gridTileSize)
+	, pFood(foodItem)
 {
 	mTransform.translate(static_cast<sf::Vector2f>(position));
 }
@@ -37,8 +36,6 @@ void Arena::Draw(sf::RenderWindow & window)
 	
 	if (pFood)
 		pFood->Draw(window, mTransform);
-	if (*ppEatEffect)
-		(*ppEatEffect)->Draw(window, mTransform);
 
 	sf::RectangleShape bondries(sf::Vector2f(mSizePx.x, mSizePx.y));
 	bondries.setPosition(0, 0);

@@ -7,51 +7,23 @@ EatEffect::EatEffect(Position position, sf::Vector2f gridTileSize, Color color, 
 	, mLifeTime(lifeTime)
 	, mDirection(direction)
 {
-	if (mDirection == Snake::Direction::Up || mDirection == Snake::Direction::Down)
+	sf::Vector2f rectangleSize = sf::Vector2f(gridTileSize.x / 6, gridTileSize.y / 6);
+	mRectangle = sf::RectangleShape(rectangleSize);
+	mRectangle.setFillColor(color);
+	mRectangle.setOrigin(rectangleSize.x / 2, rectangleSize.y / 2);
+
+	mCenterPositionCalculated = Position(position.x * gridTileSize.x + gridTileSize.x / 2, position.y * gridTileSize.y + gridTileSize.y / 2);
+
+	switch (mDirection)
 	{
-		sf::Vector2f rectangleSize = sf::Vector2f(gridTileSize.x, gridTileSize.y / 6);
-
-		// Left
-		mRectangles[0] = sf::RectangleShape(rectangleSize);
-		mRectangles[0].setPosition(position.x * gridTileSize.x - gridTileSize.x / 4, position.y * gridTileSize.y - gridTileSize.y * 3 / 4);
-		mRectangles[1] = sf::RectangleShape(rectangleSize);
-		mRectangles[1].setPosition(position.x * gridTileSize.x - gridTileSize.x / 4, position.y * gridTileSize.y - gridTileSize.y * 2 / 4);
-		mRectangles[2] = sf::RectangleShape(rectangleSize);
-		mRectangles[2].setPosition(position.x * gridTileSize.x - gridTileSize.x / 4, position.y * gridTileSize.y - gridTileSize.y * 1 / 4);
-
-		// Right
-		mRectangles[3] = sf::RectangleShape(rectangleSize);
-		mRectangles[3].setPosition(position.x * gridTileSize.x + gridTileSize.x / 4, position.y * gridTileSize.y - gridTileSize.y * 3 / 4);
-		mRectangles[4] = sf::RectangleShape(rectangleSize);
-		mRectangles[4].setPosition(position.x * gridTileSize.x + gridTileSize.x / 4, position.y * gridTileSize.y - gridTileSize.y * 2 / 4);
-		mRectangles[5] = sf::RectangleShape(rectangleSize);
-		mRectangles[5].setPosition(position.x * gridTileSize.x + gridTileSize.x / 4, position.y * gridTileSize.y - gridTileSize.y * 1 / 4);
-
-	}
-	else
-	{
-		sf::Vector2f rectangleSize = sf::Vector2f(gridTileSize.x / 6, gridTileSize.y);
-
-		// Top
-		mRectangles[0] = sf::RectangleShape(rectangleSize);
-		mRectangles[0].setPosition(position.x * gridTileSize.x + gridTileSize.x * 1 / 4, position.y * gridTileSize.y - gridTileSize.y / 4);
-		mRectangles[1] = sf::RectangleShape(rectangleSize);
-		mRectangles[1].setPosition(position.x * gridTileSize.x + gridTileSize.x * 2 / 4, position.y * gridTileSize.y - gridTileSize.y / 4);
-		mRectangles[2] = sf::RectangleShape(rectangleSize);
-		mRectangles[2].setPosition(position.x * gridTileSize.x + gridTileSize.x * 3/ 4, position.y * gridTileSize.y - gridTileSize.y / 4);
-
-		// Bot
-		mRectangles[3] = sf::RectangleShape(rectangleSize);
-		mRectangles[3].setPosition(position.x * gridTileSize.x + gridTileSize.x * 1 / 4, position.y * gridTileSize.y + gridTileSize.y / 4);
-		mRectangles[4] = sf::RectangleShape(rectangleSize);
-		mRectangles[4].setPosition(position.x * gridTileSize.x + gridTileSize.x * 2 / 4, position.y * gridTileSize.y + gridTileSize.y / 4);
-		mRectangles[5] = sf::RectangleShape(rectangleSize);
-		mRectangles[5].setPosition(position.x * gridTileSize.x + gridTileSize.x * 3 / 4, position.y * gridTileSize.y + gridTileSize.y / 4);
-	}
-
-	for (auto& rec : mRectangles)
-	{
-		rec.setFillColor(color);
+	case Snake::Direction::Up:
+	case Snake::Direction::Down:
+		mRectangle.setPosition(mCenterPositionCalculated.x - gridTileSize.x / 1.2f, mCenterPositionCalculated.y);
+		break;
+	case Snake::Direction::Right:
+	case Snake::Direction::Left:
+		mRectangle.setPosition(mCenterPositionCalculated.x, mCenterPositionCalculated.y - gridTileSize.y / 1.2f);
+		break;
 	}
 }
 
@@ -61,7 +33,6 @@ EatEffect::~EatEffect()
 
 bool EatEffect::HasLifetimeEnded() const
 {
-	std::cout << mLifeTimePassed << std::endl;
 	return mLifeTimePassed > mLifeTime;
 }
 
@@ -69,29 +40,36 @@ void EatEffect::Update()
 {
 	mLifeTimePassed++;
 
-	sf::Vector2f pos;
-	if (mDirection == Snake::Direction::Up || mDirection == Snake::Direction::Down)
+	sf::Vector2f pos = mRectangle.getPosition();
+
+	switch (mDirection)
 	{
-		for (int i = 0; i < 6; i++)
-		{
-			pos = mRectangles[i].getPosition();
-			mRectangles[i].setPosition(pos.x + (i < 3 ? - 1 : 1), pos.y);
-		}
-	}
-	else
-	{
-		for (int i = 0; i < 6; i++)
-		{
-			pos = mRectangles[i].getPosition();
-			mRectangles[i].setPosition(pos.x, pos.y + (i < 3 ? -1 : 1));
-		}
+	case Snake::Direction::Up:
+	case Snake::Direction::Down:
+		mRectangle.setPosition(pos.x - 1, pos.y);
+		break;
+	case Snake::Direction::Right:
+	case Snake::Direction::Left:
+		mRectangle.setPosition(pos.x, pos.y - 1);
+		break;
 	}
 }
 
 void EatEffect::Draw(sf::RenderWindow& window, sf::Transform t, uint8_t alpha)
 {
-	for (auto& rec : mRectangles)
+	for (int i = 0; i < 9; i++)
 	{
-		window.draw(rec, t);
+		window.draw(mRectangle, t);
+		switch (mDirection)
+		{
+		case Snake::Direction::Up:
+		case Snake::Direction::Right:
+			t.rotate(22.5f, mCenterPositionCalculated.x, mCenterPositionCalculated.y);
+			break;
+		case Snake::Direction::Down:
+		case Snake::Direction::Left:
+			t.rotate(-22.5f, mCenterPositionCalculated.x, mCenterPositionCalculated.y);
+			break;
+		}
 	}
 }

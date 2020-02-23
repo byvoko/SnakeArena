@@ -10,8 +10,9 @@ private:
 	uint64_t mLifeTimePassed;
 	uint64_t mLifeTime;
 
-	sf::RectangleShape mRectangles[6];
+	sf::RectangleShape mRectangle;
 	Snake::Direction mDirection;
+	Position mCenterPositionCalculated;
 
 public:
 	EatEffect(Position position, sf::Vector2f gridTileSize, Color color, Snake::Direction direction, uint64_t lifeTime);
