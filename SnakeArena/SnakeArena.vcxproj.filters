@@ -15,6 +15,9 @@
     <ClCompile Include="MenuControls.cpp" />
     <ClCompile Include="GameContext.cpp" />
     <ClCompile Include="SnakesFactory.cpp" />
+    <ClCompile Include="MenuButton.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arena.hpp" />
@@ -36,5 +39,13 @@
     <ClInclude Include="IGameContent.hpp" />
     <ClInclude Include="GameContext.hpp" />
     <ClInclude Include="SnakesFactory.hpp" />
+    <ClInclude Include="MenuButton.hpp">
+      <Filter>Menu</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Menu">
+      <UniqueIdentifier>{f880fb0e-58d9-400c-b36e-246defc89b77}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

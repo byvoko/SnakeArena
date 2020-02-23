@@ -1,10 +1,60 @@
 #include "Menu.hpp"
 
 Menu::Menu() :
-	mState(State::TopLevel),
-	mSelectedItemIdx (0)
+	mState(State::TopLevel)
 {
+
+	mControls.DownEvent = [this]() { ChangeSelectedItem(false); };
+	mControls.UpEvent = [this]() { ChangeSelectedItem(true); };
 	mFont.loadFromFile(Font);
+	
+	MenuButton::ButtonSettings bs;
+	bs.fontSize = 35;
+	bs.selectedBackgroundColor = bs.backgroundColor = sf::Color(0x20, 0x20, 0x20);
+	bs.selectedBoxOutlineColor = sf::Color::Cyan;
+	bs.boxOutlineColor = sf::Color(0x60, 0x60, 0x60);
+	bs.selectedBoxOutlineSize = bs.boxOutlineSize = 2;
+	bs.selectedTextColor = bs.textColor = sf::Color::White;
+	bs.boxSize = { 250.f, 60.f };
+
+	MenuButton mbNewGame("New game", mFont, bs);
+	mbNewGame.Select();
+	MenuButton mbExit("Exit", mFont, bs);
+	mTopLevelButtons.push_back(mbNewGame);
+	mTopLevelButtons.push_back(mbExit);
+}
+
+void Menu::ChangeSelectedItem(bool goUp)
+{
+	if (mTopLevelButtons.size() == 1)
+	{
+		mTopLevelButtons[0].Select();
+		return;
+	}
+
+	MenuButton * last = &mTopLevelButtons[0];
+
+	size_t itemsCount = mTopLevelButtons.size();
+	for (int i = 0; i < itemsCount; i++)
+	{
+		MenuButton& actual = mTopLevelButtons[i];
+		if (actual.IsSelected())
+		{
+			if (goUp)
+			{
+				actual.Unselect();
+				last->Select();
+				return;
+			}
+			else if (i + 1 < itemsCount)
+			{
+				actual.Unselect();
+				mTopLevelButtons[i + 1].Select();
+				return;
+			}
+		}
+		last = &actual;
+	}
 }
 
 void Menu::Update()
@@ -14,15 +64,13 @@ void Menu::Update()
 
 void Menu::DrawTopLevel(sf::RenderWindow& window, sf::Transform t, uint8_t alpha)
 {
-	const sf::Vector2u wSize = window.getSize();
-	sf::Text text;
-	sf::String s = "New Game";
-	text.setString(s);
-	text.setFont(mFont);
-	text.setCharacterSize(50);
-	text.setFillColor(sf::Color::Magenta);
-	text.setPosition({wSize.x * 0.2f, wSize.y * 0.5f});
-	window.draw(text);
+	t.translate({ window.getSize().x * 0.1f, window.getSize().y * 0.6f });
+	for (MenuButton& b : mTopLevelButtons)
+	{
+		b.Draw(window, t, alpha);
+		auto s = b.GetSize();
+		t.translate({ 0, s.y + 10 });
+	}
 
 }
 

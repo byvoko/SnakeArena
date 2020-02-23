@@ -1,7 +1,9 @@
 #pragma once
 
+#include <vector>
 #include "IGameContent.hpp"
 #include "MenuControls.hpp"
+#include "MenuButton.hpp"
 
 class Menu : public IGameContent
 {
@@ -17,7 +19,7 @@ private:
 		NewGame
 	};
 	State mState;
-	int mSelectedItemIdx;
+	std::vector<MenuButton> mTopLevelButtons;
 
 	void DrawTopLevel(sf::RenderWindow& window, sf::Transform t, uint8_t alpha = 255);
 	void DrawNewGame(sf::RenderWindow& window, sf::Transform t, uint8_t alpha = 255);
@@ -28,4 +30,6 @@ public:
 
 	void Update() override;
 	void ProcessEvent(sf::Event e) override;
+
+	void ChangeSelectedItem(bool goUp);
 };
