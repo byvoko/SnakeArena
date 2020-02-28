@@ -1,4 +1,7 @@
 #include "GameContext.hpp"
+
+#include <stdio.h>
+
 #include "Game.hpp"
 #include "Menu.hpp"
 
@@ -22,8 +25,11 @@ GameContext::~GameContext()
 	}
 }
 
-void GameContext::Sleep()
+void GameContext::SetSleep()
 {
+	sf::Time sleepTime = GetSleepTime();
+	if (sleepTime.asMilliseconds() > 0)
+		sf::sleep(sleepTime);
 }
 
 void GameContext::ProcessEvent(sf::Event e)
@@ -39,4 +45,9 @@ void GameContext::Update()
 void GameContext::Draw(sf::RenderWindow& window, sf::Transform t, uint8_t alpha)
 {
 	mpGameContent->Draw(window, t, alpha);
+}
+
+sf::Time GameContext::GetSleepTime()
+{
+	return mpGameContent->GetSleepTime();
 }

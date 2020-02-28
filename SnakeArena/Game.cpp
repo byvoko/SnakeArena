@@ -2,6 +2,7 @@
 #include "Game.hpp"
 #include "KeyControls.hpp"
 #include "GamepadControls.hpp"
+#include <iostream>
 
 const std::string Game::GameFont = "Anyfreak.ttf";
 
@@ -120,6 +121,8 @@ bool Game::IsFoodOnSnake(Position& position)
 Game::Game(sf::Vector2u windowSize)
 	: pFood(nullptr)
 	, mUpdateId(0)
+	, mClockDraw()
+	, mClockUpdate()
 {
 	srand(time(NULL));
 	nextSpeedAcumulator = FoodLevelingScale;
@@ -130,6 +133,9 @@ Game::Game(sf::Vector2u windowSize)
 	InitArenas(windowSize);
 	InitSnakes();
 	InitGameInterface();
+
+	mClockDraw.restart();
+	mClockUpdate.restart();
 }
 
 Game::~Game()
@@ -209,10 +215,11 @@ void Game::UpdateMovement()
 		return;
 
 	mBackground.Update();
-	for (Arena & arena : mArenas)
+	/*for (Arena & arena : mArenas)
 	{
 		arena.Update(mUpdateId);
-	}
+	}*/
+	mArenas[1].Update(mUpdateId);
 
 	mHud.Update();
 }
@@ -230,6 +237,30 @@ void Game::ProcessEvent(sf::Event e)
 
 void Game::Draw(sf::RenderWindow& window, sf::Transform t, uint8_t alpha)
 {
+	// Clock
+	sf::Time elapsed = mClockDraw.getElapsedTime();
+	if (elapsed.asMilliseconds() < FrameTimeMs)
+		return;
+	mClockDraw.restart();
+
+	static uint64_t frameCount = 0;
+	static double totalTime = 0.0;
+
+	// Frame counter
+	totalTime += elapsed.asSeconds();
+	frameCount++;
+	if (totalTime > 1.0)
+	{
+		double fps = frameCount / totalTime;
+
+		char buffer[512];
+		sprintf_s(buffer, "FPS: %f", fps);
+		std::cout << buffer << std::endl;
+
+		frameCount = 0;
+		totalTime = 0.0;
+	}
+
 	if (mArenas.size() == 0)
 		return;
 
@@ -242,6 +273,14 @@ void Game::Draw(sf::RenderWindow& window, sf::Transform t, uint8_t alpha)
 
 	if (!mRun)
 		DrawEnd(window);
+}
+
+sf::Time Game::GetSleepTime()
+{
+	int timeToNextUpdate = mSpeed - mClockUpdate.getElapsedTime().asMilliseconds();
+	int timeToNextDraw = FrameTimeMs - mClockDraw.getElapsedTime().asMilliseconds();
+
+	return sf::milliseconds(std::min(timeToNextUpdate, timeToNextDraw));
 }
 
 bool Game::CheckSnakeArenaColision(const Position nextPosition, sf::Vector2u gridSize)

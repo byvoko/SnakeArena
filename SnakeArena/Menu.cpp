@@ -57,6 +57,11 @@ void Menu::ChangeSelectedItem(bool goUp)
 	}
 }
 
+sf::Time Menu::GetSleepTime()
+{
+	return sf::Time();
+}
+
 void Menu::Update()
 {
 

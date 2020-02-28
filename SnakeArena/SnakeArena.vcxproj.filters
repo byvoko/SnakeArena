@@ -1,51 +1,130 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Arena.cpp" />
-    <ClCompile Include="Background.cpp" />
-    <ClCompile Include="EatEffect.cpp" />
-    <ClCompile Include="FoodItem.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GamepadControls.cpp" />
-    <ClCompile Include="HUD.cpp" />
-    <ClCompile Include="KeyControls.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Menu.cpp" />
-    <ClCompile Include="Snake.cpp" />
-    <ClCompile Include="MenuControls.cpp" />
-    <ClCompile Include="GameContext.cpp" />
-    <ClCompile Include="SnakesFactory.cpp" />
     <ClCompile Include="MenuButton.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
+    <ClCompile Include="GameContext.cpp">
+      <Filter>GameCore</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>GameCore</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>GameCore</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuControls.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyControls.cpp">
+      <Filter>GameComponents\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="GamepadControls.cpp">
+      <Filter>GameComponents\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="Snake.cpp">
+      <Filter>GameComponents\Snakes</Filter>
+    </ClCompile>
+    <ClCompile Include="SnakesFactory.cpp">
+      <Filter>GameComponents\Snakes</Filter>
+    </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>GameCore</Filter>
+    </ClCompile>
+    <ClCompile Include="HUD.cpp">
+      <Filter>GameCore</Filter>
+    </ClCompile>
+    <ClCompile Include="Arena.cpp">
+      <Filter>GameCore</Filter>
+    </ClCompile>
+    <ClCompile Include="EatEffect.cpp">
+      <Filter>GameComponents\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="FoodItem.cpp">
+      <Filter>GameComponents\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Arena.hpp" />
-    <ClInclude Include="Background.hpp" />
-    <ClInclude Include="BaseItem.hpp" />
-    <ClInclude Include="EatEffect.hpp" />
-    <ClInclude Include="FoodItem.hpp" />
-    <ClInclude Include="Game.hpp" />
-    <ClInclude Include="GamepadControls.hpp" />
-    <ClInclude Include="HUD.hpp" />
-    <ClInclude Include="IControls.hpp" />
-    <ClInclude Include="IGameDrawable.hpp" />
-    <ClInclude Include="KeyControls.hpp" />
-    <ClInclude Include="Menu.hpp" />
-    <ClInclude Include="Snake.hpp" />
-    <ClInclude Include="Types.hpp" />
-    <ClInclude Include="MenuControls.hpp" />
-    <ClInclude Include="MenuControlsLayout.hpp" />
-    <ClInclude Include="IGameContent.hpp" />
-    <ClInclude Include="GameContext.hpp" />
-    <ClInclude Include="SnakesFactory.hpp" />
     <ClInclude Include="MenuButton.hpp">
       <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="IControls.hpp">
+      <Filter>GameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="IGameContent.hpp">
+      <Filter>GameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="IGameDrawable.hpp">
+      <Filter>GameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Types.hpp">
+      <Filter>GameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContext.hpp">
+      <Filter>GameCore</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.hpp">
+      <Filter>GameCore</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.hpp">
+      <Filter>GameCore</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuControls.hpp">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuControlsLayout.hpp">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyControls.hpp">
+      <Filter>GameComponents\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="GamepadControls.hpp">
+      <Filter>GameComponents\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="Snake.hpp">
+      <Filter>GameComponents\Snakes</Filter>
+    </ClInclude>
+    <ClInclude Include="SnakesFactory.hpp">
+      <Filter>GameComponents\Snakes</Filter>
+    </ClInclude>
+    <ClInclude Include="Background.hpp">
+      <Filter>GameCore</Filter>
+    </ClInclude>
+    <ClInclude Include="HUD.hpp">
+      <Filter>GameCore</Filter>
+    </ClInclude>
+    <ClInclude Include="Arena.hpp">
+      <Filter>GameCore</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseItem.hpp">
+      <Filter>GameComponents\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="EatEffect.hpp">
+      <Filter>GameComponents\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="FoodItem.hpp">
+      <Filter>GameComponents\Items</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Menu">
       <UniqueIdentifier>{f880fb0e-58d9-400c-b36e-246defc89b77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameComponents">
+      <UniqueIdentifier>{1ef11857-581d-49f3-bbaa-cd5d6c943bd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameCore">
+      <UniqueIdentifier>{9facccc0-8686-482c-81b6-071cfc853d21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameComponents\Items">
+      <UniqueIdentifier>{5ac8ca35-a0cc-467a-875e-38f487fbd690}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameComponents\Players">
+      <UniqueIdentifier>{868d26ea-2929-44ae-90c2-4ce374653532}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameComponents\Snakes">
+      <UniqueIdentifier>{c97a1a21-a116-4d7b-b55e-b226bd171855}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

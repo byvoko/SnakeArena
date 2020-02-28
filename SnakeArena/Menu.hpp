@@ -32,4 +32,6 @@ public:
 	void ProcessEvent(sf::Event e) override;
 
 	void ChangeSelectedItem(bool goUp);
+
+	virtual sf::Time GetSleepTime() override;
 };

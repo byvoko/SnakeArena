@@ -35,16 +35,10 @@ int main()
 		}
 		
 		gameContext.Update();
-
-		sf::Time elapsed = clockDraw.getElapsedTime();
-		if (elapsed.asMilliseconds() < (1000 / FPS))
-			continue;
-		clockDraw.restart();
-
 		gameContext.Draw(window);
 		window.display();
 
-		gameContext.Sleep();
+		gameContext.SetSleep();
 	}
 
 	return 0;

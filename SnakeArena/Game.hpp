@@ -34,11 +34,13 @@ private:
 	FoodItem* pFood;
 
 	static constexpr int FoodLevelingScale = 7;	//Po kazdem x jidle nastane dalsi level
+	static constexpr float FrameTimeMs = 1000.f / 60;
 	int mSpeed = 20;	//[ms]
 	int nextSpeedAcumulator;
 	uint64_t mUpdateId;
 
 	sf::Clock mClockUpdate;
+	sf::Clock mClockDraw;
 
 	void InitBackground();
 	void InitArenas(sf::Vector2u windowSize);
@@ -63,4 +65,6 @@ public:
 
 	void Update();
 	virtual void Draw(sf::RenderWindow& window, sf::Transform t = sf::Transform::Transform::Identity, uint8_t alpha = 255) override;
+
+	virtual sf::Time GetSleepTime() override;
 };
