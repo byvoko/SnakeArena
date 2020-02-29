@@ -99,6 +99,8 @@ void Menu::Draw(sf::RenderWindow & window, sf::Transform t, uint8_t alpha)
 			break;
 	}
 
+	window.display();
+
 }
 
 void Menu::ProcessEvent(sf::Event e)

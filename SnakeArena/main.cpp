@@ -36,7 +36,6 @@ int main()
 		
 		gameContext.Update();
 		gameContext.Draw(window);
-		window.display();
 
 		gameContext.SetSleep();
 	}

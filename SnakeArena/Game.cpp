@@ -260,6 +260,7 @@ void Game::Draw(sf::RenderWindow& window, sf::Transform t, uint8_t alpha)
 		frameCount = 0;
 		totalTime = 0.0;
 	}
+	// /Frame counter
 
 	if (mArenas.size() == 0)
 		return;
@@ -269,10 +270,13 @@ void Game::Draw(sf::RenderWindow& window, sf::Transform t, uint8_t alpha)
 	{
 		arena.Draw(window);
 	}
-	mHud.Draw(window, {});
+	mHud.Draw(window);
 
 	if (!mRun)
 		DrawEnd(window);
+
+
+	window.display();
 }
 
 sf::Time Game::GetSleepTime()
