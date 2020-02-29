@@ -1,20 +1,19 @@
 #include "MenuButton.hpp"
 
-MenuButton::MenuButton(std::string s, sf::Font & font, ButtonSettings settings) :
-	mSettings (settings)
+MenuButton::MenuButton(std::string s, sf::Font & font, MenuItem::Settings settings) :
+	MenuItem(settings)
 {
 	mText.setString(s);
 	mText.setFont(font);
 	mText.setFillColor(settings.textColor);
 	mText.setCharacterSize(settings.fontSize);
-
-	Unselect();
-	mBackground.setSize(settings.boxSize);
-
 }
 
 void MenuButton::Draw(sf::RenderWindow& window, sf::Transform t, uint8_t alpha)
 {
+	if (!mSettings.isVisible)
+		return;
+
 	auto backgroundColor = mBackground.getFillColor();
 	backgroundColor.a = alpha;
 	mBackground.setFillColor(backgroundColor);
@@ -26,24 +25,4 @@ void MenuButton::Draw(sf::RenderWindow& window, sf::Transform t, uint8_t alpha)
 	textColor.a = alpha;
 	mText.setFillColor(textColor);
 	window.draw(mText, t);
-}
-
-void MenuButton::Select()
-{
-	mIsSelected = true; 
-	mBackground.setFillColor(mSettings.selectedBackgroundColor);
-	mBackground.setOutlineColor(mSettings.selectedBoxOutlineColor);
-	mBackground.setOutlineThickness(mSettings.selectedBoxOutlineSize);
-
-	mText.setFillColor(mSettings.selectedTextColor);
-}
-
-void MenuButton::Unselect()
-{ 
-	mIsSelected = false; 
-	mBackground.setFillColor(mSettings.backgroundColor);
-	mBackground.setOutlineColor(mSettings.boxOutlineColor);
-	mBackground.setOutlineThickness(mSettings.boxOutlineSize);
-	
-	mText.setFillColor(mSettings.textColor);
 }

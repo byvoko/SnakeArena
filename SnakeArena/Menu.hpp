@@ -3,7 +3,8 @@
 #include <vector>
 #include "IGameContent.hpp"
 #include "MenuControls.hpp"
-#include "MenuButton.hpp"
+#include "MenuItem.hpp"
+#include "PlayerInputSelector.hpp"
 
 class Menu : public IGameContent
 {
@@ -13,16 +14,13 @@ private:
 
 	MenuControls mControls;
 
-	enum State
-	{
-		TopLevel = 0,
-		NewGame
-	};
-	State mState;
-	std::vector<MenuButton> mTopLevelButtons;
+	typedef std::vector<MenuItem*>	vMenu;
+	vMenu mTopLevelButtons;
+	vMenu mNewGameItems;
+	vMenu* mActiveMenu;
 
-	void DrawTopLevel(sf::RenderWindow& window, sf::Transform t, uint8_t alpha = 255);
-	void DrawNewGame(sf::RenderWindow& window, sf::Transform t, uint8_t alpha = 255);
+	std::vector<PlayerInputSelector *> mPlayersIS;
+
 public:
 	Menu();
 

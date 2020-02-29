@@ -18,6 +18,12 @@
     <ClCompile Include="MenuButton.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
+    <ClCompile Include="MenuSelect.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerInputSelector.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arena.hpp" />
@@ -40,6 +46,15 @@
     <ClInclude Include="GameContext.hpp" />
     <ClInclude Include="SnakesFactory.hpp" />
     <ClInclude Include="MenuButton.hpp">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuSelect.hpp">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuItem.hpp">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerInputSelector.hpp">
       <Filter>Menu</Filter>
     </ClInclude>
   </ItemGroup>

@@ -144,6 +144,8 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MenuButton.cpp" />
     <ClCompile Include="MenuControls.cpp" />
+    <ClCompile Include="MenuSelect.cpp" />
+    <ClCompile Include="PlayerInputSelector.cpp" />
     <ClCompile Include="Snake.cpp" />
     <ClCompile Include="SnakesFactory.cpp" />
   </ItemGroup>
@@ -165,6 +167,9 @@
     <ClInclude Include="MenuButton.hpp" />
     <ClInclude Include="MenuControls.hpp" />
     <ClInclude Include="MenuControlsLayout.hpp" />
+    <ClInclude Include="MenuItem.hpp" />
+    <ClInclude Include="MenuSelect.hpp" />
+    <ClInclude Include="PlayerInputSelector.hpp" />
     <ClInclude Include="Snake.hpp" />
     <ClInclude Include="SnakesFactory.hpp" />
     <ClInclude Include="Types.hpp" />

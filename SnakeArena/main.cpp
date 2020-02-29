@@ -6,7 +6,7 @@
 int main()
 {
 	sf::Clock clockDraw;
-	static constexpr int FPS = 60;
+	static constexpr int FPS = 3;
 
 	sf::Vector2u windowSize(1200, 800);
 	sf::RenderWindow window(sf::VideoMode(windowSize.x, windowSize.y), "SnakeArena");
