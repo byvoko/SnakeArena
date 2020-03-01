@@ -26,3 +26,9 @@ void MenuButton::Draw(sf::RenderWindow& window, sf::Transform t, uint8_t alpha)
 	mText.setFillColor(textColor);
 	window.draw(mText, t);
 }
+
+void MenuButton::Click()
+{
+	if (mOnClickEvent)
+		mOnClickEvent();
+}

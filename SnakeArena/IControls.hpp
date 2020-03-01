@@ -1,16 +1,17 @@
 #pragma once
-#include <functional>
 #include <SFML/Graphics.hpp>
+
+#include "Types.hpp"
 
 class ISnakeControls
 {
 public:
-	std::function<void()> UpEvent;
-	std::function<void()> RightEvent;
-	std::function<void()> DownEvent;
-	std::function<void()> LeftEvent;
-	std::function<void()> NitroEventPush;
-	std::function<void()> NitroEventPull;
+	Event UpEvent;
+	Event RightEvent;
+	Event DownEvent;
+	Event LeftEvent;
+	Event NitroEventPush;
+	Event NitroEventPull;
 };
 
 

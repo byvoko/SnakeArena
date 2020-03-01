@@ -3,7 +3,7 @@
 #include "KeyControls.hpp"
 #include "GamepadControls.hpp"
 
-const std::string Game::GameFont = "Anyfreak.ttf";
+const std::string Game::GameFont = "font.ttf";
 
 void Game::InitBackground()
 {

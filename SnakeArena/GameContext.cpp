@@ -7,10 +7,10 @@ GameContext::GameContext(sf::Vector2u windowSize)
 	, mpGameContent(nullptr)
 {
 	// Init menu
-	//mpGameContent = new Menu();
+	mpGameContent = new Menu();
 
 	// Test - Game
-	mpGameContent = new Game(windowSize);
+	//mpGameContent = new Game(windowSize);
 }
 
 GameContext::~GameContext()

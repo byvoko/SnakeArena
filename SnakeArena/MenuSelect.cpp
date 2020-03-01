@@ -6,13 +6,13 @@ MenuSelect::MenuSelect(std::string s, sf::Font& font, MenuItem::Settings setting
 	mItems (items),
 	mSelectedItemIdx (selectedItemIdx)
 {
-	if (items.size() > mSelectedItemIdx)
+	if (items.size() <= mSelectedItemIdx)
 		mSelectedItemIdx = 0;
 
 	mText.setFont(font);
 	mText.setFillColor(settings.textColor);
 	mText.setCharacterSize(settings.fontSize);
-	Update();
+	CreateText();
 }
 
 void MenuSelect::Draw(sf::RenderWindow& window, sf::Transform t, uint8_t alpha)
@@ -38,14 +38,13 @@ void MenuSelect::RemoveItemByIdx(int idx)
 		return;
 
 	mItems.erase(mItems.begin() + idx);
+
+	if (mItems.size() >= mSelectedItemIdx)
+		mSelectedItemIdx = mItems.size() - 1;
 }
 
 void MenuSelect::Update()
 {
-	if (mItems.size() > 0)
-		mText.setString(mString + " < " + mItems[mSelectedItemIdx].text + " >");
-	else
-		mText.setString(mString + " < X >");
 }
 
 void MenuSelect::RemoveItemByValue(Value v)
@@ -58,4 +57,22 @@ void MenuSelect::RemoveItemByValue(Value v)
 		if (mItems[i].value == v)
 			RemoveItemByIdx(i);
 	}
+}
+
+void MenuSelect::Swap(bool Right)
+{
+	if (Right && mSelectedItemIdx < mItems.size() - 1)
+		mSelectedItemIdx++;
+	else if (!Right && mSelectedItemIdx > 0)
+		mSelectedItemIdx--;
+	
+	CreateText();
+}
+
+void MenuSelect::CreateText()
+{
+	if (mItems.size() > 0)
+		mText.setString(mString + " < " + mItems[mSelectedItemIdx].text + " >");
+	else
+		mText.setString(mString + " < X >");
 }

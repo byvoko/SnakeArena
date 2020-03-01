@@ -73,7 +73,7 @@ void MenuControls::ProcessKeyboardPushEvent(sf::Keyboard::Key key)
 			if (DownEvent)
 				DownEvent();
 			break;
-		case MenuControlsLayout::SelectButton:
+		case MenuControlsLayout::SelectKey:
 			if (SelectEvent)
 				SelectEvent();
 			break;

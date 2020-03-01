@@ -17,11 +17,11 @@ private:
 	bool mGamepadSelectIsPressed[sf::Joystick::Count];
 
 public:
-	std::function<void()> UpEvent;
-	std::function<void()> RightEvent;
-	std::function<void()> DownEvent;
-	std::function<void()> LeftEvent;
-	std::function<void()> SelectEvent;
+	Event UpEvent;
+	Event RightEvent;
+	Event DownEvent;
+	Event LeftEvent;
+	Event SelectEvent;
 
 	MenuControls();
 

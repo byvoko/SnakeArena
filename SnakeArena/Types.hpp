@@ -1,10 +1,11 @@
 #pragma once
-
+#include <functional>
 #include <SFML\Graphics.hpp>
 
 typedef sf::Vector2u			Position;
 typedef std::vector<Position>	Positions;
 typedef sf::Color				Color;
+typedef std::function<void()> Event;
 
 enum PlayerInputs : uint32_t
 {

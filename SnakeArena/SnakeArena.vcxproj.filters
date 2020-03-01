@@ -10,9 +10,7 @@
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="KeyControls.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Snake.cpp" />
-    <ClCompile Include="MenuControls.cpp" />
     <ClCompile Include="GameContext.cpp" />
     <ClCompile Include="SnakesFactory.cpp" />
     <ClCompile Include="MenuButton.cpp">
@@ -22,6 +20,18 @@
       <Filter>Menu</Filter>
     </ClCompile>
     <ClCompile Include="PlayerInputSelector.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="TopLevelMenu.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="NewGameMenu.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuControls.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
   </ItemGroup>
@@ -37,11 +47,8 @@
     <ClInclude Include="IControls.hpp" />
     <ClInclude Include="IGameDrawable.hpp" />
     <ClInclude Include="KeyControls.hpp" />
-    <ClInclude Include="Menu.hpp" />
     <ClInclude Include="Snake.hpp" />
     <ClInclude Include="Types.hpp" />
-    <ClInclude Include="MenuControls.hpp" />
-    <ClInclude Include="MenuControlsLayout.hpp" />
     <ClInclude Include="IGameContent.hpp" />
     <ClInclude Include="GameContext.hpp" />
     <ClInclude Include="SnakesFactory.hpp" />
@@ -55,6 +62,24 @@
       <Filter>Menu</Filter>
     </ClInclude>
     <ClInclude Include="PlayerInputSelector.hpp">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="IMenuContainer.hpp">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="TopLevelMenu.hpp">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="NewGameMenu.hpp">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.hpp">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuControls.hpp">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuControlsLayout.hpp">
       <Filter>Menu</Filter>
     </ClInclude>
   </ItemGroup>

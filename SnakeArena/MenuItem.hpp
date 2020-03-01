@@ -3,19 +3,19 @@
 #include <SFML/Graphics.hpp>
 #include "IGameDrawable.hpp"
 
-class MenuItem /*:
-	public IGameDrawable*/
+class MenuItem :
+	public IGameDrawable
 {
 public:
 	struct Settings
 	{
 		bool isVisible;
-		int fontSize;
+		int fontSize;	//TODO
 		int boxOutlineSize;
 		int selectedBoxOutlineSize;
 		sf::Vector2f boxSize;
 
-		sf::Color textColor;
+		sf::Color textColor;	//TODO
 		sf::Color backgroundColor;
 		sf::Color boxOutlineColor;
 
@@ -60,6 +60,10 @@ public:
 	}
 	Settings GetSettings() { return mSettings; };
 
-	virtual void Draw(sf::RenderWindow& window, sf::Transform t = sf::Transform::Transform::Identity, uint8_t alpha = 255) = 0;
+	bool IsVisible() { return mSettings.isVisible; }
+	void Visible(bool v) { mSettings.isVisible = v; }
 
+	virtual void Click() = 0;
+	virtual void Swap(bool Right) = 0;
+	virtual void Update() = 0;
 };

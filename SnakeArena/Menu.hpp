@@ -3,23 +3,20 @@
 #include <vector>
 #include "IGameContent.hpp"
 #include "MenuControls.hpp"
-#include "MenuItem.hpp"
-#include "PlayerInputSelector.hpp"
+#include "TopLevelMenu.hpp"
+#include "NewGameMenu.hpp"
+#include "IMenuContainer.hpp"
 
 class Menu : public IGameContent
 {
 private:
-	const std::string Font = "Anyfreak.ttf";
+	const std::string Font = "font.ttf";
 	sf::Font mFont;
 
 	MenuControls mControls;
-
-	typedef std::vector<MenuItem*>	vMenu;
-	vMenu mTopLevelButtons;
-	vMenu mNewGameItems;
-	vMenu* mActiveMenu;
-
-	std::vector<PlayerInputSelector *> mPlayersIS;
+	TopLevelMenu mTopLevelMenu;
+	NewGameMenu mNewGameMenu;
+	IMenuContainer* mActiveMenu;
 
 public:
 	Menu();

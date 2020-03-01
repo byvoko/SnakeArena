@@ -116,7 +116,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
@@ -145,9 +145,11 @@
     <ClCompile Include="MenuButton.cpp" />
     <ClCompile Include="MenuControls.cpp" />
     <ClCompile Include="MenuSelect.cpp" />
+    <ClCompile Include="NewGameMenu.cpp" />
     <ClCompile Include="PlayerInputSelector.cpp" />
     <ClCompile Include="Snake.cpp" />
     <ClCompile Include="SnakesFactory.cpp" />
+    <ClCompile Include="TopLevelMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arena.hpp" />
@@ -165,13 +167,16 @@
     <ClInclude Include="KeyControls.hpp" />
     <ClInclude Include="Menu.hpp" />
     <ClInclude Include="MenuButton.hpp" />
+    <ClInclude Include="IMenuContainer.hpp" />
     <ClInclude Include="MenuControls.hpp" />
     <ClInclude Include="MenuControlsLayout.hpp" />
     <ClInclude Include="MenuItem.hpp" />
     <ClInclude Include="MenuSelect.hpp" />
+    <ClInclude Include="NewGameMenu.hpp" />
     <ClInclude Include="PlayerInputSelector.hpp" />
     <ClInclude Include="Snake.hpp" />
     <ClInclude Include="SnakesFactory.hpp" />
+    <ClInclude Include="TopLevelMenu.hpp" />
     <ClInclude Include="Types.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
