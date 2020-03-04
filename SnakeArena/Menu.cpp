@@ -62,6 +62,10 @@ sf::Time Menu::GetSleepTime()
 	return sf::Time();
 }
 
+void Menu::Resize(sf::Vector2u windowSize)
+{
+}
+
 void Menu::Update()
 {
 

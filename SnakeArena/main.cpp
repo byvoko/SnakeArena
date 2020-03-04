@@ -18,17 +18,25 @@ int main()
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
-			// Close
 			if (event.type == sf::Event::Closed)
-				window.close();
-			if (event.type == sf::Event::KeyPressed)
 			{
+				window.close();
+			}
+			else if (event.type == sf::Event::KeyPressed)
+			{
+				// Keys
 				switch (event.key.code)
 				{
 					case sf::Keyboard::Escape:
 						window.close();
 						break;
 				}
+			}
+			else if (event.type == sf::Event::Resized) // Resize window
+			{
+				sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
+				window.setView(sf::View(visibleArea));
+				gameContext.Resize({ event.size.width, event.size.height });
 			}
 
 			gameContext.ProcessEvent(event);

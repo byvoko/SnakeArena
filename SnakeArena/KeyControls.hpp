@@ -4,9 +4,7 @@
 
 #include "IControls.hpp"
 
-class KeyControls :
-	public ISnakeControls,
-	public IGameControls
+class KeyControls : public IControls
 {
 private:
 	sf::Keyboard::Key mUpKey;

@@ -62,6 +62,11 @@ uint8_t Snake::GetStamina()
 	return mStamina;
 }
 
+void Snake::SetTileSize(sf::Vector2f tileSize)
+{
+	mTileSize = tileSize;
+}
+
 bool Snake::ShouldUpdate(const uint64_t& updateId)
 {
 	return updateId >= mNextUpdateId;
@@ -100,7 +105,7 @@ void Snake::Update(const uint64_t& updateId)
 	}
 }
 
-void Snake::AddControl(ISnakeControls & c)
+void Snake::AddControl(ISnakeControls& c)
 {
 	mControl = &c;
 

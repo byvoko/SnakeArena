@@ -132,6 +132,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Arena.cpp" />
+    <ClCompile Include="ArenaFactory.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="EatEffect.cpp" />
     <ClCompile Include="FoodItem.cpp" />
@@ -145,10 +146,11 @@
     <ClCompile Include="MenuButton.cpp" />
     <ClCompile Include="MenuControls.cpp" />
     <ClCompile Include="Snake.cpp" />
-    <ClCompile Include="SnakesFactory.cpp" />
+    <ClCompile Include="SnakeFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arena.hpp" />
+    <ClInclude Include="ArenaFactory.hpp" />
     <ClInclude Include="Background.hpp" />
     <ClInclude Include="BaseItem.hpp" />
     <ClInclude Include="EatEffect.hpp" />
@@ -166,7 +168,7 @@
     <ClInclude Include="MenuControls.hpp" />
     <ClInclude Include="MenuControlsLayout.hpp" />
     <ClInclude Include="Snake.hpp" />
-    <ClInclude Include="SnakesFactory.hpp" />
+    <ClInclude Include="SnakeFactory.hpp" />
     <ClInclude Include="Types.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

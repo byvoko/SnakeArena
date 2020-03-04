@@ -51,3 +51,8 @@ sf::Time GameContext::GetSleepTime()
 {
 	return mpGameContent->GetSleepTime();
 }
+
+void GameContext::Resize(sf::Vector2u windowSize)
+{
+	mpGameContent->Resize(windowSize);
+}

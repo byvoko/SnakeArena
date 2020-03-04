@@ -19,3 +19,7 @@ class IGameControls
 public:
 	virtual void ProcessEvent(sf::Event e) = 0;
 };
+
+class IControls : public ISnakeControls, public IGameControls
+{
+};

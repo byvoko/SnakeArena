@@ -1,10 +1,11 @@
 #include "Arena.hpp"
 #include "Snake.hpp"
 
-Arena::Arena(sf::Vector2u sizePx, sf::Vector2f gridTileSize, sf::Vector2u position, FoodItem* foodItem)
+Arena::Arena(sf::Vector2u sizePx, sf::Vector2f gridTileSize, sf::Vector2u position)
 	: mSizePx(sizePx)
 	, mGridTileSize(gridTileSize)
-	, pFood(foodItem)
+	, pFood(nullptr)
+	, mBackground(sizePx)
 {
 	mTransform.translate(static_cast<sf::Vector2f>(position));
 }
@@ -17,6 +18,8 @@ void Arena::Draw(sf::RenderWindow & window)
 {
 	if (mSnakes.size() == 0)
 		return;
+
+	mBackground.Draw(window, mTransform);
 
 	for (auto pShadow : mShadows)
 	{
@@ -66,7 +69,40 @@ sf::Vector2u Arena::GetGridResolution()
 	return sf::Vector2u { unsigned int(mSizePx.x / mGridTileSize.x), unsigned int(mSizePx.y / mGridTileSize.y)};
 }
 
+void Arena::AddSnake(Snake& snake)
+{
+	mSnakes.push_back(&snake);
+}
+
+void Arena::AddShadow(Snake& shadow)
+{
+	for (Snake* s : mSnakes)
+	{
+		if (&shadow == s)
+			return;
+	}
+
+	mShadows.push_back(&shadow);
+}
+
 void Arena::AddFood(FoodItem* food)
 {
 	pFood = food;
+}
+
+void Arena::SetSize(sf::Vector2u sizePx)
+{
+	mSizePx = sizePx;
+	mBackground = Background(sizePx);
+}
+
+void Arena::SetGridTileSize(sf::Vector2f gridTileSize)
+{
+	mGridTileSize = gridTileSize;
+}
+
+void Arena::SetPosition(sf::Vector2u position)
+{
+	mTransform = sf::Transform::Identity;
+	mTransform.translate(static_cast<sf::Vector2f>(position));
 }

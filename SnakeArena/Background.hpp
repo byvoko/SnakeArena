@@ -2,10 +2,19 @@
 
 #include <SFML\Graphics.hpp>
 
-class Background
+#include "IGameDrawable.hpp"
+
+class Background : public IGameDrawable
 {
+protected:
+	sf::RectangleShape mRectangle;
+
 public:
+	Background(const sf::Vector2u& sizePx);
+
 	void Update();
-	void Draw(sf::RenderWindow & window);
+
+	// Dìdí se pøes IGameDrawable.
+	virtual void Draw(sf::RenderWindow& window, sf::Transform t = sf::Transform::Transform::Identity, uint8_t alpha = 255) override;
 };
 

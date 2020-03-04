@@ -5,13 +5,13 @@
 #include "Types.hpp"
 #include "Snake.hpp"
 
-class SnakesFactory
+class SnakeFactory
 {
 private:
 	static const Color SnakeColors[4];
 
 public:
-	SnakesFactory();
+	SnakeFactory();
 
-	std::list<Snake> GetSnakes(const int snakeCount);
+	std::list<Snake>* CreateSnakes(const int snakeCount);
 };

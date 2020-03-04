@@ -2,9 +2,9 @@
 
 #include <iostream>
 
-GamepadControls::GamepadControls(int gamepadID, int nitroButton):
-	mGamepadID (gamepadID),
-	mNitroButton (nitroButton)
+GamepadControls::GamepadControls(int gamepadID, int nitroButton)
+	: mGamepadID (gamepadID)
+	, mNitroButton (nitroButton)
 {
 	if (!sf::Joystick::isConnected(gamepadID))
 		return;
@@ -25,7 +25,9 @@ void GamepadControls::processButton(const bool isPressedNow, bool & isPressed, s
 		cb();
 	}
 	else if (!isPressedNow && isPressed)
+	{
 		isPressed = false;
+	}
 }
 
 void GamepadControls::ProcessEvent(sf::Event e)

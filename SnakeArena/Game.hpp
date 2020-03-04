@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <list>
 #include <string>
 
 #include "IGameContent.hpp"
@@ -20,15 +21,14 @@ public:
 	static const std::string GameFont;
 
 private:
-	Background mBackground;
 	HUD mHud;
 
-	std::vector<Arena> mArenas;
-	std::vector<Snake> mSnakes;
-	std::vector<IGameControls*> mControls;
+	std::list<Arena> mArenas;
+	std::list<Snake> mSnakes;
+	std::vector<IControls*> mControls;
 
 	bool mRun;
-	int mSnakeWinner;
+	Snake* pSnakeWinner;
 
 	// Test
 	FoodItem* pFood;
@@ -67,4 +67,6 @@ public:
 	virtual void Draw(sf::RenderWindow& window, sf::Transform t = sf::Transform::Transform::Identity, uint8_t alpha = 255) override;
 
 	virtual sf::Time GetSleepTime() override;
+
+	virtual void Resize(sf::Vector2u windowSize) override;
 };

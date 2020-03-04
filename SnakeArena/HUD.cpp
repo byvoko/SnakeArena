@@ -30,13 +30,12 @@ void HUD::Draw(sf::RenderWindow & window, sf::Transform t, uint8_t alpha)
 	const uint32_t InfoShift = mSnakes.size() > 2 ? 310 : 610;
 	//Snakes
 	t.translate(10, 10);
-	for (Snake * snake : mSnakes)
+	for (Snake* snake : mSnakes)
 	{
 		if (snake == nullptr)
 			continue;
 
-		Snake & s = *snake;
-		DrawSnakeInfo(window, t, s);
+		DrawSnakeInfo(window, t, *snake);
 		t.translate(InfoShift, 0);
 	}
 }
@@ -72,5 +71,4 @@ void HUD::DrawSnakeInfo(sf::RenderWindow & window, sf::Transform t, Snake & s)
 	rsStamina.setOutlineThickness(0);
 	rsStamina.setFillColor(c);
 	window.draw(rsStamina, t);
-
 }

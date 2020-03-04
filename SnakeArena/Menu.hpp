@@ -34,4 +34,6 @@ public:
 	void ChangeSelectedItem(bool goUp);
 
 	virtual sf::Time GetSleepTime() override;
+	
+	virtual void Resize(sf::Vector2u windowSize) override;
 };

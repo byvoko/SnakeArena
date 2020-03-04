@@ -13,4 +13,5 @@ public:
 	virtual void Update() = 0;
 	virtual void Draw(sf::RenderWindow& window, sf::Transform t = sf::Transform::Transform::Identity, uint8_t alpha = 255) = 0;
 	virtual sf::Time GetSleepTime() = 0;
+	virtual void Resize(sf::Vector2u windowSize) = 0;
 };

@@ -26,9 +26,6 @@
     <ClCompile Include="Snake.cpp">
       <Filter>GameComponents\Snakes</Filter>
     </ClCompile>
-    <ClCompile Include="SnakesFactory.cpp">
-      <Filter>GameComponents\Snakes</Filter>
-    </ClCompile>
     <ClCompile Include="Background.cpp">
       <Filter>GameCore</Filter>
     </ClCompile>
@@ -43,6 +40,12 @@
     </ClCompile>
     <ClCompile Include="FoodItem.cpp">
       <Filter>GameComponents\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="ArenaFactory.cpp">
+      <Filter>GameCore</Filter>
+    </ClCompile>
+    <ClCompile Include="SnakeFactory.cpp">
+      <Filter>GameComponents\Snakes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -85,9 +88,6 @@
     <ClInclude Include="Snake.hpp">
       <Filter>GameComponents\Snakes</Filter>
     </ClInclude>
-    <ClInclude Include="SnakesFactory.hpp">
-      <Filter>GameComponents\Snakes</Filter>
-    </ClInclude>
     <ClInclude Include="Background.hpp">
       <Filter>GameCore</Filter>
     </ClInclude>
@@ -105,6 +105,12 @@
     </ClInclude>
     <ClInclude Include="FoodItem.hpp">
       <Filter>GameComponents\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="ArenaFactory.hpp">
+      <Filter>GameCore</Filter>
+    </ClInclude>
+    <ClInclude Include="SnakeFactory.hpp">
+      <Filter>GameComponents\Snakes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

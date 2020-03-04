@@ -1,8 +1,8 @@
 #include "FoodItem.hpp"
 
 FoodItem::FoodItem(Position position, sf::Vector2f tileSize)
-	: BaseItem(position),
-	mShape (position, tileSize)
+	: BaseItem(position)
+	, mShape(position, tileSize)
 {
 
 }
@@ -17,10 +17,17 @@ void FoodItem::Update()
 {
 }
 
+void FoodItem::SetTileSize(sf::Vector2f tileSize)
+{
+	mShape = FoodItem::FoodItemShape(mPosition, tileSize);
+}
+
 void FoodItem::Draw(sf::RenderWindow& window, sf::Transform t, uint8_t alpha)
 {
 	mShape.Draw(window, t, alpha);
 }
+
+// FoodItemShape
 
 FoodItem::FoodItemShape::FoodItemShape(Position position, sf::Vector2f tileSize)
 {
@@ -44,6 +51,7 @@ FoodItem::FoodItemShape::FoodItemShape(Position position, sf::Vector2f tileSize)
 	blackPart.setPosition((position.x * tileSize.x) + (tileSize.x / 2.0) - (blackPartSize.x / 2), (position.y * tileSize.y) + (tileSize.y - blackPartSize.y));
 	blackPart.setFillColor(sf::Color(0x0, 0x0, 0x0));
 }
+
 void FoodItem::FoodItemShape::Draw(sf::RenderWindow& window, sf::Transform t, uint8_t alpha)
 {
 	window.draw(body, t);

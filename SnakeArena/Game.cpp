@@ -1,75 +1,55 @@
-#include <string>
 #include "Game.hpp"
+
+#include <string>
+#include <iostream>
+
 #include "KeyControls.hpp"
 #include "GamepadControls.hpp"
-#include <iostream>
+#include "SnakeFactory.hpp"
+#include "ArenaFactory.hpp"
 
 const std::string Game::GameFont = "Anyfreak.ttf";
 
 void Game::InitBackground()
 {
-	mBackground = Background();
-}
-
-void Game::InitArenas(sf::Vector2u windowSize)
-{
-	sf::Vector2u arenaSizePx = { (windowSize.x / 2), windowSize.y - HUD::Height };
-	sf::Vector2u arenaResolution = { 20, 20 };
-	sf::Vector2f arenaGridTileSize = { (float)arenaSizePx.x / arenaResolution.x, (float)arenaSizePx.y / arenaResolution.y };
-	
-	Arena arena1(arenaSizePx, arenaGridTileSize, sf::Vector2u(0, 0));
-	Arena arena2(arenaSizePx, arenaGridTileSize, sf::Vector2u((windowSize.x / 2), 0));
-
-	mArenas.push_back(arena1);
-	mArenas.push_back(arena2);
 }
 
 void Game::InitSnakes()
 {
-	if (mArenas.size() == 0)
-		return;
-
-	auto gridResolution = mArenas[0].GetGridResolution();
-	
-	Snake snake1(sf::Color(150, 50, 250));
-	Snake snake2(sf::Color(200, 25, 180));
-
-	snake1.InitSnake(mArenas[0].GetGridTileSize(), { gridResolution.x / 2, gridResolution.y / 2 });
-	snake2.InitSnake(mArenas[1].GetGridTileSize(), { gridResolution.x / 2, gridResolution.y / 2 });
-
-	mSnakes.push_back(snake1);
-	mSnakes.push_back(snake2);
-
-	// Snakes
-	mArenas[0].AddSnake(mSnakes[0]);
-	mArenas[1].AddSnake(mSnakes[1]);
-
-	// Shadows
-	mArenas[0].AddShadow(mSnakes[1]);
-	mArenas[1].AddShadow(mSnakes[0]);
+	SnakeFactory snakeFactory = SnakeFactory();
+	mSnakes = *snakeFactory.CreateSnakes(2);
 
 	// Controls
-	KeyControls * key1 = new KeyControls(sf::Keyboard::Key::W, sf::Keyboard::Key::D, sf::Keyboard::Key::S, sf::Keyboard::Key::A, sf::Keyboard::Key::E);
-	mSnakes[0].AddControl(*key1);
-	mControls.push_back(key1);
-	
-	KeyControls * key2 = new KeyControls(sf::Keyboard::Key::Up, sf::Keyboard::Key::Right, sf::Keyboard::Key::Down, sf::Keyboard::Key::Left, sf::Keyboard::Key::Space);
-	mSnakes[1].AddControl(*key2);
-	mControls.push_back(key2);
+	std::list<IControls*> keyControls = std::list<IControls*>();
+	keyControls.push_back(new KeyControls(sf::Keyboard::Key::W, sf::Keyboard::Key::D, sf::Keyboard::Key::S, sf::Keyboard::Key::A, sf::Keyboard::Key::E));
+	keyControls.push_back(new KeyControls(sf::Keyboard::Key::Up, sf::Keyboard::Key::Right, sf::Keyboard::Key::Down, sf::Keyboard::Key::Left, sf::Keyboard::Key::Space));
+	if (sf::Joystick::isConnected(0))
+	{
+		keyControls.push_back(new GamepadControls(0, 0));
+	}
+	if (sf::Joystick::isConnected(1))
+	{
+		keyControls.push_back(new GamepadControls(1, 0));
+	}
 
-	//if (sf::Joystick::isConnected(0))
-	//{
-	//	GamepadControls * gamepad = new GamepadControls(0, 0);
-	//	mSnakes[0].AddControl(*gamepad);
-	//	mControls.push_back(gamepad);
-	//}
+	for (std::pair<std::list<Snake>::iterator, std::list<IControls*>::iterator> it(mSnakes.begin(), keyControls.begin()); it.first != mSnakes.end() && it.second != keyControls.end(); it.first++, it.second++)
+	{
+		it.first->AddControl(**it.second);
+		mControls.push_back(*it.second);
+	}
+}
+
+void Game::InitArenas(sf::Vector2u windowSize)
+{
+	ArenaFactory arenaFactory = ArenaFactory();
+	mArenas = *arenaFactory.CreateArenas(mSnakes, { 20, 20 }, windowSize);
 }
 
 void Game::InitGameInterface()
 {
-	for (int i = 0; i < mSnakes.size(); i++)
+	for (Snake& s : mSnakes)
 	{
-		mHud.AddSnake(mSnakes[i]);
+		mHud.AddSnake(s);
 	}
 }
 
@@ -84,7 +64,7 @@ void Game::GenerateFood()
 		}
 		int i = 0;
 
-		sf::Vector2u gridResolution = mArenas[0].GetGridResolution();
+		sf::Vector2u gridResolution = mArenas.front().GetGridResolution();
 
 		Position foodPosition{ rand() % gridResolution.x, rand() % gridResolution.y };
 		while (IsFoodOnSnake(foodPosition) && i++ < 100)
@@ -92,7 +72,7 @@ void Game::GenerateFood()
 			foodPosition = Position(rand() % gridResolution.x, rand() % gridResolution.y);
 		}
 		
-		pFood = new FoodItem(foodPosition, mArenas[0].GetGridTileSize());
+		pFood = new FoodItem(foodPosition, mArenas.front().GetGridTileSize());
 
 		for (Arena& arena : mArenas)
 		{
@@ -123,15 +103,15 @@ Game::Game(sf::Vector2u windowSize)
 	, mUpdateId(0)
 	, mClockDraw()
 	, mClockUpdate()
+	, pSnakeWinner(nullptr)
 {
 	srand(time(NULL));
 	nextSpeedAcumulator = FoodLevelingScale;
 	mRun = true;
-	mSnakeWinner = -1;
 
 	InitBackground();
-	InitArenas(windowSize);
 	InitSnakes();
+	InitArenas(windowSize);
 	InitGameInterface();
 
 	mClockDraw.restart();
@@ -156,15 +136,13 @@ void Game::Update()
 	mClockUpdate.restart();
 
 	// Collisions
-	for (int i = 0; i < mSnakes.size(); i++)
+	for (std::pair<std::list<Snake>::iterator, std::list<Arena>::iterator> it(mSnakes.begin(), mArenas.begin()); it.first != mSnakes.end() & it.second != mArenas.end(); it.first++, it.second++)
 	{
-		Snake& s = mSnakes[i];
-		Arena& a = mArenas[i];
-		if (s.ShouldUpdate(mUpdateId)
-			&& (CheckSnakeBodyColision(s.GetBody(), s.GetNext()) ||
-			CheckSnakeArenaColision(s.GetNext(), a.GetGridResolution())))
+		if (it.first->ShouldUpdate(mUpdateId)
+			&& (CheckSnakeBodyColision(it.first->GetBody(), it.first->GetNext()) ||
+				CheckSnakeArenaColision(it.first->GetNext(), it.second->GetGridResolution())))
 		{
-			mSnakeWinner = i;
+			pSnakeWinner = &(*it.first);
 			PrepareEnd();
 		}
 	}
@@ -214,12 +192,10 @@ void Game::UpdateMovement()
 	if (mArenas.size() == 0)
 		return;
 
-	mBackground.Update();
-	/*for (Arena & arena : mArenas)
+	for (Arena& arena : mArenas)
 	{
 		arena.Update(mUpdateId);
-	}*/
-	mArenas[1].Update(mUpdateId);
+	}
 
 	mHud.Update();
 }
@@ -243,10 +219,10 @@ void Game::Draw(sf::RenderWindow& window, sf::Transform t, uint8_t alpha)
 		return;
 	mClockDraw.restart();
 
+	// Frame counter
 	static uint64_t frameCount = 0;
 	static double totalTime = 0.0;
 
-	// Frame counter
 	totalTime += elapsed.asSeconds();
 	frameCount++;
 	if (totalTime > 1.0)
@@ -265,12 +241,12 @@ void Game::Draw(sf::RenderWindow& window, sf::Transform t, uint8_t alpha)
 	if (mArenas.size() == 0)
 		return;
 
-	mBackground.Draw(window);
+	window.clear();
 	for (Arena& arena : mArenas)
 	{
 		arena.Draw(window);
 	}
-	mHud.Draw(window);
+	//mHud.Draw(window);
 
 	if (!mRun)
 		DrawEnd(window);
@@ -285,6 +261,27 @@ sf::Time Game::GetSleepTime()
 	int timeToNextDraw = FrameTimeMs - mClockDraw.getElapsedTime().asMilliseconds();
 
 	return sf::milliseconds(std::min(timeToNextUpdate, timeToNextDraw));
+}
+
+void Game::Resize(sf::Vector2u windowSize)
+{
+	if (mArenas.size() == 0)
+		return;
+
+	ArenaFactory af = ArenaFactory();
+	af.RecalculateArenas(mArenas, windowSize);
+
+	sf::Vector2f gridTileSize = mArenas.front().GetGridTileSize();
+
+	for (Snake& s : mSnakes)
+	{
+		s.SetTileSize(gridTileSize);
+	}
+
+	if (pFood != nullptr)
+	{
+		pFood->SetTileSize(gridTileSize);
+	}
 }
 
 bool Game::CheckSnakeArenaColision(const Position nextPosition, sf::Vector2u gridSize)
@@ -308,6 +305,7 @@ bool Game::CheckSnakeBodyColision(Positions const & snakeBody, const Position ne
 		if (head == snakeBody[i])
 			return true;
 	}
+
 	return false;
 }
 
@@ -318,7 +316,7 @@ void Game::PrepareEnd()
 
 void Game::DrawEnd(sf::RenderWindow & window)
 {
-	if (mSnakeWinner < 0)
+	if (pSnakeWinner == nullptr)
 		return;
 
 	auto wSize = window.getSize();
@@ -330,7 +328,7 @@ void Game::DrawEnd(sf::RenderWindow & window)
 	text.setString(s);
 	text.setFont(font);
 	text.setCharacterSize(50);
-	text.setFillColor(mSnakes[mSnakeWinner].GetColor());
+	text.setFillColor(pSnakeWinner->GetColor());
 	text.setPosition((wSize.x / 2) - 80, (wSize.y / 2) - 35);
 
 	sf::RectangleShape endBack;

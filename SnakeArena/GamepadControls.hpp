@@ -4,9 +4,7 @@
 
 #include <SFML/Graphics.hpp>
 
-class GamepadControls:
-	public ISnakeControls,
-	public IGameControls
+class GamepadControls : public IControls
 {
 private:
 	static constexpr float PovAxisTresh = 50.f;

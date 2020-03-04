@@ -79,6 +79,8 @@ public:
 
 	uint8_t GetStamina();
 
+	void SetTileSize(sf::Vector2f tileSize);
+
 	// Dìdí se pøes IGameDrawable.
 	virtual void Draw(sf::RenderWindow & window, sf::Transform t = sf::Transform::Transform::Identity, uint8_t alpha = 255) override;
 };
