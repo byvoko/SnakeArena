@@ -14,6 +14,7 @@
 #include "IControls.hpp"
 #include "BaseItem.hpp"
 #include "FoodItem.hpp"
+#include "GameStartCountdown.hpp"
 
 class Game : public IGameContent
 {
@@ -28,6 +29,7 @@ private:
 	std::vector<IControls*> mControls;
 
 	bool mRun;
+	GameStartCountdown mGameStartCountdown;
 	Snake* pSnakeWinner;
 
 	// Test

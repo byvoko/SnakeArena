@@ -47,6 +47,9 @@
     <ClCompile Include="SnakeFactory.cpp">
       <Filter>GameComponents\Snakes</Filter>
     </ClCompile>
+    <ClCompile Include="GameStartCountdown.cpp">
+      <Filter>GameCore</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MenuButton.hpp">
@@ -111,6 +114,9 @@
     </ClInclude>
     <ClInclude Include="SnakeFactory.hpp">
       <Filter>GameComponents\Snakes</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStartCountdown.hpp">
+      <Filter>GameCore</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

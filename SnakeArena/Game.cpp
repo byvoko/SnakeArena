@@ -104,6 +104,7 @@ Game::Game(sf::Vector2u windowSize)
 	, mClockDraw()
 	, mClockUpdate()
 	, pSnakeWinner(nullptr)
+	, mGameStartCountdown(3)
 {
 	srand(time(NULL));
 	nextSpeedAcumulator = FoodLevelingScale;
@@ -134,6 +135,13 @@ void Game::Update()
 	if (elapsed.asMilliseconds() < mSpeed)
 		return;
 	mClockUpdate.restart();
+
+	// Start countdown
+	if (mGameStartCountdown.IsActive())
+	{
+		mGameStartCountdown.Update();
+		return;
+	}
 
 	// Collisions
 	for (std::pair<std::list<Snake>::iterator, std::list<Arena>::iterator> it(mSnakes.begin(), mArenas.begin()); it.first != mSnakes.end() & it.second != mArenas.end(); it.first++, it.second++)
@@ -247,6 +255,8 @@ void Game::Draw(sf::RenderWindow& window, sf::Transform t, uint8_t alpha)
 		arena.Draw(window);
 	}
 	//mHud.Draw(window);
+
+	mGameStartCountdown.Draw(window);
 
 	if (!mRun)
 		DrawEnd(window);
