@@ -22,8 +22,6 @@ public:
 	static const std::string GameFont;
 
 private:
-	HUD mHud;
-
 	std::list<Arena> mArenas;
 	std::list<Snake> mSnakes;
 	std::vector<IControls*> mControls;

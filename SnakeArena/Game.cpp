@@ -17,7 +17,7 @@ void Game::InitBackground()
 void Game::InitSnakes()
 {
 	SnakeFactory snakeFactory = SnakeFactory();
-	mSnakes = *snakeFactory.CreateSnakes(2);
+	mSnakes = *snakeFactory.CreateSnakes(1);
 
 	// Controls
 	std::list<IControls*> keyControls = std::list<IControls*>();
@@ -47,10 +47,6 @@ void Game::InitArenas(sf::Vector2u windowSize)
 
 void Game::InitGameInterface()
 {
-	for (Snake& s : mSnakes)
-	{
-		mHud.AddSnake(s);
-	}
 }
 
 void Game::GenerateFood()
@@ -204,8 +200,6 @@ void Game::UpdateMovement()
 	{
 		arena.Update(mUpdateId);
 	}
-
-	mHud.Update();
 }
 
 void Game::ProcessEvent(sf::Event e)

@@ -1,11 +1,12 @@
 #include "Arena.hpp"
 #include "Snake.hpp"
 
-Arena::Arena(sf::Vector2u sizePx, sf::Vector2f gridTileSize, sf::Vector2u position)
-	: mSizePx(sizePx)
+Arena::Arena(sf::Vector2u arenaSizePx, sf::Vector2f gridTileSize, sf::Vector2u position)
+	: mSizePx(arenaSizePx)
 	, mGridTileSize(gridTileSize)
 	, pFood(nullptr)
-	, mBackground(sizePx)
+	, mHud(sf::Vector2f(arenaSizePx.x, gridTileSize.y))
+	, mBackground(arenaSizePx)
 {
 	mTransform.translate(static_cast<sf::Vector2f>(position));
 }
@@ -29,7 +30,7 @@ void Arena::Draw(sf::RenderWindow & window)
 		pShadow->Draw(window, mTransform, 65);
 	}
 
-	for (auto pSnake : mSnakes)
+	for (Snake* pSnake : mSnakes)
 	{
 		if (pSnake == nullptr)
 			continue;
@@ -39,6 +40,9 @@ void Arena::Draw(sf::RenderWindow & window)
 	
 	if (pFood)
 		pFood->Draw(window, mTransform);
+
+	sf::Transform hudTransform = mTransform;
+	mHud.Draw(window, hudTransform.translate(0, mSizePx.y));
 
 	sf::RectangleShape bondries(sf::Vector2f(mSizePx.x, mSizePx.y));
 	bondries.setPosition(0, 0);
@@ -69,20 +73,21 @@ sf::Vector2u Arena::GetGridResolution()
 	return sf::Vector2u { unsigned int(mSizePx.x / mGridTileSize.x), unsigned int(mSizePx.y / mGridTileSize.y)};
 }
 
-void Arena::AddSnake(Snake& snake)
+void Arena::AddSnake(Snake* snake)
 {
-	mSnakes.push_back(&snake);
+	mSnakes.push_back(snake);
+	mHud.AddSnake(snake);
 }
 
-void Arena::AddShadow(Snake& shadow)
+void Arena::AddShadow(Snake* shadow)
 {
 	for (Snake* s : mSnakes)
 	{
-		if (&shadow == s)
+		if (shadow == s)
 			return;
 	}
 
-	mShadows.push_back(&shadow);
+	mShadows.push_back(shadow);
 }
 
 void Arena::AddFood(FoodItem* food)
@@ -90,15 +95,12 @@ void Arena::AddFood(FoodItem* food)
 	pFood = food;
 }
 
-void Arena::SetSize(sf::Vector2u sizePx)
+void Arena::SetSize(sf::Vector2u arenaSizePx, sf::Vector2f gridTileSize)
 {
-	mSizePx = sizePx;
-	mBackground = Background(sizePx);
-}
-
-void Arena::SetGridTileSize(sf::Vector2f gridTileSize)
-{
+	mSizePx = arenaSizePx;
 	mGridTileSize = gridTileSize;
+	mBackground = Background(arenaSizePx);
+	mHud.SetHudSize(sf::Vector2f(arenaSizePx.x, gridTileSize.y));
 }
 
 void Arena::SetPosition(sf::Vector2u position)

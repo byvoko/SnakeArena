@@ -1,63 +1,62 @@
+#include "HUD.hpp"
+
 #include <string>
 
-#include "HUD.hpp"
-#include "Game.hpp" 
+#include "Game.hpp"
 
-HUD::HUD()
+HUD::HUD(sf::Vector2f hudSize)
+	: mSnake(nullptr)
 {
 	mFont.loadFromFile(Game::GameFont);
-	mBackgroundColor = sf::Color(0x19, 0x08, 0x03);
+	mHudRectangle.setFillColor(sf::Color(0x19, 0x08, 0x03));
+	SetHudSize(hudSize);
+}
+
+void HUD::SetHudSize(sf::Vector2f hudSize)
+{
+	mHudSize = hudSize;
+	mHudRectangle = sf::RectangleShape(hudSize);
 }
 
 void HUD::Update()
 {
 }
 
-void HUD::AddSnake(Snake & s) 
+void HUD::AddSnake(Snake* s) 
 { 
-	mSnakes.push_back(&s); 
+	mSnake = s;
 }
 
-void HUD::Draw(sf::RenderWindow & window, sf::Transform t, uint8_t alpha)
+void HUD::Draw(sf::RenderWindow& window, sf::Transform t, uint8_t alpha)
 {
-	//Background
-	sf::Vector2f hudSize(window.getSize().x, Height);
-	sf::RectangleShape background(hudSize);
-	background.setFillColor(mBackgroundColor);
-	t.translate(0, (window.getSize().y - Height));
-	window.draw(background, t);
+	if (mSnake == nullptr)
+		return;
 
-	const uint32_t InfoShift = mSnakes.size() > 2 ? 310 : 610;
-	//Snakes
-	t.translate(10, 10);
-	for (Snake* snake : mSnakes)
-	{
-		if (snake == nullptr)
-			continue;
+	window.draw(mHudRectangle, t);
 
-		DrawSnakeInfo(window, t, *snake);
-		t.translate(InfoShift, 0);
-	}
+	DrawSnakeInfo(window, t, mSnake);
 }
 
-void HUD::DrawSnakeInfo(sf::RenderWindow & window, sf::Transform t, Snake & s)
+void HUD::DrawSnakeInfo(sf::RenderWindow& window, sf::Transform t, Snake* s)
 {
-	const size_t snakeLength = s.GetLength();
-	const uint8_t stamina = s.GetStamina();
-	Color c = s.GetColor();
+	const size_t snakeLength = s->GetLength();
+	const uint8_t stamina = s->GetStamina();
+	Color c = s->GetColor();
 
+	// Text
 	std::string sLength = "Length: " + std::to_string(snakeLength);
 	sf::Text tLength;
 	tLength.setString(sLength);
 	tLength.setFont(mFont);
-	tLength.setCharacterSize(30);
+	tLength.setCharacterSize(mHudSize.y * 0.85f);
 	tLength.setFillColor(c);
 	
 	window.draw(tLength, t);
-	t.translate(0, 45);
 
-	//Stamina
-	sf::Vector2f staminaSize = { 150, 30 };
+	// Stamina
+	t.translate(mHudSize.x * 0.375f, 4);
+
+	sf::Vector2f staminaSize = { mHudSize.x * 0.25f, mHudSize.y * 0.80f };
 	sf::RectangleShape rsStamina(staminaSize);
 	rsStamina.setFillColor(mBackgroundColor);
 	rsStamina.setOutlineColor(c);

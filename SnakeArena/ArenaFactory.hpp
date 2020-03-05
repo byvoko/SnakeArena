@@ -16,7 +16,7 @@ private:
 	};
 
 	std::pair<ArenasLayout, uint32_t> GetLayoutAndGridTileSizePx(const uint32_t arenaCount, const sf::Vector2u& arenaResolution, const sf::Vector2u& windowSize);
-	std::pair<sf::Vector2u, sf::Vector2u> GetArenaPositionAndIncrement(const ArenasLayout layout, const uint32_t arenaCount, const sf::Vector2u& arenaSizePx, const sf::Vector2u& windowSize);
+	std::pair<sf::Vector2u, sf::Vector2u> GetArenaPositionAndIncrement(const ArenasLayout layout, const uint32_t arenaCount, const sf::Vector2u& arenaSizePx, const uint32_t gridTileSidePx, const sf::Vector2u& windowSize);
 	void UpdateArenaPosition(sf::Vector2u& arenaPosition, const ArenaFactory::ArenasLayout layout, const uint32_t arenaIndex, const sf::Vector2u& arenaPositionIncrement);
 
 public:

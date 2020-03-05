@@ -5,7 +5,7 @@ std::pair<ArenaFactory::ArenasLayout, uint32_t> ArenaFactory::GetLayoutAndGridTi
 {
 	// All Horizontal
 	ArenasLayout layout = ArenasLayout::Horizontal;
-	uint32_t gridTileSidePx = (float)windowSize.y / arenaResolution.y;
+	uint32_t gridTileSidePx = (float)windowSize.y / (arenaResolution.y + 1);
 	if (gridTileSidePx * arenaResolution.x * arenaCount > windowSize.x)
 	{
 		gridTileSidePx = windowSize.x / (arenaResolution.x * arenaCount);
@@ -13,9 +13,9 @@ std::pair<ArenaFactory::ArenasLayout, uint32_t> ArenaFactory::GetLayoutAndGridTi
 
 	// All Vertical
 	uint32_t gridTileSideVerticalPx = (float)windowSize.x / arenaResolution.x;
-	if (gridTileSideVerticalPx * arenaResolution.y * arenaCount > windowSize.y)
+	if (gridTileSideVerticalPx * (arenaResolution.y + 1) * arenaCount > windowSize.y)
 	{
-		gridTileSideVerticalPx = windowSize.y / (arenaResolution.y * arenaCount);
+		gridTileSideVerticalPx = windowSize.y / ((arenaResolution.y + 1) * arenaCount);
 	}
 	if (gridTileSidePx < gridTileSideVerticalPx)
 	{
@@ -27,9 +27,9 @@ std::pair<ArenaFactory::ArenasLayout, uint32_t> ArenaFactory::GetLayoutAndGridTi
 	if (arenaCount > 2)
 	{
 		uint32_t gridTileSideCheckerPx = (float)windowSize.x / (arenaResolution.x * 2);
-		if (gridTileSideCheckerPx * arenaResolution.y * arenaCount > windowSize.y)
+		if (gridTileSideCheckerPx * (arenaResolution.y + 1) * arenaCount > windowSize.y)
 		{
-			gridTileSideCheckerPx = windowSize.y / (arenaResolution.y * 2);
+			gridTileSideCheckerPx = windowSize.y / ((arenaResolution.y + 1) * 2);
 		}
 		if (gridTileSidePx < gridTileSideCheckerPx)
 		{
@@ -41,23 +41,23 @@ std::pair<ArenaFactory::ArenasLayout, uint32_t> ArenaFactory::GetLayoutAndGridTi
 	return std::pair<ArenasLayout, uint32_t>(layout, gridTileSidePx);
 }
 
-std::pair<sf::Vector2u, sf::Vector2u> ArenaFactory::GetArenaPositionAndIncrement(const ArenaFactory::ArenasLayout layout, const uint32_t arenaCount, const sf::Vector2u& arenaSizePx, const sf::Vector2u& windowSize)
+std::pair<sf::Vector2u, sf::Vector2u> ArenaFactory::GetArenaPositionAndIncrement(const ArenaFactory::ArenasLayout layout, const uint32_t arenaCount, const sf::Vector2u& arenaSizePx, const uint32_t gridTileSidePx, const sf::Vector2u& windowSize)
 {
 	sf::Vector2u arenaPosition;
 	sf::Vector2u arenaPositionIncrement;
 	switch (layout)
 	{
 	case ArenaFactory::ArenasLayout::Horizontal:
-		arenaPosition = sf::Vector2u((windowSize.x - arenaCount * arenaSizePx.x) / 2, (windowSize.y - arenaSizePx.y) / 2);
+		arenaPosition = sf::Vector2u((windowSize.x - arenaCount * arenaSizePx.x) / 2, (windowSize.y - (arenaSizePx.y + gridTileSidePx)) / 2);
 		arenaPositionIncrement = sf::Vector2u(arenaSizePx.x, 0);
 		break;
 	case ArenaFactory::ArenasLayout::Vertical:
-		arenaPosition = sf::Vector2u((windowSize.x - arenaSizePx.x) / 2, (windowSize.y - arenaCount * arenaSizePx.y) / 2);
-		arenaPositionIncrement = sf::Vector2u(0, arenaSizePx.y);
+		arenaPosition = sf::Vector2u((windowSize.x - arenaSizePx.x) / 2, (windowSize.y - arenaCount * (arenaSizePx.y + gridTileSidePx)) / 2);
+		arenaPositionIncrement = sf::Vector2u(0, (arenaSizePx.y + gridTileSidePx));
 		break;
 	case ArenaFactory::ArenasLayout::Checker:
-		arenaPosition = sf::Vector2u((windowSize.x - 2 * arenaSizePx.x) / 2, (windowSize.y - 2 * arenaSizePx.y) / 2);
-		arenaPositionIncrement = sf::Vector2u(arenaSizePx.x, arenaSizePx.y);
+		arenaPosition = sf::Vector2u((windowSize.x - 2 * arenaSizePx.x) / 2, (windowSize.y - 2 * (arenaSizePx.y + gridTileSidePx)) / 2);
+		arenaPositionIncrement = sf::Vector2u(arenaSizePx.x, (arenaSizePx.y + gridTileSidePx));
 		break;
 	}
 
@@ -102,15 +102,13 @@ std::list<Arena>* ArenaFactory::CreateArenas(std::list<Snake>& snakes, sf::Vecto
 	if (snakeCount == 0)
 		return arenas;
 
-	//// TODO: Every arena needs its own HUD
-
 	std::pair<ArenasLayout, uint32_t> layoutAndGridTileSizePx = GetLayoutAndGridTileSizePx(snakeCount, arenaResolution, windowSize);
 	ArenasLayout layout = layoutAndGridTileSizePx.first;
 	uint32_t gridTileSidePx = layoutAndGridTileSizePx.second;
 
 	sf::Vector2u arenaSizePx = { arenaResolution.x * gridTileSidePx, arenaResolution.y * gridTileSidePx };
 
-	std::pair<sf::Vector2u, sf::Vector2u> arenaPositionAndIncrement = GetArenaPositionAndIncrement(layout, snakeCount, arenaSizePx, windowSize);
+	std::pair<sf::Vector2u, sf::Vector2u> arenaPositionAndIncrement = GetArenaPositionAndIncrement(layout, snakeCount, arenaSizePx, gridTileSidePx, windowSize);
 	sf::Vector2u arenaPosition = arenaPositionAndIncrement.first;
 	sf::Vector2u arenaPositionIncrement = arenaPositionAndIncrement.second;
 	
@@ -122,7 +120,7 @@ std::list<Arena>* ArenaFactory::CreateArenas(std::list<Snake>& snakes, sf::Vecto
 	{
 		Arena a = Arena(arenaSizePx, gridTileSize, arenaPosition);
 		arenas->push_back(a);
-		arenas->back().AddSnake(s);
+		arenas->back().AddSnake(&s);
 
 		s.InitSnake(a.GetGridTileSize(), { arenaResolution.x / 2, arenaResolution.y / 2 });
 
@@ -135,7 +133,7 @@ std::list<Arena>* ArenaFactory::CreateArenas(std::list<Snake>& snakes, sf::Vecto
 	{
 		for (Arena& a : *arenas)
 		{
-			a.AddShadow(s);
+			a.AddShadow(&s);
 		}
 	}
 
@@ -156,7 +154,7 @@ void ArenaFactory::RecalculateArenas(std::list<Arena>& arenas, sf::Vector2u wind
 
 	sf::Vector2u arenaSizePx = { arenaResolution.x * gridTileSidePx, arenaResolution.y * gridTileSidePx };
 
-	std::pair<sf::Vector2u, sf::Vector2u> arenaPositionAndIncrement = GetArenaPositionAndIncrement(layout, arenaCount, arenaSizePx, windowSize);
+	std::pair<sf::Vector2u, sf::Vector2u> arenaPositionAndIncrement = GetArenaPositionAndIncrement(layout, arenaCount, arenaSizePx, gridTileSidePx, windowSize);
 	sf::Vector2u arenaPosition = arenaPositionAndIncrement.first;
 	sf::Vector2u arenaPositionIncrement = arenaPositionAndIncrement.second;
 
@@ -165,8 +163,7 @@ void ArenaFactory::RecalculateArenas(std::list<Arena>& arenas, sf::Vector2u wind
 	uint32_t arenaIndex = 0;
 	for (Arena& a : arenas)
 	{
-		a.SetSize(arenaSizePx);
-		a.SetGridTileSize(gridTileSize);
+		a.SetSize(arenaSizePx, gridTileSize);
 		a.SetPosition(arenaPosition);
 
 		UpdateArenaPosition(arenaPosition, layout, arenaIndex, arenaPositionIncrement);

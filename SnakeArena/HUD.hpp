@@ -1,26 +1,29 @@
 #pragma once
 
 #include <vector>
-
 #include <SFML\Graphics.hpp>
+
 #include "Snake.hpp"
 #include "IGameDrawable.hpp"
 
 class HUD : public IGameDrawable
 {
 private:
+	sf::Vector2f mHudSize;
+	sf::RectangleShape mHudRectangle;
+
 	sf::Color mBackgroundColor;
 	sf::Font mFont;
-	std::vector<Snake*> mSnakes;
+	Snake* mSnake;
 
-	void DrawSnakeInfo(sf::RenderWindow & window, sf::Transform t, Snake & s);
+	void DrawSnakeInfo(sf::RenderWindow& window, sf::Transform t, Snake* s);
 
 public:
-	static constexpr size_t Height = 100;	//[px]
+	HUD(sf::Vector2f hudSize);
 
-	HUD();
+	void SetHudSize(sf::Vector2f hudSize);
 
-	void AddSnake(Snake & s);
+	void AddSnake(Snake* s);
 	void Update();
-	void Draw(sf::RenderWindow & window, sf::Transform t = sf::Transform::Transform::Identity, uint8_t alpha = 255) override;
+	void Draw(sf::RenderWindow& window, sf::Transform t = sf::Transform::Transform::Identity, uint8_t alpha = 255) override;
 };
