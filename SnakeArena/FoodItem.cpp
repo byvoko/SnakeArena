@@ -4,7 +4,6 @@ FoodItem::FoodItem(Position position, sf::Vector2f tileSize)
 	: BaseItem(position)
 	, mShape(position, tileSize)
 {
-
 }
 
 void FoodItem::Eat(Snake& snake)

@@ -27,7 +27,7 @@ std::pair<ArenaFactory::ArenasLayout, uint32_t> ArenaFactory::GetLayoutAndGridTi
 	if (arenaCount > 2)
 	{
 		uint32_t gridTileSideCheckerPx = (float)windowSize.x / (arenaResolution.x * 2);
-		if (gridTileSideCheckerPx * (arenaResolution.y + 1) * arenaCount > windowSize.y)
+		if (gridTileSideCheckerPx * (arenaResolution.y + 1) * 2 > windowSize.y)
 		{
 			gridTileSideCheckerPx = windowSize.y / ((arenaResolution.y + 1) * 2);
 		}

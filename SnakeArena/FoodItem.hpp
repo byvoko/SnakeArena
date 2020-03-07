@@ -1,8 +1,9 @@
 #pragma once
 
+#include <SFML/Graphics.hpp>
+
 #include "BaseItem.hpp"
 #include "Types.hpp"
-#include <SFML/Graphics.hpp>
 
 class FoodItem : public BaseItem
 {
@@ -22,6 +23,7 @@ public:
 	};
 
 private:
+
 	FoodItemShape mShape;
 
 public:

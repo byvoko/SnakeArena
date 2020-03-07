@@ -17,7 +17,7 @@ void Game::InitBackground()
 void Game::InitSnakes()
 {
 	SnakeFactory snakeFactory = SnakeFactory();
-	mSnakes = *snakeFactory.CreateSnakes(1);
+	mSnakes = *snakeFactory.CreateSnakes(4);
 
 	// Controls
 	std::list<IControls*> keyControls = std::list<IControls*>();
@@ -32,10 +32,22 @@ void Game::InitSnakes()
 		keyControls.push_back(new GamepadControls(1, 0));
 	}
 
-	for (std::pair<std::list<Snake>::iterator, std::list<IControls*>::iterator> it(mSnakes.begin(), keyControls.begin()); it.first != mSnakes.end() && it.second != keyControls.end(); it.first++, it.second++)
+	// If one player - use arrows
+	if (mSnakes.size() == 1)
 	{
-		it.first->AddControl(**it.second);
-		mControls.push_back(*it.second);
+		std::list<IControls*>::iterator it = keyControls.begin();
+		std::advance(it, 1);
+
+		mSnakes.front().AddControl(**it);
+		mControls.push_back(*it);
+	}
+	else
+	{
+		for (std::pair<std::list<Snake>::iterator, std::list<IControls*>::iterator> it(mSnakes.begin(), keyControls.begin()); it.first != mSnakes.end() && it.second != keyControls.end(); it.first++, it.second++)
+		{
+			it.first->AddControl(**it.second);
+			mControls.push_back(*it.second);
+		}
 	}
 }
 
@@ -57,6 +69,7 @@ void Game::GenerateFood()
 		{
 			mSpeed--;
 			nextSpeedAcumulator = FoodLevelingScale;
+			std::cout << "Speed up: " << mSpeed << std::endl;
 		}
 		int i = 0;
 
